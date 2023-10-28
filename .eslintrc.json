@@ -8,9 +8,13 @@
   ],
   "plugins": ["tailwindcss"],
   "rules": {
+    "react/react-in-jsx-scope": "off",
     "@next/next/no-html-link-for-pages": "off",
     "tailwindcss/no-custom-classname": "off",
-    "tailwindcss/classnames-order": "error"
+    "tailwindcss/classnames-order": "error",
+    "no-console": "off",
+    "react/no-unescaped-entities": "off",
+    "@next/next/no-page-custom-font": "off"
   },
   "settings": {
     "tailwindcss": {
