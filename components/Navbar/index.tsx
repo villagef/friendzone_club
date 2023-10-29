@@ -1,58 +1,31 @@
 "use client";
 
-import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import Image from "next/image";
 import Link from "next/link";
 import NavLink from "./NavLink";
 import Language from "./Language";
 import Profile from "./Profile";
-
-const config = [
-  {
-    href: "/explore",
-    name: "Explore",
-    icon: "/explore.svg",
-  },
-  {
-    href: "/favourite",
-    name: "Favourite",
-    icon: "/favourite.svg",
-  },
-  {
-    href: "/messages",
-    name: "Messages",
-    icon: "/message.svg",
-  },
-  {
-    href: "/notifications",
-    name: "Notifications",
-    icon: "/notification.svg",
-  },
-];
+import { useScroll } from "@/hooks/useScroll";
+import { navbarConfig } from "@/config/navbar";
 
 export function MainNav() {
+  const { y: scrollYPos } = useScroll();
   return (
-    <div className="w-full flex items-center justify-center">
-      <div className="w-full max-w-screen-2xl flex justify-between items-center p-6">
+    <div
+      className={`w-full sticky top-0 flex items-center justify-center ${
+        scrollYPos > 0 ? "bg-popover" : "bg-transparent"
+      }`}>
+      <div className="w-full max-w-screen-2xl flex justify-between flex-col sm:flex-row items-center p-6">
         <Link href={"/"}>
-          <Image
-            src="/logo.svg"
-            alt="Logo"
-            className="dark:invert"
-            width={240}
-            height={24}
-            priority
-          />
+          <Image src="/logo.svg" alt="Logo" width={240} height={24} priority />
         </Link>
-        <div className="">
-          <ul className="flex items-center gap-x-6">
-            {config.map(props => (
-              <NavLink key={props.name} {...props} />
-            ))}
-            <Language />
-            <Profile />
-          </ul>
-        </div>
+        <ul className="flex items-center gap-x-6 sm:gap-x-10 mt-8 sm:mt-0">
+          {Object.values(navbarConfig).map(props => (
+            <NavLink key={props.name} {...props} />
+          ))}
+          <Language />
+          <Profile />
+        </ul>
       </div>
     </div>
   );

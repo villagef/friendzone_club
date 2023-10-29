@@ -1,22 +1,27 @@
-import Image from "next/image";
 import Link from "next/link";
+import { useScroll } from "@/hooks/useScroll";
 import { Button } from "@/components/ui/button";
 import Tooltip from "../ui/tooltip";
+import { Icons } from "../icons";
 
 interface NavLinkProps {
   href: string;
   name: string;
-  icon?: string;
+  icon: keyof typeof Icons;
 }
 
 export default function NavLink({ href, name, icon }: NavLinkProps) {
+  const { y: scrollYPos } = useScroll();
+  const IconComponent = Icons[icon];
   return (
     <Tooltip content={name}>
       <li>
         <Link href={href}>
           {icon ? (
             <Button variant="ghost" size="icon">
-              <Image src={icon} alt={name} width={24} height={24} />
+              <IconComponent
+                className={`${scrollYPos > 0 ? "stroke-black" : "strok-black"}`}
+              />
             </Button>
           ) : (
             <Button variant="ghost" size="default">

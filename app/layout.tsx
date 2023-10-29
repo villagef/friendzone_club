@@ -28,7 +28,7 @@ export default function RootLayout({
           fontSans.variable,
         )}>
         <MainNav />
-        {children}
+        <div className=" min-h-screen">{children}</div>
       </body>
     </html>
   );
