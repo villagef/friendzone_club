@@ -48,6 +48,10 @@ module.exports = {
           DEFAULT: "hsla(210,100%,98%, 70%)",
           foreground: "hsl(var(--popover-foreground))",
         },
+        navbar: {
+          DEFAULT: "hsla(210,100%,98%, 50%)",
+          foreground: "hsl(var(--popover-foreground))",
+        },
         card: {
           DEFAULT: "hsl(var(--card))",
           foreground: "hsl(var(--card-foreground))",
