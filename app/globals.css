@@ -15,6 +15,8 @@
 
     --primary: 222.2 47.4% 11.2%;
     --primary-foreground: 210 40% 98%;
+    --primary-gradient-start: 211, 96%, 62%, 0.95;
+    --primary-gradient-end: 295, 94%, 76%, 0.95;
 
     --secondary: 210 40% 96.1%;
     --secondary-foreground: 222.2 47.4% 11.2%;
@@ -73,6 +75,10 @@
 
   body {
     @apply bg-background text-foreground;
-    background: linear-gradient(225deg, hsla(211, 96%, 62%, 1) 0%, hsla(295, 94%, 76%, 1) 100%);
+    background: linear-gradient(
+      225deg,
+      hsla(var(--primary-gradient-start)) 0%,
+      hsla(var(--primary-gradient-end)) 100%
+    );
   }
 }

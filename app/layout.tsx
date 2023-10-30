@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import "./globals.css";
 import { Inter as FontSans } from "next/font/google";
 import { cn } from "@/lib/utils";
-import { MainNav } from "@/components/main-nav";
+import { MainNav } from "@/components/Navbar";
 
 export const fontSans = FontSans({
   subsets: ["latin"],
@@ -24,11 +24,12 @@ export default function RootLayout({
       <head />
       <body
         className={cn(
-          "bg-background min-h-screen font-sans antialiased",
+          "min-h-screen bg-background font-sans antialiased",
           fontSans.variable,
-        )}>
+        )}
+      >
         <MainNav />
-        {children}
+        <div className=" min-h-screen">{children}</div>
       </body>
     </html>
   );
