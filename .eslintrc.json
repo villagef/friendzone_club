@@ -1,13 +1,29 @@
 {
   "$schema": "https://json.schemastore.org/eslintrc",
   "root": true,
+  "plugins": ["@typescript-eslint", "tailwindcss"],
+  "parser": "@typescript-eslint/parser",
+  "parserOptions": {
+    "project": "./tsconfig.json"
+  },
   "extends": [
     "next/core-web-vitals",
     "prettier",
-    "plugin:tailwindcss/recommended"
+    "plugin:tailwindcss/recommended",
+    "plugin:@typescript-eslint/recommended",
+    "plugin:@typescript-eslint/recommended",
+    "plugin:@typescript-eslint/recommended-requiring-type-checking"
   ],
-  "plugins": ["tailwindcss"],
   "rules": {
+    "no-void": "off",
+    "import/export": "off",
+    "import/namespace": "off",
+    "@typescript-eslint/explicit-module-boundary-types": "off",
+    "react/state-in-constructor": "off",
+    "import/prefer-default-export": "off",
+    "react/require-default-props": "off",
+    "react/prop-types": "off",
+    "react-hooks/exhaustive-deps": "off",
     "react/react-in-jsx-scope": "off",
     "@next/next/no-html-link-for-pages": "off",
     "tailwindcss/no-custom-classname": "off",
@@ -27,8 +43,7 @@
   },
   "overrides": [
     {
-      "files": ["*.ts", "*.tsx"],
-      "parser": "@typescript-eslint/parser"
+      "files": ["src/**/*.{ts, tsx, js, jsx}"]
     }
   ]
 }
