@@ -2,11 +2,11 @@
 module.exports = {
   darkMode: ["class"],
   content: [
-    './pages/**/*.{ts,tsx}',
-    './components/**/*.{ts,tsx}',
-    './app/**/*.{ts,tsx}',
-    './src/**/*.{ts,tsx}',
-	],
+    "./pages/**/*.{ts,tsx}",
+    "./components/**/*.{ts,tsx}",
+    "./app/**/*.{ts,tsx}",
+    "./src/**/*.{ts,tsx}",
+  ],
   theme: {
     container: {
       center: true,
@@ -22,8 +22,10 @@ module.exports = {
         ring: "hsl(var(--ring))",
         background: "hsl(var(--background))",
         foreground: "hsl(var(--foreground))",
+        primaryGradientStart: "hsla(211, 96%, 62%, 1)",
+        primaryGradientEnd: "hsla(295, 94%, 76%, 1)",
         primary: {
-          DEFAULT: "hsl(var(--primary))",
+          DEFAULT: "#24292d",
           foreground: "hsl(var(--primary-foreground))",
         },
         secondary: {
@@ -39,16 +41,23 @@ module.exports = {
           foreground: "hsl(var(--muted-foreground))",
         },
         accent: {
-          DEFAULT: "hsl(var(--accent))",
+          DEFAULT: "hsla(210,100%,98%, 30%)",
           foreground: "hsl(var(--accent-foreground))",
         },
         popover: {
-          DEFAULT: "hsl(var(--popover))",
+          DEFAULT: "hsla(210,100%,98%, 70%)",
+          foreground: "hsl(var(--popover-foreground))",
+        },
+        navbar: {
+          DEFAULT: "hsla(210,100%,98%, 70%)",
           foreground: "hsl(var(--popover-foreground))",
         },
         card: {
           DEFAULT: "hsl(var(--card))",
           foreground: "hsl(var(--card-foreground))",
+        },
+        primaryButton: {
+          DEFAULT: "hsla(211, 96%, 62%, 0.75)",
         },
       },
       borderRadius: {
@@ -73,4 +82,5 @@ module.exports = {
     },
   },
   plugins: [require("tailwindcss-animate")],
-}
+  ignorePatterns: ["tailwind.config.js"],
+};
