@@ -1,22 +1,27 @@
 export const subNavbarConfig = {
   profile: {
-    name: "Profile",
-    href: "/home/account/profile",
+    name: "My profile",
+    href: "/account/profile",
     description: "Profile",
   },
   settings: {
     name: "Settings",
-    href: "/home/account/settings",
+    href: "/account/settings",
     description: "Account Settings",
   },
   subscription: {
     name: "Subscription",
-    href: "/home/account/subscription",
+    href: "/account/subscription",
     description: "Select Subscription Plan",
+  },
+  help: {
+    name: "Help",
+    href: "/account/help",
+    description: "Help",
   },
   becomeFriend: {
     name: "Become a Friend",
-    href: "/home/become",
+    href: "/become",
     description: "Become a Friend",
   },
   logout: {

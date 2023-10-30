@@ -6,6 +6,7 @@ import { subNavbarConfig } from "@/config/subNavbar";
 import { Separator } from "@/components/ui/separator";
 import { navbarConfig } from "@/config/navbar";
 import SidebarNavLink from "./SidebarNavLink";
+import UserAvatar from "./UserAvatar";
 import { Icons } from "../icons";
 import { Button } from "../ui/button";
 import {
@@ -20,7 +21,7 @@ import {
 
 export default function SidebarNav() {
   const router = useRouter();
-  const { profile, settings, subscription, becomeFriend, logout } =
+  const { profile, settings, subscription, help, becomeFriend, logout } =
     subNavbarConfig;
   const [open, setOpen] = useState(false);
 
@@ -73,9 +74,13 @@ export default function SidebarNav() {
           </SheetTitle>
         </SheetHeader>
         <Link href={becomeFriend.href}>
-          <Button variant="ghost" size={"xl"} className="mt-4">
-            {profile.name}
-          </Button>
+          <div className="mt-8 flex justify-center pb-4">
+            <UserAvatar />
+            <div className="pl-4 ">
+              <span className="my-0 py-0 text-lg font-bold">John</span>
+              <p className="my-0 py-0 text-sm text-slate-700">{profile.name}</p>
+            </div>
+          </div>
           <Separator />
         </Link>
         <div className="flex flex-col items-center justify-center py-4">
@@ -91,7 +96,7 @@ export default function SidebarNav() {
         </Link>
         <Separator />
         <div className="flex flex-col items-center justify-center py-4">
-          {[settings, subscription].map(props => (
+          {[settings, subscription, help].map(props => (
             <SidebarNavLink key={props.name} {...props} />
           ))}
         </div>
