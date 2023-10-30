@@ -1,3 +1,13 @@
+import Link from "next/link";
+import Image from "next/image";
+import { useRouter } from "next/navigation";
+import { useState } from "react";
+import { subNavbarConfig } from "@/config/subNavbar";
+import { Separator } from "@/components/ui/separator";
+import { navbarConfig } from "@/config/navbar";
+import SidebarNavLink from "./SidebarNavLink";
+import { Icons } from "../icons";
+import { Button } from "../ui/button";
 import {
   Sheet,
   SheetClose,
@@ -7,16 +17,6 @@ import {
   SheetTitle,
   SheetTrigger,
 } from "../ui/sheet";
-import { Button } from "../ui/button";
-import Link from "next/link";
-import Image from "next/image";
-import { Icons } from "../icons";
-import { subNavbarConfig } from "@/config/subNavbar";
-import { useRouter } from "next/navigation";
-import { Separator } from "@/components/ui/separator";
-import { navbarConfig } from "@/config/navbar";
-import SidebarNavLink from "./SidebarNavLink";
-import { useState } from "react";
 
 export default function SidebarNav() {
   const router = useRouter();

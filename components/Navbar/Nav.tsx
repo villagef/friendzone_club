@@ -1,6 +1,6 @@
-import { navbarConfig } from "@/config/navbar";
 import Link from "next/link";
 import Image from "next/image";
+import { navbarConfig } from "@/config/navbar";
 import Language from "./Language";
 import NavLink from "./NavLink";
 import Profile from "./Profile";

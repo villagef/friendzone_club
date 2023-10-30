@@ -1,4 +1,6 @@
 import React from "react";
+import Link from "next/link";
+import { useRouter } from "next/navigation";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -8,12 +10,10 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
+import { subNavbarConfig } from "@/config/subNavbar";
+import ProfileLink from "./ProfileLink";
 import { Button } from "../ui/button";
 import { Avatar, AvatarFallback, AvatarImage } from "../ui/avatar";
-import Link from "next/link";
-import { subNavbarConfig } from "@/config/subNavbar";
-import { useRouter } from "next/navigation";
-import ProfileLink from "./ProfileLink";
 
 export default function Profile() {
   const [open, setOpen] = React.useState(false);
