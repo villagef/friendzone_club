@@ -15,8 +15,8 @@
 
     --primary: 222.2 47.4% 11.2%;
     --primary-foreground: 210 40% 98%;
-    --primary-gradient-start: 211, 96%, 62%, 0.8;
-    --primary-gradient-end: 295, 94%, 76%, 0.8;
+    --primary-gradient-start: 211, 96%, 62%, 0.95;
+    --primary-gradient-end: 295, 94%, 76%, 0.95;
 
     --secondary: 210 40% 96.1%;
     --secondary-foreground: 222.2 47.4% 11.2%;

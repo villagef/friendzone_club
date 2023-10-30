@@ -43,8 +43,7 @@ export default function Language() {
                       ? "bg-slate-600  text-white"
                       : "bg-transparent"
                   }`}
-                  onSelect={e => {
-                    console.log(e);
+                  onSelect={() => {
                     setValue(language.value);
                   }}
                 >
