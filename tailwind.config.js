@@ -25,7 +25,7 @@ module.exports = {
         primaryGradientStart: "hsla(211, 96%, 62%, 1)",
         primaryGradientEnd: "hsla(295, 94%, 76%, 1)",
         primary: {
-          DEFAULT: "hsl(var(--primary))",
+          DEFAULT: "#24292d",
           foreground: "hsl(var(--primary-foreground))",
         },
         secondary: {
@@ -78,4 +78,5 @@ module.exports = {
     },
   },
   plugins: [require("tailwindcss-animate")],
+  ignorePatterns: ["tailwind.config.js"],
 };

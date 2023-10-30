@@ -8,7 +8,7 @@ export default function Language() {
     <li>
       <Button variant="ghost" size="icon">
         <Icons.world
-          className={`${scrollYPos > 0 ? "stroke-black" : "strok-black"}`}
+          className={`${scrollYPos > 0 ? "stroke-primary" : "stroke-white"}`}
         />
       </Button>
     </li>

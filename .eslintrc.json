@@ -35,7 +35,7 @@
   "settings": {
     "tailwindcss": {
       "callees": ["cn", "cva"],
-      "config": "tailwind.config.cjs"
+      "config": "tailwind.config.js"
     },
     "next": {
       "rootDir": ["apps/*/"]
@@ -43,7 +43,8 @@
   },
   "overrides": [
     {
-      "files": ["src/**/*.{ts, tsx, js, jsx}"]
+      "files": ["*.ts", "*.tsx"],
+      "parser": "@typescript-eslint/parser"
     }
   ]
 }

@@ -9,7 +9,7 @@ export const subNavbarConfig = {
     href: "/home/account/settings",
     description: "Account Settings",
   },
-  subcription: {
+  subscription: {
     name: "Subscription",
     href: "/home/account/subscription",
     description: "Select Subscription Plan",

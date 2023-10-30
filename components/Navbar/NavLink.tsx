@@ -18,7 +18,9 @@ export default function NavLink({ href, name, icon }: NavLinkProps) {
         {icon ? (
           <Button variant="ghost" size="icon">
             <IconComponent
-              className={`${scrollYPos > 0 ? "stroke-black" : "strok-black"}`}
+              className={`${
+                scrollYPos > 0 ? "stroke-primary" : "stroke-white"
+              }`}
             />
           </Button>
         ) : (

@@ -18,7 +18,7 @@ import ProfileLink from "./ProfileLink";
 export default function Profile() {
   const [open, setOpen] = React.useState(false);
   const router = useRouter();
-  const { profile, settings, subcription, becomeFriend, logout } =
+  const { profile, settings, subscription, becomeFriend, logout } =
     subNavbarConfig;
 
   const handleLogout = () => {
@@ -42,7 +42,7 @@ export default function Profile() {
           </DropdownMenuLabel>
           <DropdownMenuSeparator />
           <DropdownMenuGroup>
-            <ProfileLink {...subcription} />
+            <ProfileLink {...subscription} />
             <ProfileLink {...settings} />
             <DropdownMenuSeparator />
             <Link href={becomeFriend.href}>
