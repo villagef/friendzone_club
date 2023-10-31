@@ -52,7 +52,8 @@
     background: linear-gradient(
       0deg,
       hsl(var(--primary-gradient-start)) 0%,
-      hsla(var(--primary-gradient-end)) 100%
+      hsla(var(--primary-gradient-end)) 80%
     );
+    background-repeat: no-repeat;
   }
 }

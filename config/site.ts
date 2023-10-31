@@ -1,13 +1,9 @@
-export const siteConfig = {
-  name: "shadcn/ui",
-  url: "https://ui.shadcn.com",
-  ogImage: "https://ui.shadcn.com/og.jpg",
-  description:
-    "Beautifully designed components built with Radix UI and Tailwind CSS.",
-  links: {
-    twitter: "https://twitter.com/shadcn",
-    github: "https://github.com/shadcn-ui/ui",
-  },
+export const landingPage = {
+  title: "Best Online Affairs Platform in US",
+  subtitle:
+    "We make dating process more effective and enjoyable. Let's start dating right now and feel the convinience",
+  actionButton: "Get started",
+  actionButtonTarget: "/plan",
 };
 
-export type SiteConfig = typeof siteConfig;
+export type SiteConfig = typeof landingPage;

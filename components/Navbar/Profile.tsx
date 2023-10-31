@@ -46,7 +46,11 @@ export default function Profile() {
             <DropdownMenuSeparator />
             <Link href={becomeFriend.href}>
               <DropdownMenuItem className="my-3 p-0">
-                <Button variant="primary" size={"xl"} className="m-0">
+                <Button
+                  variant="primary"
+                  size={"xl"}
+                  className="m-0 hover:text-button"
+                >
                   {becomeFriend.name}
                 </Button>
               </DropdownMenuItem>
