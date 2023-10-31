@@ -1,5 +1,4 @@
 import { useState } from "react";
-import { useScroll } from "@/hooks/useScroll";
 import {
   Popover,
   PopoverContent,
@@ -17,18 +16,12 @@ const languages = [
 export default function Language() {
   const [value, setValue] = useState<string>();
 
-  const { y: scrollYPos } = useScroll();
-
   return (
     <li>
       <Popover>
         <PopoverTrigger asChild>
           <Button variant="ghost" size="icon">
-            <Icons.world
-              className={`${
-                scrollYPos > 0 ? "stroke-primary" : "stroke-white"
-              }`}
-            />
+            <Icons.world />
           </Button>
         </PopoverTrigger>
         <PopoverContent className="w-auto p-0">
@@ -39,9 +32,7 @@ export default function Language() {
                   value={language.value}
                   key={language.value}
                   className={`${
-                    value === language.value
-                      ? "bg-slate-600  text-white"
-                      : "bg-transparent"
+                    value === language.value ? "bg-secondary" : "bg-transparent"
                   }`}
                   onSelect={() => {
                     setValue(language.value);

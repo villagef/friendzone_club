@@ -9,7 +9,7 @@ export function MainNav() {
   return (
     <div
       className={`sticky top-0 flex w-full items-center justify-center ${
-        scrollYPos > 0 ? "bg-navbar" : "bg-transparent"
+        scrollYPos > 0 ? "bg-primaryGradientEnd" : "bg-transparent"
       }`}
     >
       <Nav />

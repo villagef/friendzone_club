@@ -17,15 +17,20 @@ module.exports = {
     },
     extend: {
       colors: {
+        text: "#fff",
         border: "hsl(var(--border))",
         input: "hsl(var(--input))",
         ring: "hsl(var(--ring))",
         background: "hsl(var(--background))",
         foreground: "hsl(var(--foreground))",
-        primaryGradientStart: "hsla(211, 96%, 62%, 1)",
-        primaryGradientEnd: "hsla(295, 94%, 76%, 1)",
+        primaryGradientStart: "hsl(var(--primary-gradient-start))",
+        primaryGradientEnd: "hsla(var(--primary-gradient-end))",
+        button: {
+          DEFAULT: "hsl(var(--primary-button))",
+          foreground: "hsl(var(--primary-foreground))",
+        },
         primary: {
-          DEFAULT: "#24292d",
+          DEFAULT: "hsl(var(--primary))",
           foreground: "hsl(var(--primary-foreground))",
         },
         secondary: {
@@ -41,23 +46,16 @@ module.exports = {
           foreground: "hsl(var(--muted-foreground))",
         },
         accent: {
-          DEFAULT: "hsla(210,100%,98%, 30%)",
+          DEFAULT: "hsla(var(--accent))",
           foreground: "hsl(var(--accent-foreground))",
         },
         popover: {
-          DEFAULT: "hsla(210,100%,98%, 70%)",
-          foreground: "hsl(var(--popover-foreground))",
-        },
-        navbar: {
-          DEFAULT: "hsla(210,100%,98%, 70%)",
+          DEFAULT: "hsl(var(--popover))",
           foreground: "hsl(var(--popover-foreground))",
         },
         card: {
           DEFAULT: "hsl(var(--card))",
           foreground: "hsl(var(--card-foreground))",
-        },
-        primaryButton: {
-          DEFAULT: "hsla(211, 96%, 62%, 0.75)",
         },
       },
       borderRadius: {

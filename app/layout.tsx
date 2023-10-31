@@ -24,12 +24,12 @@ export default function RootLayout({
       <head />
       <body
         className={cn(
-          "min-h-screen bg-background font-sans antialiased",
+          "min-h-screen w-full overflow-x-hidden bg-background font-sans antialiased",
           fontSans.variable,
         )}
       >
         <MainNav />
-        <div className=" min-h-screen">{children}</div>
+        <div className="min-h-screen p-8">{children}</div>
       </body>
     </html>
   );

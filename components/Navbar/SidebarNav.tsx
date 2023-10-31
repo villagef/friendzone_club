@@ -65,7 +65,7 @@ export default function SidebarNav() {
           </Button>
         </SheetTrigger>
       </div>
-      <SheetContent side="top" className="h-full">
+      <SheetContent side="top" className="h-full overflow-y-auto">
         <SheetHeader>
           <SheetTitle>
             <Link href={"/"}>
@@ -73,7 +73,7 @@ export default function SidebarNav() {
                 <Image
                   src="/logo.svg"
                   alt="Logo"
-                  width={240}
+                  width={200}
                   height={24}
                   priority
                 />
@@ -93,13 +93,15 @@ export default function SidebarNav() {
         <Link href={profile.href}>
           <SheetTrigger className="w-full">
             <div
-              className="mt-8 flex justify-center pb-4"
+              className="mt-5 flex justify-center pb-4 text-start"
               onClick={handleNavClose}
             >
               <UserAvatar />
-              <div className="pl-4 ">
-                <span className="my-0 py-0 text-lg font-bold">John</span>
-                <p className="my-0 py-0 text-sm text-slate-700">
+              <div className="pl-4">
+                <span className="my-0 py-0 text-lg font-bold text-primary">
+                  John
+                </span>
+                <p className="my-0 py-0 text-sm text-secondary">
                   {profile.name}
                 </p>
               </div>
@@ -107,27 +109,25 @@ export default function SidebarNav() {
             <Separator />
           </SheetTrigger>
         </Link>
-        <div className="flex flex-col items-center justify-center py-4">
+        <div className="flex flex-col items-center justify-center py-3">
           {links.map(props => (
             <SheetTrigger key={props.name} asChild>
               <SidebarNavLink {...props} onClick={handleNavClose} />
             </SheetTrigger>
           ))}
         </div>
-        <Separator />
         <Link href={becomeFriend.href}>
           <SheetTrigger asChild>
             <Button
               variant="primary"
               size={"xl"}
-              className="my-4"
+              className="my-1.5"
               onClick={handleNavClose}
             >
               {becomeFriend.name}
             </Button>
           </SheetTrigger>
         </Link>
-        <Separator />
         <div className="flex flex-col items-center justify-center py-4">
           {subLinks.map(props => (
             <SheetTrigger key={props.name} asChild>
