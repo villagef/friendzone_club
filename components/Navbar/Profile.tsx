@@ -1,12 +1,10 @@
 import { useState } from "react";
 import Link from "next/link";
-import { useRouter } from "next/navigation";
 import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuGroup,
   DropdownMenuItem,
-  DropdownMenuLabel,
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
@@ -17,13 +15,8 @@ import { Button } from "../ui/button";
 
 export default function Profile() {
   const [open, setOpen] = useState(false);
-  const router = useRouter();
   const { profile, settings, subscription, help, becomeFriend, logout } =
     subNavbarConfig;
-
-  const handleLogout = () => {
-    router.push("/");
-  };
 
   return (
     <li>
@@ -33,38 +26,36 @@ export default function Profile() {
             <UserAvatar />
           </Button>
         </DropdownMenuTrigger>
-        <DropdownMenuContent align="end" className="w-[280px]">
+        <DropdownMenuContent align="end" className="hidden w-[280px] sm:block">
           <Link href={profile.href}>
-            <DropdownMenuLabel className="flex">
+            <DropdownMenuItem className="flex">
               <UserAvatar />
               <div className="px-2">
-                <span className="my-0 py-0 pl-2 text-lg">John</span>
-                <p className="my-0 py-0 pl-2 text-xs text-slate-700">
+                <span className="my-0 py-0 pl-2 text-lg font-medium">John</span>
+                <p className="my-0 py-0 pl-2 text-xs font-normal">
                   {profile.name}
                 </p>
               </div>
-            </DropdownMenuLabel>
+            </DropdownMenuItem>
           </Link>
           <DropdownMenuSeparator />
           <DropdownMenuGroup>
-            <DropdownMenuItem>
-              <ProfileLink {...subscription} />
-            </DropdownMenuItem>
-            <DropdownMenuItem>
-              <ProfileLink {...settings} />
-            </DropdownMenuItem>
-            <DropdownMenuItem>
-              <ProfileLink {...help} />
-            </DropdownMenuItem>
+            <ProfileLink {...subscription} />
+            <ProfileLink {...settings} />
+            <ProfileLink {...help} />
             <DropdownMenuSeparator />
             <Link href={becomeFriend.href}>
-              <Button variant="primary" size={"xl"} className="my-3">
-                {becomeFriend.name}
-              </Button>
+              <DropdownMenuItem className="my-3 p-0">
+                <Button variant="primary" size={"xl"} className="m-0">
+                  {becomeFriend.name}
+                </Button>
+              </DropdownMenuItem>
             </Link>
-            <Button variant="outline" size={"xl"} onClick={handleLogout}>
-              {logout.name}
-            </Button>
+            <DropdownMenuSeparator />
+            <ProfileLink
+              {...logout}
+              className="py-2 font-bold text-transparent/70"
+            />
           </DropdownMenuGroup>
         </DropdownMenuContent>
       </DropdownMenu>
