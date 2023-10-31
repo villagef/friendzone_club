@@ -50,7 +50,14 @@ export default function SidebarNav() {
         } w-full flex-row items-center justify-between px-6 py-4`}
       >
         <Link href={"/"}>
-          <Image src="/logo.svg" alt="Logo" width={240} height={24} priority />
+          <Image
+            src="/logo.svg"
+            alt="Logo"
+            width={240}
+            height={24}
+            className="pr-4"
+            priority
+          />
         </Link>
         <SheetTrigger asChild>
           <Button variant="ghost" size={"icon"} onClick={handleNavOpen}>
