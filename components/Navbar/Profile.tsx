@@ -15,8 +15,7 @@ import { Button } from "../ui/button";
 
 export default function Profile() {
   const [open, setOpen] = useState(false);
-  const { profile, settings, subscription, help, becomeFriend, logout } =
-    subNavbarConfig;
+  const { profile, settings, support, credits, logout } = subNavbarConfig;
 
   return (
     <li>
@@ -40,14 +39,17 @@ export default function Profile() {
           </Link>
           <DropdownMenuSeparator />
           <DropdownMenuGroup>
-            <ProfileLink {...subscription} />
             <ProfileLink {...settings} />
-            <ProfileLink {...help} />
+            <ProfileLink {...support} />
             <DropdownMenuSeparator />
-            <Link href={becomeFriend.href}>
+            <Link href={credits.href}>
               <DropdownMenuItem className="my-3 p-0">
-                <Button variant="primary" size={"xl"} className="m-0">
-                  {becomeFriend.name}
+                <Button
+                  variant="primary"
+                  size={"xl"}
+                  className="m-0 hover:text-button"
+                >
+                  {credits.name}
                 </Button>
               </DropdownMenuItem>
             </Link>

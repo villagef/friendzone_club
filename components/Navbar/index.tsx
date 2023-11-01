@@ -8,8 +8,8 @@ export function MainNav() {
   const { y: scrollYPos } = useScroll();
   return (
     <div
-      className={`sticky top-0 flex w-full items-center justify-center ${
-        scrollYPos > 0 ? "bg-navbar" : "bg-transparent"
+      className={`sticky left-0 top-0 z-10 flex w-full items-center justify-center ${
+        scrollYPos > 0 ? "bg-primaryGradientEnd" : "bg-primaryGradientEnd"
       }`}
     >
       <Nav />

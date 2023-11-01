@@ -14,10 +14,7 @@ export default function ProfileLink({
 }: ProfileLinkProps) {
   return (
     <Link href={href}>
-      <DropdownMenuItem
-        className="my-1 py-2 font-medium text-primary"
-        {...props}
-      >
+      <DropdownMenuItem className="my-1 py-2 font-medium " {...props}>
         {name}
       </DropdownMenuItem>
     </Link>
