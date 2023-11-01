@@ -7,17 +7,13 @@ export const subNavbarConfig = {
     name: "Settings",
     href: "/account/settings",
   },
-  subscription: {
-    name: "Subscription",
-    href: "/account/subscription",
+  support: {
+    name: "Help & Support",
+    href: "/support",
   },
-  help: {
-    name: "Help",
-    href: "/help",
-  },
-  becomeFriend: {
-    name: "Become a Friend",
-    href: "/plan",
+  credits: {
+    name: "Add Credits",
+    href: "/credits",
   },
   logout: {
     name: "Logout",
