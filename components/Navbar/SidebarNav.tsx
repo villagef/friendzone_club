@@ -23,11 +23,10 @@ import {
 
 export default function SidebarNav() {
   const router = useRouter();
-  const { profile, settings, subscription, help, becomeFriend, logout } =
-    subNavbarConfig;
+  const { profile, settings, support, credits, logout } = subNavbarConfig;
   const [open, setOpen] = useState(false);
   const links = Object.values(navbarConfig);
-  const subLinks = [settings, subscription, help] as NavLinkProps[];
+  const subLinks = [settings, support] as NavLinkProps[];
 
   const handleNavOpen = () => {
     setOpen(true);
@@ -116,7 +115,7 @@ export default function SidebarNav() {
             </SheetTrigger>
           ))}
         </div>
-        <Link href={becomeFriend.href}>
+        <Link href={credits.href}>
           <SheetTrigger asChild>
             <Button
               variant="primary"
@@ -124,7 +123,7 @@ export default function SidebarNav() {
               className="my-1.5"
               onClick={handleNavClose}
             >
-              {becomeFriend.name}
+              {credits.name}
             </Button>
           </SheetTrigger>
         </Link>

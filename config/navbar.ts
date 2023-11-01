@@ -23,7 +23,7 @@ export const navbarConfig: { [key: string]: NavLinkProps } = {
     icon: "message",
   },
   notification: {
-    href: "/notifications",
+    href: "/account/notifications",
     name: "Notifications",
     icon: "notification",
   },

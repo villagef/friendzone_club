@@ -4,7 +4,7 @@
 
 @layer base {
   :root {
-    --background: 274deg 73.53% 47.38%;
+    --background: 0, 0%, 100%;
     --foreground: 222.2 84% 4.9%;
 
     --primary-button: 327, 78%, 44%;
@@ -18,8 +18,8 @@
 
     --primary: 0 0% 100%;
     --primary-foreground: 0 0% 100%;
-    --primary-gradient-start: 274deg 73.53% 47.38%;
-    --primary-gradient-end: 0, 0%, 0%, 1;
+    --primary-gradient-start: 246, 63%, 44%;
+    --primary-gradient-end: 252, 60%, 5%;
 
     --secondary: 0 0% 100%;
     --secondary-foreground: 0 0% 100%;
@@ -48,12 +48,6 @@
 
   body {
     @apply bg-background text-foreground;
-    background: hsl(var(--primary-gradient-start));
-    background: linear-gradient(
-      0deg,
-      hsl(var(--primary-gradient-start)) 0%,
-      hsla(var(--primary-gradient-end)) 80%
-    );
-    background-repeat: no-repeat;
+    background: hsl(var(--background));
   }
 }
