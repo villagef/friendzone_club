@@ -3,6 +3,7 @@
 import Link from "next/link"
 import { useRouter } from "next/navigation"
 import { useState } from "react"
+import { useTheme } from "next-themes"
 import { subNavbarConfig } from "@/config/subNavbar"
 import { Separator } from "@/components/ui/separator"
 import { navbarConfig, NavLinkProps } from "@/config/navbar"
@@ -31,8 +32,10 @@ export default function SidebarNav() {
   const links = Object.values(navbarConfig)
   const subLinks = [settings, support] as NavLinkProps[]
   const { y } = useScroll()
+  const { theme } = useTheme()
 
   const stroke = y > 0 ? "stroke-primary" : "stroke-secondary"
+  const isDark = theme === "light" && y > 0
 
   const handleNavOpen = () => {
     setOpen(true)
@@ -54,9 +57,7 @@ export default function SidebarNav() {
           open ? "hidden" : "flex sm:hidden"
         } w-full flex-row items-center justify-between px-6 py-4`}
       >
-        <Link href={"/"}>
-          <Logo styling={`pr-2 ${stroke}`} />
-        </Link>
+        <Logo styling={`pr-2`} dark={isDark} />
         <SheetTrigger asChild>
           <Button variant="ghost" size={"icon"} onClick={handleNavOpen}>
             <Icons.hamburger className={stroke} />
@@ -69,7 +70,7 @@ export default function SidebarNav() {
       >
         <SheetHeader>
           <SheetTitle>
-            <SheetTrigger asChild className="w-full">
+            <SheetTrigger>
               <Logo width={220} />
             </SheetTrigger>
             <SheetClose
@@ -129,7 +130,7 @@ export default function SidebarNav() {
             <Button
               variant="outline"
               size={"xl"}
-              className="font-bold"
+              className="font-bold text-secondary"
               onClick={handleLogout}
             >
               {logout.name}
