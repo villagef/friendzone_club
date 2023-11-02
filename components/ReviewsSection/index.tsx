@@ -1,25 +1,23 @@
-import { reviewsSection } from "@/config/home";
-import { Avatar, AvatarImage } from "../ui/avatar";
+import { reviewsSection } from "@/config/home"
+import { Avatar, AvatarImage } from "../ui/avatar"
 
 export default function ReviewsSection() {
   return (
     <div className="container flex max-w-screen-2xl flex-col items-center justify-center">
-      <h1 className="mb-16 w-full text-center text-4xl font-bold lg:text-5xl">
+      <h1 className="mb-16 w-full text-center text-4xl font-bold text-primary lg:text-5xl">
         {reviewsSection.title}
       </h1>
       <div className="flex w-full flex-wrap items-center justify-center gap-10 md:gap-16">
         {reviewsSection.items.map(item => (
           <div
             key={item.title}
-            className={`flex h-96 w-80 flex-col items-center justify-start rounded-xl bg-background p-8 shadow-lg`}
+            className={`flex h-96 w-80 flex-col items-center justify-start rounded-xl bg-card p-8 text-black shadow-lg`}
           >
             <Avatar className="h-20 w-20 shadow-lg blur-sm">
               <AvatarImage src={item.avatar} />
             </Avatar>
             <h1 className="mt-4 text-xl font-bold">{item.title}</h1>
-            <h3 className="text-sm font-semibold text-slate-500">
-              {item.subtitle}
-            </h3>
+            <h3 className="text-sm font-semibold ">{item.subtitle}</h3>
             <div className="">
               <div className="mt-4 flex items-center">
                 {Array.from({ length: 5 }).map((_, index) => (
@@ -34,9 +32,7 @@ export default function ReviewsSection() {
                     <path d="M20.924 7.625a1.523 1.523 0 0 0-1.238-1.044l-5.051-.734-2.259-4.577a1.534 1.534 0 0 0-2.752 0L7.365 5.847l-5.051.734A1.535 1.535 0 0 0 1.463 9.2l3.656 3.563-.863 5.031a1.532 1.532 0 0 0 2.226 1.616L11 17.033l4.518 2.375a1.534 1.534 0 0 0 2.226-1.617l-.863-5.03L20.537 9.2a1.523 1.523 0 0 0 .387-1.575Z" />
                   </svg>
                 ))}
-                <p className="ml-2 text-sm font-medium text-gray-500 dark:text-gray-400">
-                  {item.rate} / 5
-                </p>
+                <p className="ml-2 text-sm font-medium ">{item.rate} / 5</p>
               </div>
             </div>
             <p className="pt-4 text-center tracking-wider">
@@ -46,5 +42,5 @@ export default function ReviewsSection() {
         ))}
       </div>
     </div>
-  );
+  )
 }

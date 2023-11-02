@@ -1,50 +1,52 @@
-import { useState } from "react";
+"use client"
+
+import { useState } from "react"
 import {
-  Popover,
-  PopoverContent,
-  PopoverTrigger,
-} from "@/components/ui/popover";
-import { Command, CommandGroup, CommandItem } from "@/components/ui/command";
-import { Button } from "../ui/button";
-import { Icons } from "../icons";
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu"
+import { useScroll } from "@/hooks/useScroll"
+import { Button } from "../ui/button"
+import { Icons } from "../icons"
 
 const languages = [
   { label: "English", value: "en" },
   { label: "Polish", value: "pl" },
-] as const;
+] as const
 
 export default function Language() {
-  const [value, setValue] = useState<string>();
+  const [value, setValue] = useState<string>()
+  const { y } = useScroll()
+
+  const stroke = y > 0 ? "stroke-primary" : "stroke-secondary"
 
   return (
-    <li>
-      <Popover>
-        <PopoverTrigger asChild>
+    <li className="list-none">
+      <DropdownMenu>
+        <DropdownMenuTrigger asChild>
           <Button variant="ghost" size="icon">
-            <Icons.world />
+            <Icons.world className={stroke} />
+            <span className="sr-only">Toggle language</span>
           </Button>
-        </PopoverTrigger>
-        <PopoverContent className="w-auto p-0">
-          <Command>
-            <CommandGroup>
-              {languages.map(language => (
-                <CommandItem
-                  value={language.value}
-                  key={language.value}
-                  className={`${
-                    value === language.value ? "bg-secondary" : "bg-transparent"
-                  }`}
-                  onSelect={() => {
-                    setValue(language.value);
-                  }}
-                >
-                  {language.label}
-                </CommandItem>
-              ))}
-            </CommandGroup>
-          </Command>
-        </PopoverContent>
-      </Popover>
+        </DropdownMenuTrigger>
+        <DropdownMenuContent align="end">
+          {languages.map(language => (
+            <DropdownMenuItem
+              key={language.value}
+              className={`${
+                value === language.value ? "bg-secondary" : "bg-transparent"
+              }`}
+              onClick={() => {
+                setValue(language.value)
+              }}
+            >
+              {language.label}
+            </DropdownMenuItem>
+          ))}
+        </DropdownMenuContent>
+      </DropdownMenu>
     </li>
-  );
+  )
 }

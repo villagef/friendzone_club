@@ -6,8 +6,8 @@
 
 @layer base {
   :root {
-    --background: 0, 0%, 100%;
-    --foreground: 222.2 84% 4.9%;
+    --background: 0, 0%, 99%;
+    --foreground: 236, 100%, 98%;
 
     --primary-button: 327, 78%, 44%;
     --primary-button-foreground: 0, 0%, 96%;
@@ -18,15 +18,52 @@
     --popover: 0, 0%, 100%, 90%;
     --popover-foreground: 222.2 84% 4.9%;
 
+    --primary: 0 0% 5%;
+    --primary-foreground: 0 0% 100%;
+    --primary-gradient-start: 236, 100%, 83%;
+    --primary-gradient-end: 0, 0%, 99%;
+
+    --secondary: 0 0% 98%;
+    --secondary-foreground: 0 0% 100%;
+
+    --muted: 0, 0%, 98%;
+    --muted-foreground: 0, 0%, 94%;
+
+    --accent: 210, 100%, 98%, 30%;
+    --accent-foreground: 222.2 47.4% 11.2%;
+
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 210 40% 98%;
+
+    --border: 214.3 31.8% 91.4%;
+    --input: 214.3 31.8% 91.4%;
+    --ring: 222.2 84% 4.9%;
+
+    --radius: 0.5rem;
+  }
+
+  .dark {
+    --background: 279, 59%, 9%;
+    --foreground: 222.2 84% 4.9%;
+
+    --primary-button: 327, 78%, 44%;
+    --primary-button-foreground: 0, 0%, 96%;
+
+    --card: 0 0% 90%;
+    --card-foreground: 222.2 84% 4.9%;
+
+    --popover: 0, 0%, 100%, 90%;
+    --popover-foreground: 222.2 84% 4.9%;
+
     --primary: 0 0% 100%;
     --primary-foreground: 0 0% 100%;
-    --primary-gradient-start: 246, 63%, 44%;
-    --primary-gradient-end: 252, 60%, 5%;
+    --primary-gradient-start: 0, 0%, 1%;
+    --primary-gradient-end: 279, 59%, 9%;
 
     --secondary: 0 0% 100%;
     --secondary-foreground: 0 0% 100%;
 
-    --muted: 210 40% 96.1%;
+    --muted: 0, 0%, 2.5%;
     --muted-foreground: 215.4 16.3% 46.9%;
 
     --accent: 210, 100%, 98%, 30%;

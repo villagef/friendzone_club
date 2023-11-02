@@ -1,16 +1,18 @@
-"use client";
+"use client"
 
-import Link from "next/link";
-import Image from "next/image";
-import { useRouter } from "next/navigation";
-import { useState } from "react";
-import { subNavbarConfig } from "@/config/subNavbar";
-import { Separator } from "@/components/ui/separator";
-import { navbarConfig, NavLinkProps } from "@/config/navbar";
-import SidebarNavLink from "./SidebarNavLink";
-import UserAvatar from "./UserAvatar";
-import { Icons } from "../icons";
-import { Button } from "../ui/button";
+import Link from "next/link"
+import { useRouter } from "next/navigation"
+import { useState } from "react"
+import { subNavbarConfig } from "@/config/subNavbar"
+import { Separator } from "@/components/ui/separator"
+import { navbarConfig, NavLinkProps } from "@/config/navbar"
+import { useScroll } from "@/hooks/useScroll"
+import SidebarNavLink from "./SidebarNavLink"
+import UserAvatar from "./UserAvatar"
+import { ModeToggle } from "./ModeToggle"
+import Language from "./Language"
+import { Icons } from "../icons"
+import { Button } from "../ui/button"
 import {
   Sheet,
   SheetClose,
@@ -19,27 +21,31 @@ import {
   SheetHeader,
   SheetTitle,
   SheetTrigger,
-} from "../ui/sheet";
+} from "../ui/sheet"
+import Logo from "../Logo"
 
 export default function SidebarNav() {
-  const router = useRouter();
-  const { profile, settings, support, credits, logout } = subNavbarConfig;
-  const [open, setOpen] = useState(false);
-  const links = Object.values(navbarConfig);
-  const subLinks = [settings, support] as NavLinkProps[];
+  const router = useRouter()
+  const { profile, settings, support, credits, logout } = subNavbarConfig
+  const [open, setOpen] = useState(false)
+  const links = Object.values(navbarConfig)
+  const subLinks = [settings, support] as NavLinkProps[]
+  const { y } = useScroll()
+
+  const stroke = y > 0 ? "stroke-primary" : "stroke-secondary"
 
   const handleNavOpen = () => {
-    setOpen(true);
-  };
+    setOpen(true)
+  }
 
   const handleNavClose = () => {
-    setOpen(false);
-  };
+    setOpen(false)
+  }
 
   const handleLogout = () => {
-    router.push("/");
-    handleNavClose();
-  };
+    router.push("/")
+    handleNavClose()
+  }
 
   return (
     <Sheet key={"top"}>
@@ -49,35 +55,23 @@ export default function SidebarNav() {
         } w-full flex-row items-center justify-between px-6 py-4`}
       >
         <Link href={"/"}>
-          <Image
-            src="/logo.svg"
-            alt="Logo"
-            width={240}
-            height={24}
-            className="pr-4"
-            priority
-          />
+          <Logo styling={`pr-2 ${stroke}`} />
         </Link>
         <SheetTrigger asChild>
           <Button variant="ghost" size={"icon"} onClick={handleNavOpen}>
-            <Icons.hamburger />
+            <Icons.hamburger className={stroke} />
           </Button>
         </SheetTrigger>
       </div>
-      <SheetContent side="top" className="h-full overflow-y-auto">
+      <SheetContent
+        side="top"
+        className="h-full overflow-y-auto bg-primaryGradientStart text-secondary dark:text-primary"
+      >
         <SheetHeader>
           <SheetTitle>
-            <Link href={"/"}>
-              <SheetTrigger asChild>
-                <Image
-                  src="/logo.svg"
-                  alt="Logo"
-                  width={200}
-                  height={24}
-                  priority
-                />
-              </SheetTrigger>
-            </Link>
+            <SheetTrigger asChild className="w-full">
+              <Logo width={220} />
+            </SheetTrigger>
             <SheetClose
               asChild
               onClick={handleNavClose}
@@ -97,12 +91,8 @@ export default function SidebarNav() {
             >
               <UserAvatar />
               <div className="pl-4">
-                <span className="my-0 py-0 text-lg font-bold text-primary">
-                  John
-                </span>
-                <p className="my-0 py-0 text-sm text-secondary">
-                  {profile.name}
-                </p>
+                <span className="my-0 py-0 text-lg font-bold">John</span>
+                <p className="my-0 py-0 text-sm">{profile.name}</p>
               </div>
             </div>
             <Separator />
@@ -127,7 +117,7 @@ export default function SidebarNav() {
             </Button>
           </SheetTrigger>
         </Link>
-        <div className="flex flex-col items-center justify-center py-4">
+        <div className="flex flex-col items-center justify-center py-4 ">
           {subLinks.map(props => (
             <SheetTrigger key={props.name} asChild>
               <SidebarNavLink {...props} onClick={handleNavClose} />
@@ -136,12 +126,21 @@ export default function SidebarNav() {
         </div>
         <SheetFooter>
           <SheetTrigger asChild>
-            <Button variant="outline" size={"xl"} onClick={handleLogout}>
+            <Button
+              variant="outline"
+              size={"xl"}
+              className="font-bold"
+              onClick={handleLogout}
+            >
               {logout.name}
             </Button>
           </SheetTrigger>
         </SheetFooter>
+        <SheetFooter className="flex flex-row items-center justify-center gap-8 py-8">
+          <ModeToggle />
+          <Language />
+        </SheetFooter>
       </SheetContent>
     </Sheet>
-  );
+  )
 }
