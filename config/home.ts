@@ -18,18 +18,24 @@ export const faqSection = {
   title: "FAQ",
   items: [
     {
-      title: "Is it accessible?",
-      description: "Yes. It adheres to the WAI-ARIA design pattern.",
-    },
-    {
-      title: "Is it styled?",
-      description: `Yes. It comes with default styles that matches the other
-      components&apos; aesthetic.`,
-    },
-    {
-      title: "Is it animated?",
+      title: "How do I use FriendZone Club safely?",
       description:
-        "Yes. It's animated by default, but you can disable it if you prefer.",
+        "To ensure the best experience possible on our platform, here are four simple ways you can protect yourself and your data when interacting with other Members on FriendZone Club.",
+    },
+    {
+      title: "Get to know who you’re messaging",
+      description:
+        "Before sharing any personal contact information, try getting to know other Members better. We suggest you ask them questions about themselves to ensure they present a consistent story. Remember, if someone tries to quickly move your conversation off-site to apps like Google Chat, WhatsApp, SnapChat, Facebook Messenger, Skype, etc, they may not have good intentions.",
+    },
+    {
+      title: "If it seems too good to be true, it probably is",
+      description:
+        "If someone you’re chatting with seems absolutely flawless (including their photos), proceed with caution and keep your guard up. Until you can verify that they are genuine, don’t share any information that would help them to identify you.",
+    },
+    {
+      title: "Stay on guard for fraud",
+      description:
+        "From continued investments in security and moderation capabilities to investigating imposters who target the dating community—the safety and security of our members are at the forefront of everything we do. If you become aware of a problem, please help us by reporting suspicious users.",
     },
   ],
 };
