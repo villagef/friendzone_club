@@ -34,6 +34,39 @@ export const faqSection = {
   ],
 };
 
+export const reviewsSection = {
+  title: "User's Review",
+  items: [
+    {
+      title: "Ben Johnson",
+      subtitle: "Married",
+      gender: "man",
+      rate: 5,
+      description:
+        "Since meeting someone on FriendZone Club, and reinvigorating the sexual part of my romantic life, I’m a better husband now than I was.",
+      avatar: "/ben.png",
+    },
+    {
+      title: "Emily Clark",
+      subtitle: "Single",
+      gender: "woman",
+      rate: 5,
+      description:
+        "I joined the Club and have found the fulfillment I needed. It’s completely removed the anxiety from my life.",
+      avatar: "/emily.png",
+    },
+    {
+      title: "Roxie Swanson",
+      subtitle: "Single",
+      gender: "woman",
+      rate: 4.9,
+      description:
+        "I cheated on my boyfriend to find companionship and to feel happy and alive again.",
+      avatar: "/roxie.png",
+    },
+  ],
+};
+
 // "Experience a better way to date – efficient and enjoyable. Start dating today and feel the convenience."
 // "We've revolutionized dating for your enjoyment and efficiency. Begin your dating journey now for ultimate convenience."
 // "Elevating the dating experience – more efficient and delightful. Begin dating right away and embrace the convenience."

@@ -3,6 +3,7 @@ import Image from "next/image";
 import { firstSection, heroSection } from "@/config/home";
 import { Button } from "@/components/ui/button";
 import FAQSection from "@/components/FAQSection";
+import ReviewsSection from "@/components/ReviewsSection";
 
 export default function Home() {
   return (
@@ -27,7 +28,7 @@ export default function Home() {
           </div>
         </div>
       </main>
-      <main className="w-full bg-transparent">
+      <main className="w-full ">
         <div className="container flex h-3/5 w-full  max-w-screen-2xl flex-col items-center justify-center bg-transparent p-6 sm:p-8 lg:flex-row">
           <div className="h-50 order-2 flex w-full flex-col items-center justify-center p-2 px-8 lg:order-1 lg:w-1/2">
             <p className=" text-center text-4xl font-bold tracking-tight text-black md:text-5xl md:tracking-wide lg:text-start ">
@@ -48,7 +49,10 @@ export default function Home() {
           </div>
         </div>
       </main>
-      <main className="w-full bg-primaryGradientEnd py-16">
+      <main className="w-full bg-[#fbfbfb] py-12 shadow-inner sm:py-24">
+        <ReviewsSection />
+      </main>
+      <main className="w-full bg-primaryGradientEnd py-12 sm:py-24">
         <FAQSection />
       </main>
     </>

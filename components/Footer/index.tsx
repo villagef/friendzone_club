@@ -5,8 +5,8 @@ import { footerConfig } from "@/config/footer";
 export default function Footer() {
   const links = Object.values(footerConfig);
   return (
-    <div className="w-full bg-primaryGradientEnd">
-      <div className="container flex w-full flex-col items-center justify-center px-10 py-6 text-white  md:flex-row">
+    <div className="w-full bg-primaryGradientEnd py-16 sm:py-6">
+      <div className="container flex w-full flex-col items-center justify-center px-10 text-white  md:flex-row">
         <div className="flex w-full pb-6 sm:pb-0">
           <Link href={"/"} className="mb-6 md:mb-0">
             <Image
