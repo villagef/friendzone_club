@@ -1,18 +1,22 @@
 export const footerConfig = {
+  about: {
+    name: "About",
+    href: "/support",
+  },
+  contact: {
+    name: "Contact",
+    href: "/support",
+  },
   support: {
-    name: "Help & Support",
+    name: "Help",
+    href: "/support",
+  },
+  cookies: {
+    name: "Cookies",
     href: "/support",
   },
   terms: {
-    name: "Terms",
+    name: "Terms & Conditions",
     href: "/terms",
   },
-  privacy: {
-    name: "Privacy",
-    href: "/privacy",
-  },
-  cookies: {
-    name: "Cookie Policy",
-    href: "/cookies",
-  },
-};
+}

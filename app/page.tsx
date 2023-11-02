@@ -1,23 +1,23 @@
-import Link from "next/link";
-import Image from "next/image";
-import { firstSection, heroSection } from "@/config/home";
-import { Button } from "@/components/ui/button";
-import FAQSection from "@/components/FAQSection";
-import ReviewsSection from "@/components/ReviewsSection";
+import Link from "next/link"
+import Image from "next/image"
+import { firstSection, heroSection } from "@/config/home"
+import { Button } from "@/components/ui/button"
+import FAQSection from "@/components/FAQSection"
+import ReviewsSection from "@/components/ReviewsSection"
 
 export default function Home() {
   return (
     <>
-      <main className="w-full bg-gradient-to-t from-primaryGradientStart to-primaryGradientEnd">
+      <main className="w-full bg-gradient-to-b from-primaryGradientStart to-primaryGradientEnd">
         <div className="container flex h-auto max-h-[800px] max-w-screen-2xl flex-col items-center justify-center bg-transparent py-36 sm:p-8 lg:flex-row xl:h-[calc(100vh-70px)]">
-          <div className="h-50 flex w-full flex-col items-center justify-center p-6 lg:w-[990px]">
-            <p className="text-center text-4xl  font-bold tracking-tight text-primary sm:text-5xl md:text-5xl md:tracking-wide xl:text-6xl">
+          <div className="h-50 flex w-full flex-col items-center justify-center p-6 text-primary lg:w-[990px]">
+            <p className="text-center text-4xl  font-bold tracking-tight sm:text-5xl md:text-5xl md:tracking-wide xl:text-6xl">
               {heroSection.title}
             </p>
-            <p className="mt-4 text-center text-4xl font-bold tracking-tight text-primary sm:text-5xl md:text-5xl md:tracking-wide xl:text-6xl">
+            <p className="mt-4 text-center text-4xl font-bold tracking-tight sm:text-5xl md:text-5xl md:tracking-wide xl:text-6xl">
               {heroSection.subtitle}
             </p>
-            <p className="md:px-42 lg:px-46 text-md mt-2 p-0 py-6 text-center leading-8 tracking-wider text-white sm:mt-6 sm:px-24 md:text-xl">
+            <p className="md:px-42 lg:px-46 text-md mt-2 p-0 py-6 text-center leading-8 tracking-wider sm:mt-6 sm:px-24 md:text-xl">
               {heroSection.description}
             </p>
             <Link href={heroSection.actionButtonTarget}>
@@ -31,10 +31,10 @@ export default function Home() {
       <main className="w-full ">
         <div className="container flex h-3/5 w-full  max-w-screen-2xl flex-col items-center justify-center bg-transparent p-6 sm:p-8 lg:flex-row">
           <div className="h-50 order-2 flex w-full flex-col items-center justify-center p-2 px-8 lg:order-1 lg:w-1/2">
-            <p className=" text-center text-4xl font-bold tracking-tight text-black md:text-5xl md:tracking-wide lg:text-start ">
+            <p className=" text-center text-4xl font-bold tracking-tight text-primary md:text-5xl md:tracking-wide lg:text-start ">
               {firstSection.title}
             </p>
-            <p className="text-md py-6 text-center leading-8 tracking-wider text-black md:text-2xl lg:text-start">
+            <p className="text-md py-6 text-center leading-8 tracking-wider text-primary md:text-2xl lg:text-start">
               {firstSection.subtitle}
             </p>
           </div>
@@ -49,12 +49,12 @@ export default function Home() {
           </div>
         </div>
       </main>
-      <main className="w-full bg-[#fbfbfb] py-12 shadow-inner sm:py-24">
+      <main className="w-full py-12 shadow-md sm:py-24">
         <ReviewsSection />
       </main>
-      <main className="w-full bg-primaryGradientEnd py-12 sm:py-24">
+      <main className="w-full bg-gradient-to-t from-primaryGradientStart to-primaryGradientEnd py-12 sm:py-24">
         <FAQSection />
       </main>
     </>
-  );
+  )
 }
