@@ -30,7 +30,7 @@ export default function RootLayout({
         )}
       >
         <MainNav />
-        <div className="w-full">{children}</div>
+        <div className="min-h-[calc(100vh-143px)] w-full">{children}</div>
         <Footer />
       </body>
     </html>

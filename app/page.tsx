@@ -2,12 +2,13 @@ import Link from "next/link";
 import Image from "next/image";
 import { firstSection, heroSection } from "@/config/home";
 import { Button } from "@/components/ui/button";
+import FAQSection from "@/components/FAQSection";
 
 export default function Home() {
   return (
     <>
       <main className="w-full bg-gradient-to-t from-primaryGradientStart to-primaryGradientEnd">
-        <div className="container flex h-[calc(100vh-70px)] max-h-[800px] max-w-screen-2xl flex-col items-center justify-center bg-transparent sm:p-8 lg:flex-row">
+        <div className="container flex h-auto max-h-[800px] max-w-screen-2xl flex-col items-center justify-center bg-transparent py-36 sm:p-8 lg:flex-row xl:h-[calc(100vh-70px)]">
           <div className="h-50 flex w-full flex-col items-center justify-center p-6 lg:w-[990px]">
             <p className="text-center text-4xl  font-bold tracking-tight text-primary sm:text-5xl md:text-5xl md:tracking-wide xl:text-6xl">
               {heroSection.title}
@@ -46,6 +47,9 @@ export default function Home() {
             />
           </div>
         </div>
+      </main>
+      <main className="w-full bg-primaryGradientEnd py-16">
+        <FAQSection />
       </main>
     </>
   );

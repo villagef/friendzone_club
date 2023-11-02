@@ -1,6 +1,6 @@
 export const heroSection = {
   title: "Unlock Joy in Any Language",
-  subtitle: "Chat and Fun!",
+  subtitle: "Chat, Meet and Fun!",
   description:
     "We've revolutionized dating for your enjoyment and efficiency. Begin your dating journey now for ultimate convenience.",
   actionButton: "Get started",
@@ -12,6 +12,26 @@ export const firstSection = {
     "You're not alone — millions are seeking a discreet connection, just like you.",
   subtitle:
     "Join the ever-growing FriendZone Club network daily, where countless people just like you find discreet relationships – whether married, attached, or simply curious.",
+};
+
+export const faqSection = {
+  title: "FAQ",
+  items: [
+    {
+      title: "Is it accessible?",
+      description: "Yes. It adheres to the WAI-ARIA design pattern.",
+    },
+    {
+      title: "Is it styled?",
+      description: `Yes. It comes with default styles that matches the other
+      components&apos; aesthetic.`,
+    },
+    {
+      title: "Is it animated?",
+      description:
+        "Yes. It's animated by default, but you can disable it if you prefer.",
+    },
+  ],
 };
 
 // "Experience a better way to date – efficient and enjoyable. Start dating today and feel the convenience."

@@ -18,7 +18,7 @@ export default function Footer() {
             />
           </Link>
         </div>
-        <div className="flex w-full flex-col justify-end gap-4 whitespace-nowrap px-4 font-semibold md:flex-row md:justify-center">
+        <div className="flex w-full flex-col justify-end gap-4 whitespace-nowrap px-4 md:flex-row md:justify-center">
           {links.map(link => (
             <Link key={link.name} href={link.href}>
               {link.name}
