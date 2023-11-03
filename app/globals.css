@@ -2,8 +2,6 @@
 @tailwind components;
 @tailwind utilities;
 
-@import url("https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;0,9..40,800;0,9..40,900;1,9..40,400;1,9..40,500;1,9..40,600;1,9..40,700;1,9..40,800;1,9..40,900&display=swap");
-
 @layer base {
   :root {
     --background: 0, 0%, 99%;
@@ -77,17 +75,5 @@
     --ring: 222.2 84% 4.9%;
 
     --radius: 0.5rem;
-  }
-}
-
-@layer base {
-  * {
-    @apply border-border;
-    font-family: "DM Sans", sans-serif;
-  }
-
-  body {
-    @apply bg-background text-foreground;
-    background: hsl(var(--background));
   }
 }

@@ -3,11 +3,9 @@
 import Link from "next/link"
 import { useRouter } from "next/navigation"
 import { useState } from "react"
-import { useTheme } from "next-themes"
 import { subNavbarConfig } from "@/config/subNavbar"
 import { Separator } from "@/components/ui/separator"
 import { navbarConfig, NavLinkProps } from "@/config/navbar"
-import { useScroll } from "@/hooks/useScroll"
 import SidebarNavLink from "./SidebarNavLink"
 import UserAvatar from "./UserAvatar"
 import { ModeToggle } from "./ModeToggle"
@@ -31,11 +29,6 @@ export default function SidebarNav() {
   const [open, setOpen] = useState(false)
   const links = Object.values(navbarConfig)
   const subLinks = [settings, support] as NavLinkProps[]
-  const { y } = useScroll()
-  const { theme } = useTheme()
-
-  const stroke = y > 0 ? "stroke-primary" : "stroke-secondary"
-  const isDark = theme === "light" && y > 0
 
   const handleNavOpen = () => {
     setOpen(true)
@@ -57,7 +50,7 @@ export default function SidebarNav() {
           open ? "hidden" : "flex sm:hidden"
         } w-full flex-row items-center justify-between px-6 py-4`}
       >
-        <Logo styling={`pr-2`} dark={isDark} />
+        <Logo styling={`pr-2`} />
         <SheetTrigger asChild>
           <Button
             variant="ghost"
@@ -65,7 +58,9 @@ export default function SidebarNav() {
             onClick={handleNavOpen}
             aria-label="Open side menu"
           >
-            <Icons.hamburger className={stroke} />
+            <Icons.hamburger
+              className={"stroke-secondary dark:stroke-primary"}
+            />
           </Button>
         </SheetTrigger>
       </div>
@@ -88,7 +83,7 @@ export default function SidebarNav() {
                 size={"icon"}
                 aria-label="Close side menu"
               >
-                <Icons.close />
+                <Icons.close className="stroke-secondary dark:text-primary" />
               </Button>
             </SheetClose>
           </SheetTitle>

@@ -1,8 +1,5 @@
-"use client"
-
 import Link from "next/link"
 import { Button } from "@/components/ui/button"
-import { useScroll } from "@/hooks/useScroll"
 import { Icons } from "../icons"
 
 interface NavLinkProps {
@@ -13,9 +10,6 @@ interface NavLinkProps {
 
 export default function NavLink({ href, name, icon }: NavLinkProps) {
   const IconComponent = Icons[icon]
-  const { y } = useScroll()
-
-  const stroke = y > 0 ? "stroke-primary" : "stroke-secondary"
 
   return (
     <li>
@@ -26,7 +20,7 @@ export default function NavLink({ href, name, icon }: NavLinkProps) {
             size="icon"
             aria-label={`Navigate to ${name}`}
           >
-            <IconComponent className={stroke} />
+            <IconComponent className={"stroke-secondary dark:stroke-primary"} />
           </Button>
         ) : (
           <Button
