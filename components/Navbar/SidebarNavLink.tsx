@@ -11,18 +11,13 @@ interface NavLinkProps {
 }
 
 const SidebarNavLink = forwardRef(
-  ({ href, name, icon, onClick }: NavLinkProps) => {
+  ({ href, name, icon, onClick }: NavLinkProps, _ref) => {
     const IconComponent = icon && Icons[icon]
     return (
-      <Link href={href} onClick={onClick} className="w-full">
+      <Link href={href} onClick={onClick}>
         {IconComponent ? (
-          <Button
-            variant="ghost"
-            size="xl"
-            className="my-1.5 bg-secondary/5"
-            aria-label={`Navigate to ${name}`}
-          >
-            <IconComponent className="stroke-white" />
+          <Button variant="ghost" size="default" className="my-2">
+            <IconComponent className="stroke-secondary dark:stroke-primary" />
             <span className="mx-2 text-secondary dark:text-primary">
               {name}
             </span>
@@ -30,9 +25,8 @@ const SidebarNavLink = forwardRef(
         ) : (
           <Button
             variant="ghost"
-            size="xl"
-            className="my-1.5 bg-secondary/5 text-secondary dark:text-primary"
-            aria-label={`Navigate to ${name}`}
+            size="default"
+            className="text-secondary dark:text-primary"
           >
             {name}
           </Button>

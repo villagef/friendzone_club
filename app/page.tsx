@@ -24,7 +24,7 @@ export default function Home() {
               <Button
                 variant={"primary"}
                 size={"lg"}
-                className="mt-4 text-lg"
+                className="mt-4 px-12 py-6 text-lg"
                 aria-label="Register"
               >
                 {heroSection.actionButton}
@@ -35,7 +35,7 @@ export default function Home() {
       </main>
       <main className="w-full py-6">
         <div className="container flex h-3/5 w-full max-w-screen-2xl flex-col items-center justify-center bg-transparent px-0 sm:px-8 lg:flex-row">
-          <div className="h-50 order-2 mt-16 flex w-full flex-col items-center justify-center px-6 lg:order-1 lg:mt-0 lg:w-1/2">
+          <div className="h-50 order-2 ml-0 mt-16 flex w-full flex-col items-center justify-center px-6 md:ml-6 lg:order-1 lg:mt-0 lg:w-1/2">
             <p className=" text-center text-3xl font-bold tracking-tight text-primary md:text-4xl md:tracking-wide lg:text-start ">
               {firstSection.title}
             </p>
