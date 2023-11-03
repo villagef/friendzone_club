@@ -26,7 +26,7 @@ export default function Language() {
     <li className="list-none">
       <DropdownMenu>
         <DropdownMenuTrigger asChild>
-          <Button variant="ghost" size="icon">
+          <Button variant="ghost" size="icon" aria-label="Language selector">
             <Icons.world className={stroke} />
             <span className="sr-only">Toggle language</span>
           </Button>

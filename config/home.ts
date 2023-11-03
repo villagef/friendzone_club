@@ -1,18 +1,18 @@
 export const heroSection = {
   title: "Unlock Joy in Any Language",
-  subtitle: "Chat, Meet and Fun!",
+  subtitle: "Chat and Fun!",
   description:
     "We've revolutionized dating for your enjoyment and efficiency. Begin your dating journey now for ultimate convenience.",
-  actionButton: "Get started",
+  actionButton: "Join the Club",
   actionButtonTarget: "/explore",
-};
+}
 
 export const firstSection = {
   title:
-    "You're not alone — millions are seeking a discreet connection, just like you.",
+    "You're not alone! Millions are seeking a discreet connection, just like you.",
   subtitle:
     "Join the ever-growing FriendZone Club network daily, where countless people just like you find discreet relationships – whether married, attached, or simply curious.",
-};
+}
 
 export const faqSection = {
   title: "FAQ",
@@ -38,7 +38,7 @@ export const faqSection = {
         "From continued investments in security and moderation capabilities to investigating imposters who target the dating community—the safety and security of our members are at the forefront of everything we do. If you become aware of a problem, please help us by reporting suspicious users.",
     },
   ],
-};
+}
 
 export const reviewsSection = {
   title: "User's Review",
@@ -71,7 +71,7 @@ export const reviewsSection = {
       avatar: "/roxie.png",
     },
   ],
-};
+}
 
 // "Experience a better way to date – efficient and enjoyable. Start dating today and feel the convenience."
 // "We've revolutionized dating for your enjoyment and efficiency. Begin your dating journey now for ultimate convenience."

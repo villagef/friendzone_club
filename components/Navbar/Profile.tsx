@@ -1,27 +1,30 @@
-import { useState } from "react";
-import Link from "next/link";
+import { useState } from "react"
+import Link from "next/link"
 import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuGroup,
   DropdownMenuItem,
-  DropdownMenuSeparator,
   DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu";
-import { subNavbarConfig } from "@/config/subNavbar";
-import ProfileLink from "./ProfileLink";
-import UserAvatar from "./UserAvatar";
-import { Button } from "../ui/button";
+} from "@/components/ui/dropdown-menu"
+import { subNavbarConfig } from "@/config/subNavbar"
+import ProfileLink from "./ProfileLink"
+import UserAvatar from "./UserAvatar"
+import { Button } from "../ui/button"
 
 export default function Profile() {
-  const [open, setOpen] = useState(false);
-  const { profile, settings, support, credits, logout } = subNavbarConfig;
+  const [open, setOpen] = useState(false)
+  const { profile, settings, support, credits, logout } = subNavbarConfig
 
   return (
     <li>
       <DropdownMenu open={open} onOpenChange={setOpen}>
         <DropdownMenuTrigger asChild>
-          <Button variant={"avatar"} size={"avatar"}>
+          <Button
+            variant={"avatar"}
+            size={"avatar"}
+            aria-label="Visit your profile"
+          >
             <UserAvatar />
           </Button>
         </DropdownMenuTrigger>
@@ -37,30 +40,25 @@ export default function Profile() {
               </div>
             </DropdownMenuItem>
           </Link>
-          <DropdownMenuSeparator />
           <DropdownMenuGroup>
             <ProfileLink {...settings} />
             <ProfileLink {...support} />
-            <DropdownMenuSeparator />
             <Link href={credits.href}>
               <DropdownMenuItem className="my-3 p-0">
                 <Button
                   variant="primary"
                   size={"xl"}
-                  className="m-0 hover:text-button"
+                  className="m-0"
+                  aria-label="Get more credits"
                 >
                   {credits.name}
                 </Button>
               </DropdownMenuItem>
             </Link>
-            <DropdownMenuSeparator />
-            <ProfileLink
-              {...logout}
-              className="py-2 font-bold text-transparent/70"
-            />
+            <ProfileLink {...logout} className="py-2 font-bold text-black" />
           </DropdownMenuGroup>
         </DropdownMenuContent>
       </DropdownMenu>
     </li>
-  );
+  )
 }

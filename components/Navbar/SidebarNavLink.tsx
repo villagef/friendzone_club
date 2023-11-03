@@ -16,7 +16,12 @@ const SidebarNavLink = forwardRef(
     return (
       <Link href={href} onClick={onClick} className="w-full">
         {IconComponent ? (
-          <Button variant="ghost" size="xl" className="my-1.5 bg-secondary/5">
+          <Button
+            variant="ghost"
+            size="xl"
+            className="my-1.5 bg-secondary/5"
+            aria-label={`Navigate to ${name}`}
+          >
             <IconComponent className="stroke-white" />
             <span className="mx-2 text-secondary dark:text-primary">
               {name}
@@ -27,6 +32,7 @@ const SidebarNavLink = forwardRef(
             variant="ghost"
             size="xl"
             className="my-1.5 bg-secondary/5 text-secondary dark:text-primary"
+            aria-label={`Navigate to ${name}`}
           >
             {name}
           </Button>
