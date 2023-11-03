@@ -24,7 +24,7 @@ export default function Home() {
               <Button
                 variant={"primary"}
                 size={"lg"}
-                className="mt-4 text-lg"
+                className="mt-4 px-12 py-6 text-lg"
                 aria-label="Register"
               >
                 {heroSection.actionButton}

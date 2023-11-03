@@ -1,7 +1,7 @@
 import type { Metadata } from "next"
+import { DM_Sans as FontSans } from "next/font/google"
 import { ThemeProvider } from "@/components/theme-provider"
 import "./globals.css"
-import { DM_Sans as FontSans } from "next/font/google"
 import { cn } from "@/lib/utils"
 import { MainNav } from "@/components/Navbar"
 import Footer from "@/components/Footer"
@@ -36,7 +36,7 @@ export default function RootLayout({
           disableTransitionOnChange
         >
           <MainNav />
-          <div className="min-h-[calc(100vh-143px)] w-full">{children}</div>
+          <div className="min-h-[calc(100vh-166px)] w-full">{children}</div>
           <Footer />
         </ThemeProvider>
       </body>
