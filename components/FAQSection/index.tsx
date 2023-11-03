@@ -5,7 +5,6 @@ import {
   AccordionTrigger,
 } from "@/components/ui/accordion"
 import { faqSection } from "@/config/home"
-import { Separator } from "../ui/separator"
 
 export default function FAQSection() {
   return (
@@ -25,7 +24,6 @@ export default function FAQSection() {
           </AccordionItem>
         ))}
       </Accordion>
-      <Separator className="mt-20" />
     </div>
   )
 }

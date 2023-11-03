@@ -59,7 +59,12 @@ export default function SidebarNav() {
       >
         <Logo styling={`pr-2`} dark={isDark} />
         <SheetTrigger asChild>
-          <Button variant="ghost" size={"icon"} onClick={handleNavOpen}>
+          <Button
+            variant="ghost"
+            size={"icon"}
+            onClick={handleNavOpen}
+            aria-label="Open side menu"
+          >
             <Icons.hamburger className={stroke} />
           </Button>
         </SheetTrigger>
@@ -78,7 +83,11 @@ export default function SidebarNav() {
               onClick={handleNavClose}
               className="absolute right-3 top-3"
             >
-              <Button variant="ghost" size={"icon"}>
+              <Button
+                variant="ghost"
+                size={"icon"}
+                aria-label="Close side menu"
+              >
                 <Icons.close />
               </Button>
             </SheetClose>
@@ -113,6 +122,7 @@ export default function SidebarNav() {
               size={"xl"}
               className="my-1.5"
               onClick={handleNavClose}
+              aria-label="Get more credits"
             >
               {credits.name}
             </Button>
@@ -132,6 +142,7 @@ export default function SidebarNav() {
               size={"xl"}
               className="font-bold text-secondary"
               onClick={handleLogout}
+              aria-label="Logout"
             >
               {logout.name}
             </Button>
