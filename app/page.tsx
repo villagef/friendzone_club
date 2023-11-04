@@ -25,8 +25,7 @@ export default function Home() {
                 variant={"primary"}
                 size={"lg"}
                 className="mt-4 px-12 py-6 text-lg"
-                aria-label="Register"
-              >
+                aria-label="Register">
                 {heroSection.actionButton}
               </Button>
             </Link>

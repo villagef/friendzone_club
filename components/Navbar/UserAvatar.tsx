@@ -1,10 +1,14 @@
-import { Avatar, AvatarFallback, AvatarImage } from "../ui/avatar";
+import { Avatar, AvatarFallback, AvatarImage } from "../ui/avatar"
 
-export default function UserAvatar() {
+interface UserAvatarProps {
+  src: string | null | undefined
+}
+
+export default function UserAvatar({ src }: UserAvatarProps) {
   return (
     <Avatar>
-      <AvatarImage src="https://cdn.iconscout.com/icon/free/png-256/free-avatar-370-456322.png?f=webp" />
+      <AvatarImage src={src ?? ""} />
       <AvatarFallback>FW</AvatarFallback>
     </Avatar>
-  );
+  )
 }

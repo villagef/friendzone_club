@@ -1,8 +1,8 @@
 "use client"
 
 import Link from "next/link"
-import { useRouter } from "next/navigation"
 import { useState } from "react"
+import { Session } from "next-auth"
 import { subNavbarConfig } from "@/config/subNavbar"
 import { Separator } from "@/components/ui/separator"
 import { navbarConfig, NavLinkProps } from "@/config/navbar"
@@ -22,13 +22,20 @@ import {
   SheetTrigger,
 } from "../ui/sheet"
 import Logo from "../Logo"
+import ButtonSignOut from "../ButtonSignOut"
+import ButtonSignIn from "../ButtonSignIn"
 
-export default function SidebarNav() {
-  const router = useRouter()
-  const { profile, settings, support, credits, logout } = subNavbarConfig
+interface NavProps {
+  session: Session | null
+}
+
+export default function SidebarNav({ session }: NavProps) {
+  const { profile, settings, support, credits } = subNavbarConfig
   const [open, setOpen] = useState(false)
   const links = Object.values(navbarConfig)
   const subLinks = [settings, support] as NavLinkProps[]
+  const userName = session?.user?.name
+  const userAvatar = session?.user?.image
 
   const handleNavOpen = () => {
     setOpen(true)
@@ -38,26 +45,19 @@ export default function SidebarNav() {
     setOpen(false)
   }
 
-  const handleLogout = () => {
-    router.push("/")
-    handleNavClose()
-  }
-
-  return (
+  return session ? (
     <Sheet key={"top"}>
       <div
         className={`${
           open ? "hidden" : "flex sm:hidden"
-        } w-full flex-row items-center justify-between px-6 py-4`}
-      >
+        } w-full flex-row items-center justify-between px-6 py-2`}>
         <Logo styling={`pr-2`} />
         <SheetTrigger asChild>
           <Button
             variant="ghost"
             size={"icon"}
             onClick={handleNavOpen}
-            aria-label="Open side menu"
-          >
+            aria-label="Open side menu">
             <Icons.hamburger
               className={"stroke-secondary dark:stroke-primary"}
             />
@@ -66,23 +66,20 @@ export default function SidebarNav() {
       </div>
       <SheetContent
         side="top"
-        className="h-full overflow-y-auto bg-primaryGradientStart text-secondary dark:text-primary"
-      >
+        className="h-full overflow-y-auto bg-primaryGradientStart text-secondary dark:text-primary">
         <SheetHeader>
           <SheetTitle>
             <SheetTrigger>
-              <Logo width={220} />
+              <Logo width={200} />
             </SheetTrigger>
             <SheetClose
               asChild
               onClick={handleNavClose}
-              className="absolute right-3 top-3"
-            >
+              className="absolute right-3 top-3">
               <Button
                 variant="ghost"
                 size={"icon"}
-                aria-label="Close side menu"
-              >
+                aria-label="Close side menu">
                 <Icons.close className="stroke-secondary dark:text-primary" />
               </Button>
             </SheetClose>
@@ -92,11 +89,10 @@ export default function SidebarNav() {
           <SheetTrigger className="w-full">
             <div
               className="mt-5 flex justify-center pb-4 text-start"
-              onClick={handleNavClose}
-            >
-              <UserAvatar />
+              onClick={handleNavClose}>
+              <UserAvatar src={userAvatar} />
               <div className="pl-4">
-                <span className="my-0 py-0 text-lg font-bold">John</span>
+                <span className="my-0 py-0 text-lg font-bold">{userName}</span>
                 <p className="my-0 py-0 text-sm">{profile.name}</p>
               </div>
             </div>
@@ -117,8 +113,7 @@ export default function SidebarNav() {
               size={"xl"}
               className="my-1.5"
               onClick={handleNavClose}
-              aria-label="Get more credits"
-            >
+              aria-label="Get more credits">
               {credits.name}
             </Button>
           </SheetTrigger>
@@ -132,15 +127,7 @@ export default function SidebarNav() {
         </div>
         <SheetFooter>
           <SheetTrigger asChild>
-            <Button
-              variant="outline"
-              size={"xl"}
-              className="font-bold text-secondary"
-              onClick={handleLogout}
-              aria-label="Logout"
-            >
-              {logout.name}
-            </Button>
+            <ButtonSignOut />
           </SheetTrigger>
         </SheetFooter>
         <SheetFooter className="flex flex-row items-center justify-center gap-8 py-8">
@@ -149,5 +136,15 @@ export default function SidebarNav() {
         </SheetFooter>
       </SheetContent>
     </Sheet>
+  ) : (
+    <div
+      className={`flex w-full flex-row items-center justify-between px-2 py-4 sm:hidden`}>
+      <Logo width={200} styling={`pr-2`} />
+      <div className="flex gap-x-6">
+        <ModeToggle />
+        <Language />
+        <ButtonSignIn icon />
+      </div>
+    </div>
   )
 }
