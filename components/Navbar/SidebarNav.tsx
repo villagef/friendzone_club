@@ -24,6 +24,7 @@ import {
 import Logo from "../Logo"
 import ButtonSignOut from "../ButtonSignOut"
 import ButtonSignIn from "../ButtonSignIn"
+import ButtonCredits from "../ButtonCredits"
 
 interface NavProps {
   session: Session | null
@@ -50,37 +51,35 @@ export default function SidebarNav({ session }: NavProps) {
       <div
         className={`${
           open ? "hidden" : "flex sm:hidden"
-        } w-full flex-row items-center justify-between px-6 py-2`}>
+        } w-full flex-row items-center justify-between`}
+      >
         <Logo styling={`pr-2`} />
         <SheetTrigger asChild>
-          <Button
-            variant="ghost"
-            size={"icon"}
-            onClick={handleNavOpen}
-            aria-label="Open side menu">
-            <Icons.hamburger
-              className={"stroke-secondary dark:stroke-primary"}
-            />
+          <Button variant="ghost" size={"icon"} onClick={handleNavOpen}>
+            <Icons.hamburger />
+            <span className="sr-only">Open side menu</span>
           </Button>
         </SheetTrigger>
       </div>
       <SheetContent
         side="top"
-        className="h-full overflow-y-auto bg-primaryGradientStart text-secondary dark:text-primary">
+        className="h-full overflow-y-auto bg-gradient-to-b from-primaryGradientStart to-primaryGradientEnd "
+      >
         <SheetHeader>
           <SheetTitle>
-            <SheetTrigger>
-              <Logo width={200} />
-            </SheetTrigger>
+            <div className="flex w-full">
+              <SheetTrigger>
+                <Logo width={180} />
+              </SheetTrigger>
+            </div>
             <SheetClose
               asChild
               onClick={handleNavClose}
-              className="absolute right-3 top-3">
-              <Button
-                variant="ghost"
-                size={"icon"}
-                aria-label="Close side menu">
-                <Icons.close className="stroke-secondary dark:text-primary" />
+              className="absolute right-3 top-3"
+            >
+              <Button variant="ghost" size={"icon"}>
+                <Icons.close />
+                <span className="sr-only">Close side menu</span>
               </Button>
             </SheetClose>
           </SheetTitle>
@@ -88,8 +87,9 @@ export default function SidebarNav({ session }: NavProps) {
         <Link href={profile.href}>
           <SheetTrigger className="w-full">
             <div
-              className="mt-5 flex justify-center pb-4 text-start"
-              onClick={handleNavClose}>
+              className="my-4 flex justify-center text-start"
+              onClick={handleNavClose}
+            >
               <UserAvatar src={userAvatar} />
               <div className="pl-4">
                 <span className="my-0 py-0 text-lg font-bold">{userName}</span>
@@ -106,18 +106,9 @@ export default function SidebarNav({ session }: NavProps) {
             </SheetTrigger>
           ))}
         </div>
-        <Link href={credits.href}>
-          <SheetTrigger asChild>
-            <Button
-              variant="primary"
-              size={"xl"}
-              className="my-1.5"
-              onClick={handleNavClose}
-              aria-label="Get more credits">
-              {credits.name}
-            </Button>
-          </SheetTrigger>
-        </Link>
+        <SheetTrigger asChild>
+          <ButtonCredits onClick={handleNavClose} />
+        </SheetTrigger>
         <div className="flex flex-col items-center justify-center py-4 ">
           {subLinks.map(props => (
             <SheetTrigger key={props.name} asChild>
@@ -126,11 +117,9 @@ export default function SidebarNav({ session }: NavProps) {
           ))}
         </div>
         <SheetFooter>
-          <SheetTrigger asChild>
-            <ButtonSignOut />
-          </SheetTrigger>
+          <ButtonSignOut />
         </SheetFooter>
-        <SheetFooter className="flex flex-row items-center justify-center gap-8 py-8">
+        <SheetFooter className="flex flex-row items-center justify-center gap-8 pt-6">
           <ModeToggle />
           <Language />
         </SheetFooter>
@@ -138,12 +127,13 @@ export default function SidebarNav({ session }: NavProps) {
     </Sheet>
   ) : (
     <div
-      className={`flex w-full flex-row items-center justify-between px-2 py-4 sm:hidden`}>
-      <Logo width={200} styling={`pr-2`} />
-      <div className="flex gap-x-6">
+      className={`flex w-full flex-row items-center justify-between sm:hidden`}
+    >
+      <Logo width={190} styling="pr-2" />
+      <div className="flex gap-x-2">
         <ModeToggle />
         <Language />
-        <ButtonSignIn icon />
+        <ButtonSignIn />
       </div>
     </div>
   )

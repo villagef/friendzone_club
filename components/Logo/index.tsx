@@ -5,24 +5,18 @@ interface LogoProps {
   width?: number
   height?: number
   styling?: string
-  dark?: boolean
 }
 
-export default function Logo({
-  width = 240,
-  height = 24,
-  styling,
-  dark = false,
-}: LogoProps) {
+export default function Logo({ width = 220, height = 24, styling }: LogoProps) {
   return (
     <Link href={"/"}>
       <Image
-        src={`${dark ? "/logoDark.svg" : "/logo.svg"}`}
+        src="/logo.svg"
         alt="Logo"
         width={width}
         height={height}
         priority
-        className={`fill-black p-4 ${styling || ""}`}
+        className={`mr-4 p-1 dark:invert ${styling || ""}`}
       />
     </Link>
   )

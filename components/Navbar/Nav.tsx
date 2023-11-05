@@ -13,7 +13,7 @@ interface NavProps {
 
 export default function Nav({ session }: NavProps) {
   return (
-    <div className="hidden w-full max-w-screen-2xl flex-col items-center justify-between px-6 py-2 sm:flex sm:flex-row">
+    <div className="hidden w-full max-w-screen-2xl flex-col items-center justify-between sm:flex sm:flex-row">
       <Logo />
       <ul className="mt-8 flex items-center sm:mt-0 sm:gap-x-5 md:gap-x-6 lg:gap-x-8">
         {session ? (

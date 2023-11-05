@@ -13,20 +13,15 @@ export default function ButtonSignIn({ icon }: ButtonSignInProps) {
     signIn()
   }
   return icon ? (
-    <Button
-      variant="primary"
-      size={"icon"}
-      aria-label="Login"
-      onClick={handleClick}>
+    <Button variant="primary" size={"default"} onClick={handleClick}>
       <Icons.login className={"stroke-secondary dark:stroke-primary"} />
+      <span className="ml-2">Sign in</span>
+      <span className="sr-only">Sign in</span>
     </Button>
   ) : (
-    <Button
-      variant={"primary"}
-      size={"lg"}
-      aria-label="Login"
-      onClick={handleClick}>
+    <Button variant={"primary"} size={"default"} onClick={handleClick}>
       Sign in
+      <span className="sr-only">Sign in</span>
     </Button>
   )
 }

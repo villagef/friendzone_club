@@ -15,6 +15,7 @@ import ProfileLink from "./ProfileLink"
 import UserAvatar from "./UserAvatar"
 import { Button } from "../ui/button"
 import ButtonSignOut from "../ButtonSignOut"
+import ButtonCredits from "../ButtonCredits"
 
 export default function Profile() {
   const [open, setOpen] = useState(false)
@@ -27,11 +28,9 @@ export default function Profile() {
     <li>
       <DropdownMenu open={open} onOpenChange={setOpen}>
         <DropdownMenuTrigger asChild>
-          <Button
-            variant={"avatar"}
-            size={"avatar"}
-            aria-label="Visit your profile">
+          <Button variant={"avatar"} size={"avatar"}>
             <UserAvatar src={userAvatar} />
+            <span className="sr-only">Visit your profile</span>
           </Button>
         </DropdownMenuTrigger>
         <DropdownMenuContent align="end" className="hidden w-[280px] sm:block">
@@ -51,17 +50,7 @@ export default function Profile() {
           <DropdownMenuGroup>
             <ProfileLink {...settings} />
             <ProfileLink {...support} />
-            <Link href={credits.href}>
-              <DropdownMenuItem className="my-3 p-0">
-                <Button
-                  variant="primary"
-                  size={"xl"}
-                  className="m-0"
-                  aria-label="Get more credits">
-                  {credits.name}
-                </Button>
-              </DropdownMenuItem>
-            </Link>
+            <ButtonCredits />
             <ButtonSignOut />
           </DropdownMenuGroup>
         </DropdownMenuContent>

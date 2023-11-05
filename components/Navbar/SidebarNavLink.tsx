@@ -14,20 +14,14 @@ const SidebarNavLink = forwardRef(
   ({ href, name, icon, onClick }: NavLinkProps, _ref) => {
     const IconComponent = icon && Icons[icon]
     return (
-      <Link href={href} onClick={onClick}>
+      <Link href={href} onClick={onClick} className="my-1 w-full">
         {IconComponent ? (
-          <Button variant="ghost" size="default" className="my-2">
-            <IconComponent className="stroke-secondary dark:stroke-primary" />
-            <span className="mx-2 text-secondary dark:text-primary">
-              {name}
-            </span>
+          <Button variant="ghost" size="xl">
+            <IconComponent />
+            <span className="mx-2">{name}</span>
           </Button>
         ) : (
-          <Button
-            variant="ghost"
-            size="default"
-            className="text-secondary dark:text-primary"
-          >
+          <Button variant="ghost" size="xl">
             {name}
           </Button>
         )}

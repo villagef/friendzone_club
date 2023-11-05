@@ -8,7 +8,7 @@ import ReviewsSection from "@/components/ReviewsSection"
 export default function Home() {
   return (
     <>
-      <main className="w-full bg-gradient-to-b from-primaryGradientStart to-primaryGradientEnd">
+      <main className="w-full bg-gradient-to-l from-primaryGradientStart to-primaryGradientEnd">
         <div className="container flex h-auto max-h-[800px] max-w-screen-2xl flex-col items-center justify-center bg-transparent px-6 py-16 sm:p-8 md:py-36 lg:flex-row xl:h-[calc(100vh-70px)]">
           <div className="h-50 flex w-full flex-col items-center justify-center text-primary lg:w-[990px]">
             <p className="text-center text-4xl  font-bold tracking-tight sm:text-5xl md:text-5xl md:tracking-wide xl:text-6xl">
@@ -25,8 +25,9 @@ export default function Home() {
                 variant={"primary"}
                 size={"lg"}
                 className="mt-4 px-12 py-6 text-lg"
-                aria-label="Register">
+              >
                 {heroSection.actionButton}
+                <span className="sr-only">Register</span>
               </Button>
             </Link>
           </div>
@@ -48,15 +49,15 @@ export default function Home() {
               width={500}
               height={400}
               alt="Phone with user profiles"
-              className="rounded-xl shadow-xl"
+              className="mt-4 rounded-xl shadow-xl sm:mt-0"
             />
           </div>
         </div>
       </main>
-      <main className="md-24 w-full py-6 shadow-md sm:py-12 xl:py-32">
+      <main className="md-24 w-full bg-foreground py-8 shadow-md sm:py-12 lg:py-20">
         <ReviewsSection />
       </main>
-      <main className="w-full bg-gradient-to-t from-primaryGradientStart to-primaryGradientEnd py-6 sm:py-12">
+      <main className="w-full bg-gradient-to-l from-primaryGradientStart to-primaryGradientEnd py-6 sm:py-12">
         <FAQSection />
       </main>
     </>
