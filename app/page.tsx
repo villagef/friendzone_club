@@ -1,9 +1,8 @@
-import Link from "next/link"
 import Image from "next/image"
 import { firstSection, heroSection } from "@/config/home"
-import { Button } from "@/components/ui/button"
 import FAQSection from "@/components/FAQSection"
 import ReviewsSection from "@/components/ReviewsSection"
+import ButtonSignUp from "@/components/ButtonSignUp"
 
 export default function Home() {
   return (
@@ -20,16 +19,7 @@ export default function Home() {
             <p className="md:px-42 lg:px-46 text-md mt-2 p-0 py-6 text-center leading-8 tracking-wider sm:mt-6 sm:px-24 md:text-xl">
               {heroSection.description}
             </p>
-            <Link href={heroSection.actionButtonTarget}>
-              <Button
-                variant={"primary"}
-                size={"lg"}
-                className="mt-4 px-12 py-6 text-lg"
-              >
-                {heroSection.actionButton}
-                <span className="sr-only">Register</span>
-              </Button>
-            </Link>
+            <ButtonSignUp />
           </div>
         </div>
       </main>

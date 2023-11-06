@@ -12,15 +12,12 @@ export default function ButtonSignIn({ icon }: ButtonSignInProps) {
   const handleClick = () => {
     signIn()
   }
-  return icon ? (
+  return (
     <Button variant="primary" size={"default"} onClick={handleClick}>
-      <Icons.login className={"stroke-secondary dark:stroke-primary"} />
-      <span className="ml-2">Sign in</span>
-      <span className="sr-only">Sign in</span>
-    </Button>
-  ) : (
-    <Button variant={"primary"} size={"default"} onClick={handleClick}>
-      Sign in
+      {icon && (
+        <Icons.login className={"stroke-secondary dark:stroke-primary"} />
+      )}
+      <span className="mx-2">Sign in</span>
       <span className="sr-only">Sign in</span>
     </Button>
   )

@@ -36,8 +36,7 @@ export default function Language() {
               }`}
               onClick={() => {
                 setValue(language.value)
-              }}
-            >
+              }}>
               {language.label}
             </DropdownMenuItem>
           ))}

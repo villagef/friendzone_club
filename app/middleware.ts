@@ -13,6 +13,10 @@ export default withAuth(
     if (request.nextUrl.pathname.startsWith("/explore")) {
       return NextResponse.rewrite(new URL("/", request.url))
     }
+
+    if (request.nextUrl.pathname.startsWith("/auth")) {
+      return NextResponse.rewrite(new URL("/auth/signup", request.url))
+    }
   },
   {
     callbacks: {

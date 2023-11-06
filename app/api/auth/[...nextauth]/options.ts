@@ -3,41 +3,42 @@ import type { NextAuthOptions } from "next-auth"
 import GoogleProvider from "next-auth/providers/google"
 import CredentialsProvider from "next-auth/providers/credentials"
 
-export const options: NextAuthOptions = {
+export const authOptions: NextAuthOptions = {
   providers: [
-    // CredentialsProvider({
-    //   name: "Credentials",
-    //   credentials: {
-    //     username: {
-    //       label: "Username:",
-    //       type: "text",
-    //       placeholder: "Enter your username",
-    //     },
-    //     password: {
-    //       label: "Password:",
-    //       type: "password",
-    //       placeholder: "Enter your password",
-    //     },
-    //   },
-    //   async authorize(credentials) {
-    //     const user = {
-    //       id: "42",
-    //       name: "Dave",
-    //       password: "qwerty",
-    //       role: "user",
-    //       email: "dave12126565@gmail.com",
-    //     }
+    CredentialsProvider({
+      name: "Credentials",
+      credentials: {
+        username: {
+          label: "Username:",
+          type: "text",
+          placeholder: "Enter your username",
+        },
+        password: {
+          label: "Password:",
+          type: "password",
+          placeholder: "Enter your password",
+        },
+      },
+      async authorize(credentials) {
+        const user = {
+          id: "42",
+          name: "Dave",
+          password: "qwerty",
+          role: "user",
+          email: "dave12126565@gmail.com",
+        }
 
-    //     if (
-    //       credentials?.username === user.name &&
-    //       credentials?.password === user.password
-    //     ) {
-    //       return user
-    //     } else {
-    //       return null
-    //     }
-    //   },
-    // }),
+        if (
+          credentials?.username === user.name &&
+          credentials?.password === user.password
+        ) {
+          await fetch("POST", {})
+          return user
+        } else {
+          return null
+        }
+      },
+    }),
     GoogleProvider({
       clientId: process.env.GOOGLE_CLIENT_ID as string,
       clientSecret: process.env.GOOGLE_SECRET_ID as string,
@@ -65,5 +66,9 @@ export const options: NextAuthOptions = {
     generateSessionToken: () => {
       return randomUUID?.() ?? randomBytes(32).toString("hex")
     },
+  },
+  pages: {
+    signIn: "/auth/signin",
+    newUser: "/",
   },
 } satisfies NextAuthOptions

@@ -23,24 +23,24 @@ export default function RootLayout({
   children: React.ReactNode
 }) {
   return (
-    <html lang="en" suppressHydrationWarning>
-      <head />
-      <body
-        className={cn(
-          "w-full overflow-x-hidden bg-background font-sans antialiased",
-          fontSans.variable,
-        )}>
-        <ClientProvider>
+    <ClientProvider>
+      <html lang="en" suppressHydrationWarning>
+        <head />
+        <body
+          className={cn(
+            "w-full overflow-x-hidden bg-background font-sans antialiased",
+            fontSans.variable,
+          )}>
           <ThemeProvider
             attribute="class"
             defaultTheme="light"
             disableTransitionOnChange>
             <MainNav />
-            <div className="min-h-[calc(100vh-166px)] w-full">{children}</div>
+            <div className=" w-full">{children}</div>
             <Footer />
           </ThemeProvider>
-        </ClientProvider>
-      </body>
-    </html>
+        </body>
+      </html>
+    </ClientProvider>
   )
 }

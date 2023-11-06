@@ -54,7 +54,11 @@
       }
     ]
   },
-  "ignorePatterns": ["next.config.js"],
+  "ignorePatterns": [
+    "next.config.js",
+    "app/api/auth/[...nextauth]/route.ts",
+    "app/api/auth/[...nextauth]/options.ts"
+  ],
   "settings": {
     "tailwindcss": {
       "callees": ["cn", "cva"],
