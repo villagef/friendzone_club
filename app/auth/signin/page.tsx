@@ -21,6 +21,14 @@ export default function SignInForm() {
     }
   }
 
+  const handleSignInWithFacebook = async () => {
+    try {
+      await signIn("facebook")
+    } catch (error) {
+      console.log(error)
+    }
+  }
+
   function onSubmit(event: React.SyntheticEvent) {
     event.preventDefault()
     setIsLoading(true)
@@ -30,8 +38,12 @@ export default function SignInForm() {
     }, 3000)
   }
 
-  const handleSubmit = () => {
+  const handleGoogleSubmit = () => {
     handleSignInWithGoogle()
+  }
+
+  const handleFacebookSubmit = () => {
+    handleSignInWithFacebook()
   }
 
   return (
@@ -102,14 +114,14 @@ export default function SignInForm() {
           </div>
           <div className="flex flex-col gap-y-2">
             <Button
-              onClick={handleSubmit}
+              onClick={handleGoogleSubmit}
               variant="outline"
               type="button"
               disabled={isLoading}>
               <Icons.google className="mr-2" /> Google
             </Button>
             <Button
-              onClick={handleSubmit}
+              onClick={handleFacebookSubmit}
               variant="outline"
               type="button"
               disabled={isLoading}>

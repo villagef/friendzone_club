@@ -98,13 +98,13 @@ export default function SignUpForm() {
           By clicking 'Create account' you agree to our{" "}
           <Link
             href="/support"
-            className="underline underline-offset-4 hover:text-button">
-            Terms of Service
+            className="font-semibold underline underline-offset-4 hover:text-button">
+            Terms&Conditions
           </Link>{" "}
           and{" "}
           <Link
             href="/support"
-            className="underline underline-offset-4 hover:text-button">
+            className="font-semibold underline underline-offset-4 hover:text-button">
             Privacy Policy
           </Link>
           .

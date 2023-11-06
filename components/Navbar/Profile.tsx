@@ -22,7 +22,7 @@ export default function Profile() {
   const { data: session } = useSession()
   const userName = session?.user?.name
   const userAvatar = session?.user?.image
-  const { profile, settings, support, credits } = subNavbarConfig
+  const { profile, settings, support } = subNavbarConfig
 
   return (
     <li>

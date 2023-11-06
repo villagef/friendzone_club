@@ -21,12 +21,12 @@ export default function Authentication({
         </div>
         <div className="relative z-20 mt-auto">
           <blockquote className="space-y-2">
-            <p className="text-lg">
-              &ldquo;This library has saved me countless hours of work and
-              helped me deliver stunning designs to my clients faster than ever
-              before.&rdquo;
+            <p className="text-lg italic">
+              &ldquo;Discover a world of endless possibilities and meaningful
+              connections as you take the first step towards an exciting journey
+              of friendships and exploration.&rdquo;
             </p>
-            <footer className="text-sm">Sofia Davis</footer>
+            <footer className="text-sm">~ Chat Gpt</footer>
           </blockquote>
         </div>
       </div>
@@ -41,7 +41,7 @@ export default function Authentication({
             {isSignup && <ButtonSignIn />}
           </div>
         </div>
-        <div className="w-full rounded-lg bg-background p-4 shadow-lg sm:w-auto sm:p-8">
+        <div className="w-full rounded-lg bg-background p-4 shadow-lg dark:bg-transparent/20 sm:w-auto sm:p-8">
           {children}
         </div>
       </div>
