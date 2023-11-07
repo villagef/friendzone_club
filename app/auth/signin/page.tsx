@@ -1,9 +1,10 @@
 "use client"
 
-import React from "react"
+import React, { useRef } from "react"
 
 import { signIn } from "next-auth/react"
 import Link from "next/link"
+import { useRouter } from "next/navigation"
 import { Icons } from "@/components/icons"
 import { Label } from "@/components/ui/label"
 import { Input } from "@/components/ui/input"
@@ -12,7 +13,9 @@ import Authentication from "@/components/Authentication"
 
 export default function SignInForm() {
   const [isLoading, setIsLoading] = React.useState<boolean>(false)
-
+  const emailRef = useRef<HTMLInputElement>(null)
+  const passwordRef = useRef<HTMLInputElement>(null)
+  const route = useRouter()
   const handleSignInWithGoogle = (event: React.SyntheticEvent) => {
     event.preventDefault()
     setIsLoading(true)
@@ -28,10 +31,13 @@ export default function SignInForm() {
   function onSubmit(event: React.SyntheticEvent) {
     event.preventDefault()
     setIsLoading(true)
-
-    setTimeout(() => {
-      setIsLoading(false)
-    }, 3000)
+    const email = emailRef.current?.value
+    const password = passwordRef.current?.value
+    const data = { email, password }
+    signIn("credentials", {
+      ...data,
+      redirect: false,
+    }).then(() => route.push("/explore"))
   }
 
   return (
@@ -52,6 +58,7 @@ export default function SignInForm() {
                 </Label>
                 <Input
                   id="email"
+                  ref={emailRef}
                   placeholder="name@example.com"
                   type="email"
                   autoCapitalize="none"
@@ -67,6 +74,7 @@ export default function SignInForm() {
               </Label>
               <Input
                 id="password"
+                ref={passwordRef}
                 placeholder="password"
                 type="password"
                 autoCapitalize="none"
@@ -88,7 +96,7 @@ export default function SignInForm() {
             Not a member?
             <Link href="/auth/signup">
               <span className="mx-2 w-full text-sm font-semibold underline">
-                Sign up
+                Create free account
               </span>
             </Link>
           </div>

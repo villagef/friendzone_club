@@ -3,6 +3,9 @@ import { NextRequestWithAuth } from "next-auth/middleware"
 import { NextResponse } from "next/server"
 
 export const middleware = (request: NextRequestWithAuth) => {
+  if (request.nextUrl.pathname.startsWith("/auth/signup")) {
+    return NextResponse.rewrite(new URL("/auth/signup", request.url))
+  }
   if (request.nextUrl.pathname.startsWith("/auth")) {
     return NextResponse.rewrite(new URL("/auth/signin", request.url))
   }

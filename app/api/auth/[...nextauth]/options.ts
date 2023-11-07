@@ -3,41 +3,52 @@ import type { NextAuthOptions } from "next-auth"
 import GoogleProvider from "next-auth/providers/google"
 import FacebookProvider from "next-auth/providers/facebook"
 import CredentialsProvider from "next-auth/providers/credentials"
+import bcrypt from "bcrypt"
+import { PrismaAdapter } from "@auth/prisma-adapter"
+import { PrismaClient } from "@prisma/client"
+
+const prisma = new PrismaClient()
 
 export const authOptions: NextAuthOptions = {
+  adapter: PrismaAdapter(prisma),
   providers: [
     CredentialsProvider({
       name: "Credentials",
       credentials: {
-        username: {
-          label: "Username:",
+        email: {
+          label: "Email:",
           type: "text",
-          placeholder: "Enter your username",
+          placeholder: "example@email.com",
         },
         password: {
           label: "Password:",
           type: "password",
-          placeholder: "Enter your password",
+          placeholder: "password",
         },
       },
-      async authorize(credentials) {
-        const user = {
-          id: "42",
-          name: "Dave",
-          password: "qwerty",
-          role: "user",
-          email: "dave12126565@gmail.com",
+      async authorize(credentials: Record<"email" | "password", string> | undefined ) {
+        if(!credentials?.email || !credentials?.password){
+          return null
         }
 
-        if (
-          credentials?.username === user.name &&
-          credentials?.password === user.password
-        ) {
-          await fetch("POST", {})
+      const user = await prisma.user.findUnique({
+        where: {
+          email: credentials.email
+        }
+      })
+
+      if(!user){
+        return null
+      } else {
+        const match = await bcrypt.compare(credentials.password, user.password)
+
+        if(match){
           return user
         } else {
           return null
         }
+      }
+
       },
     }),
     GoogleProvider({
@@ -51,22 +62,13 @@ export const authOptions: NextAuthOptions = {
     })
   ],
   session: {
-    // Choose how you want to save the user session.
-    // The default is `"jwt"`, an encrypted JWT (JWE) stored in the session cookie.
-    // If you use an `adapter` however, we default it to `"database"` instead.
-    // You can still force a JWT session by explicitly defining `"jwt"`.
-    // When using `"database"`, the session cookie will only contain a `sessionToken` value,
-    // which is used to look up the session in the database.
     strategy: "jwt",
-
     // Seconds - How long until an idle session expires and is no longer valid.
     maxAge: 30 * 24 * 60 * 60, // 30 days
-
     // Seconds - Throttle how frequently to write to database to extend a session.
     // Use it to limit write operations. Set to 0 to always update the database.
     // Note: This option is ignored if using JSON Web Tokens
     updateAge: 24 * 60 * 60, // 24 hours
-
     // The session token is usually either a random UUID or string, however if you
     // need a more customized session token string, you can define your own generate function.
     generateSessionToken: () => {
@@ -86,5 +88,7 @@ export const authOptions: NextAuthOptions = {
     redirect({ baseUrl }) {
       return baseUrl
     }
-  }
+  },
+  secret: process.env.NEXTAUTH_SECRET,
+  debug: process.env.NODE_ENV === "development",
 } satisfies NextAuthOptions

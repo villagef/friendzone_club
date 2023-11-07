@@ -3,37 +3,42 @@
 import { useState } from "react"
 import Link from "next/link"
 import { useRef } from "react"
+import { useRouter } from "next/navigation"
 import Authentication from "@/components/Authentication"
 import { Icons } from "@/components/icons"
 import { Label } from "@/components/ui/label"
 import { Input } from "@/components/ui/input"
 import { Button } from "@/components/ui/button"
-// import { useRouter } from "next/navigation"
 
 export default function SignUpForm() {
   const [isLoading, setIsLoading] = useState<boolean>(false)
   const emailRef = useRef<HTMLInputElement>(null)
   const passwordRef = useRef<HTMLInputElement>(null)
-  // const route = useRouter()
+  const route = useRouter()
 
-  function onSubmit() {
-    // "use server"
+  async function handleLoginWithCredentials(event: React.SyntheticEvent) {
+    event.preventDefault()
     setIsLoading(true)
-    // const email = emailRef.current?.value
-    // const password = passwordRef.current?.value
-    // const response = await fetch("/api/signup", {
-    //   method: "POST",
-    //   body: JSON.stringify({ email, password }),
-    //   headers: {
-    //     "Content-Type": "application/json",
-    //   },
-    // })
-    // if (response.ok) {
-    //   await response.json()
-    //   setIsLoading(false)
-    // } else {
-    //   console.log(response)
-    // }
+    const email = emailRef.current?.value
+    const password = passwordRef.current?.value
+    const data = { email, password }
+    await fetch("/api/signup", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ data }),
+    })
+      .then(res => {
+        res.json()
+        route.push("/auth/signin")
+      })
+      .catch(err => console.log(err))
+      .finally(() => setIsLoading(false))
+  }
+
+  const onSubmit = (event: React.SyntheticEvent) => {
+    handleLoginWithCredentials(event)
   }
 
   return (
