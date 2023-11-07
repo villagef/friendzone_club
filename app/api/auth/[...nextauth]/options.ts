@@ -46,7 +46,8 @@ export const authOptions: NextAuthOptions = {
     }),
     FacebookProvider({
       clientId: process.env.FACEBOOK_CLIENT_ID as string,
-      clientSecret: process.env.FACEBOOK_CLIENT_SECRET as string
+      clientSecret: process.env.FACEBOOK_CLIENT_SECRET as string,
+
     })
   ],
   session: {
@@ -74,6 +75,16 @@ export const authOptions: NextAuthOptions = {
   },
   pages: {
     signIn: "/auth/signin",
+    signOut: "/",
     newUser: "/",
   },
+  callbacks: {
+    signIn({ user, account, profile, email, credentials }) {
+      console.log(user, account, profile, email, credentials)
+      return true
+    },
+    redirect({ baseUrl }) {
+      return baseUrl
+    }
+  }
 } satisfies NextAuthOptions

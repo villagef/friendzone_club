@@ -13,20 +13,16 @@ import Authentication from "@/components/Authentication"
 export default function SignInForm() {
   const [isLoading, setIsLoading] = React.useState<boolean>(false)
 
-  const handleSignInWithGoogle = async () => {
-    try {
-      await signIn("google")
-    } catch (error) {
-      console.log(error)
-    }
+  const handleSignInWithGoogle = (event: React.SyntheticEvent) => {
+    event.preventDefault()
+    setIsLoading(true)
+    signIn("google")
   }
 
-  const handleSignInWithFacebook = async () => {
-    try {
-      await signIn("facebook")
-    } catch (error) {
-      console.log(error)
-    }
+  const handleSignInWithFacebook = (event: React.SyntheticEvent) => {
+    event.preventDefault()
+    setIsLoading(true)
+    signIn("facebook")
   }
 
   function onSubmit(event: React.SyntheticEvent) {
@@ -36,14 +32,6 @@ export default function SignInForm() {
     setTimeout(() => {
       setIsLoading(false)
     }, 3000)
-  }
-
-  const handleGoogleSubmit = () => {
-    handleSignInWithGoogle()
-  }
-
-  const handleFacebookSubmit = () => {
-    handleSignInWithFacebook()
   }
 
   return (
@@ -114,18 +102,28 @@ export default function SignInForm() {
           </div>
           <div className="flex flex-col gap-y-2">
             <Button
-              onClick={handleGoogleSubmit}
+              onClick={handleSignInWithGoogle}
               variant="outline"
               type="button"
               disabled={isLoading}>
-              <Icons.google className="mr-2" /> Google
+              {isLoading ? (
+                <Icons.spinner className="mr-2 h-4 w-4 animate-spin" />
+              ) : (
+                <Icons.google className="mr-2" />
+              )}
+              Google
             </Button>
             <Button
-              onClick={handleFacebookSubmit}
+              onClick={handleSignInWithFacebook}
               variant="outline"
               type="button"
               disabled={isLoading}>
-              <Icons.facebook className="mr-2" /> Facebook
+              {isLoading ? (
+                <Icons.spinner className="mr-2 h-4 w-4 animate-spin" />
+              ) : (
+                <Icons.facebook className="mr-2" />
+              )}
+              Facebook
             </Button>
           </div>
         </div>

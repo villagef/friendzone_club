@@ -1,24 +1,41 @@
 "use client"
 
-import { SyntheticEvent, useState } from "react"
+import { useState } from "react"
 import Link from "next/link"
+import { useRef } from "react"
 import Authentication from "@/components/Authentication"
 import { Icons } from "@/components/icons"
 import { Label } from "@/components/ui/label"
 import { Input } from "@/components/ui/input"
 import { Button } from "@/components/ui/button"
+// import { useRouter } from "next/navigation"
 
 export default function SignUpForm() {
   const [isLoading, setIsLoading] = useState<boolean>(false)
+  const emailRef = useRef<HTMLInputElement>(null)
+  const passwordRef = useRef<HTMLInputElement>(null)
+  // const route = useRouter()
 
-  function onSubmit(event: SyntheticEvent) {
-    event.preventDefault()
+  function onSubmit() {
+    // "use server"
     setIsLoading(true)
-
-    setTimeout(() => {
-      setIsLoading(false)
-    }, 3000)
+    // const email = emailRef.current?.value
+    // const password = passwordRef.current?.value
+    // const response = await fetch("/api/signup", {
+    //   method: "POST",
+    //   body: JSON.stringify({ email, password }),
+    //   headers: {
+    //     "Content-Type": "application/json",
+    //   },
+    // })
+    // if (response.ok) {
+    //   await response.json()
+    //   setIsLoading(false)
+    // } else {
+    //   console.log(response)
+    // }
   }
+
   return (
     <Authentication isSignup>
       <div className="mx-auto flex w-full flex-col justify-center space-y-6 sm:w-[350px]">
@@ -39,6 +56,7 @@ export default function SignUpForm() {
                 </Label>
                 <Input
                   id="email"
+                  ref={emailRef}
                   placeholder="name@example.com"
                   type="email"
                   autoCapitalize="none"
@@ -54,6 +72,7 @@ export default function SignUpForm() {
               </Label>
               <Input
                 id="password"
+                ref={passwordRef}
                 placeholder="password (min 8 characters)"
                 type="password"
                 autoCapitalize="none"
