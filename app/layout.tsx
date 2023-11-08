@@ -40,7 +40,7 @@ export default function RootLayout({
             <div className=" w-full">{children}</div>
             <Footer />
           </ThemeProvider>
-          <Toaster />
+          <Toaster richColors />
         </body>
       </html>
     </ClientProvider>

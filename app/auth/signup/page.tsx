@@ -4,6 +4,7 @@ import { useState } from "react"
 import Link from "next/link"
 import { useRef } from "react"
 import { useRouter } from "next/navigation"
+import { toast } from "sonner"
 import Authentication from "@/components/Authentication"
 import { Icons } from "@/components/icons"
 import { Label } from "@/components/ui/label"
@@ -12,6 +13,8 @@ import { Button } from "@/components/ui/button"
 
 export default function SignUpForm() {
   const [isLoading, setIsLoading] = useState<boolean>(false)
+  const nameRef = useRef<HTMLInputElement>(null)
+  const lastNameRef = useRef<HTMLInputElement>(null)
   const emailRef = useRef<HTMLInputElement>(null)
   const passwordRef = useRef<HTMLInputElement>(null)
   const route = useRouter()
@@ -19,22 +22,38 @@ export default function SignUpForm() {
   async function handleLoginWithCredentials(event: React.SyntheticEvent) {
     event.preventDefault()
     setIsLoading(true)
+    const name = nameRef.current?.value
+    const lastName = lastNameRef.current?.value
     const email = emailRef.current?.value
     const password = passwordRef.current?.value
-    const data = { email, password }
-    await fetch("/api/signup", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({ data }),
-    })
-      .then(res => {
-        res.json()
-        route.push("/auth/signin")
+    const data = { name, lastName, email, password }
+
+    try {
+      const res = await fetch("/api/signup", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ data }),
       })
-      .catch(err => console.log(err))
-      .finally(() => setIsLoading(false))
+
+      if (res.ok) {
+        toast.success("Account created successfully", {
+          position: "top-right",
+        })
+        route.push("/auth/signin")
+      } else {
+        toast.error("This user already exists", {
+          position: "top-right",
+        })
+      }
+    } catch (error) {
+      toast.error("Something went wrong", {
+        position: "top-right",
+      })
+    } finally {
+      setIsLoading(false)
+    }
   }
 
   const onSubmit = (event: React.SyntheticEvent) => {
@@ -43,7 +62,7 @@ export default function SignUpForm() {
 
   return (
     <Authentication isSignup>
-      <div className="mx-auto flex w-full flex-col justify-center space-y-6 sm:w-[350px]">
+      <div className="mx-auto flex w-full flex-col justify-center space-y-6">
         <div className="flex flex-col space-y-2 text-center">
           <h1 className="text-2xl font-semibold tracking-tight">
             Create an account
@@ -55,8 +74,44 @@ export default function SignUpForm() {
         <div className={"grid gap-6"}>
           <form onSubmit={onSubmit}>
             <div className="grid gap-2">
+              <div className="grid grid-cols-2 gap-4 ">
+                <div>
+                  <Label className="font-semibold" htmlFor="name">
+                    Name
+                  </Label>
+                  <Input
+                    id="name"
+                    ref={nameRef}
+                    placeholder="name"
+                    type="text"
+                    autoCapitalize="none"
+                    autoComplete="name"
+                    autoCorrect="off"
+                    disabled={isLoading}
+                    required
+                    className="text-primary"
+                  />
+                </div>
+                <div>
+                  <Label className="font-semibold" htmlFor="surname">
+                    Surname
+                  </Label>
+                  <Input
+                    id="surname"
+                    ref={lastNameRef}
+                    placeholder="surname"
+                    type="text"
+                    autoCapitalize="none"
+                    autoComplete="surname"
+                    autoCorrect="off"
+                    disabled={isLoading}
+                    required
+                    className="text-primary"
+                  />
+                </div>
+              </div>
               <div className="grid gap-1">
-                <Label className="" htmlFor="email">
+                <Label className="font-semibold" htmlFor="email">
                   Email
                 </Label>
                 <Input
@@ -72,7 +127,7 @@ export default function SignUpForm() {
                   className="text-primary"
                 />
               </div>
-              <Label className="" htmlFor="password">
+              <Label className="font-semibold" htmlFor="password">
                 Password
               </Label>
               <Input
@@ -87,7 +142,7 @@ export default function SignUpForm() {
                 required
                 className="text-primary"
               />
-              <Label className="" htmlFor="password">
+              <Label className="font-semibold" htmlFor="password">
                 Confirm Password
               </Label>
               <Input

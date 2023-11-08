@@ -15,9 +15,19 @@ export const authOptions: NextAuthOptions = {
     CredentialsProvider({
       name: "Credentials",
       credentials: {
+        name: {
+          label: "Name:",
+          type: "text",
+          placeholder: "name",
+        },
+        lastName: {
+          label: "Surname:",
+          type: "text",
+          placeholder: "surname",
+        },
         email: {
           label: "Email:",
-          type: "text",
+          type: "email",
           placeholder: "example@email.com",
         },
         password: {
@@ -27,7 +37,7 @@ export const authOptions: NextAuthOptions = {
         },
       },
       async authorize(credentials: Record<"email" | "password", string> | undefined ) {
-        if(!credentials?.email || !credentials?.password){
+        if( !credentials?.email || !credentials?.password){
           return null
         }
 

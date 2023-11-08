@@ -6,6 +6,8 @@ const prisma = new PrismaClient()
 
 interface BodyProps {
     data: {
+    name: string;
+    lastName: string;
     email: string;
     password: string;
     }
@@ -14,9 +16,9 @@ interface BodyProps {
 export const POST = async (req: Request) => {
     try{
         const body = await req.json() as BodyProps
-        const {email, password} = body.data
+        const {name, lastName, email, password} = body.data
         
-        if(!email || !password){
+        if(!name || !lastName || !email || !password){
             return new NextResponse("Please fill all fields", {status: 422})
         }
         
@@ -26,13 +28,15 @@ export const POST = async (req: Request) => {
             }
         })
         
-        if(exist){
-            return new NextResponse("User already exist", {status: 422})
+        if (exist) {
+            return NextResponse.json({ error: "User already exists" }, { status: 422 });
         }
         
         const hashedPassword = await bcrypt.hash(password, 10)
         const user = await prisma.user.create({
             data: {
+                name,
+                lastName,
                 email,
                 password: hashedPassword
             }

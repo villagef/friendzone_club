@@ -41,7 +41,7 @@ export default function Authentication({
             {isSignup && <ButtonSignIn />}
           </div>
         </div>
-        <div className="w-full rounded-lg bg-background p-4 shadow-lg dark:bg-transparent/20 sm:w-auto sm:p-8">
+        <div className="w-full max-w-[450px] rounded-lg bg-background p-4 py-8 shadow-lg dark:bg-black/80 sm:w-auto sm:p-8 lg:dark:bg-transparent/20">
           {children}
         </div>
       </div>
