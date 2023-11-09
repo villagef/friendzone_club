@@ -6,9 +6,9 @@
   "singleQuote": false,
   "quoteProps": "as-needed",
   "jsxSingleQuote": false,
+  "jsxBracketSameLine": true,
   "trailingComma": "all",
   "bracketSpacing": true,
-  "jsxBracketSameLine": true,
   "arrowParens": "avoid",
   "endOfLine": "auto"
 }

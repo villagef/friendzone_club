@@ -2,6 +2,7 @@
 
 import { useState } from "react"
 import Link from "next/link"
+import { useSession } from "next-auth/react"
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -13,29 +14,33 @@ import { subNavbarConfig } from "@/config/subNavbar"
 import ProfileLink from "./ProfileLink"
 import UserAvatar from "./UserAvatar"
 import { Button } from "../ui/button"
+import ButtonSignOut from "../ButtonSignOut"
+import ButtonCredits from "../ButtonCredits"
 
 export default function Profile() {
   const [open, setOpen] = useState(false)
-  const { profile, settings, support, credits, logout } = subNavbarConfig
+  const { data: session } = useSession()
+  const userName = session?.user?.name
+  const userAvatar = session?.user?.image
+  const { profile, settings, support } = subNavbarConfig
 
   return (
     <li>
       <DropdownMenu open={open} onOpenChange={setOpen}>
         <DropdownMenuTrigger asChild>
-          <Button
-            variant={"avatar"}
-            size={"avatar"}
-            aria-label="Visit your profile"
-          >
-            <UserAvatar />
+          <Button variant={"avatar"} size={"avatar"}>
+            <UserAvatar src={userAvatar} />
+            <span className="sr-only">Visit your profile</span>
           </Button>
         </DropdownMenuTrigger>
         <DropdownMenuContent align="end" className="hidden w-[280px] sm:block">
           <Link href={profile.href}>
             <DropdownMenuItem className="flex">
-              <UserAvatar />
+              <UserAvatar src={userAvatar} />
               <div className="px-2">
-                <span className="my-0 py-0 pl-2 text-lg font-medium">John</span>
+                <span className="my-0 py-0 pl-2 text-lg font-medium">
+                  {userName}
+                </span>
                 <p className="my-0 py-0 pl-2 text-xs font-normal">
                   {profile.name}
                 </p>
@@ -45,19 +50,8 @@ export default function Profile() {
           <DropdownMenuGroup>
             <ProfileLink {...settings} />
             <ProfileLink {...support} />
-            <Link href={credits.href}>
-              <DropdownMenuItem className="my-3 p-0">
-                <Button
-                  variant="primary"
-                  size={"xl"}
-                  className="m-0"
-                  aria-label="Get more credits"
-                >
-                  {credits.name}
-                </Button>
-              </DropdownMenuItem>
-            </Link>
-            <ProfileLink {...logout} className="py-2 font-bold text-black" />
+            <ButtonCredits />
+            <ButtonSignOut />
           </DropdownMenuGroup>
         </DropdownMenuContent>
       </DropdownMenu>

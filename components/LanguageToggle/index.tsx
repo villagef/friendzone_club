@@ -22,8 +22,8 @@ export default function Language() {
     <li className="list-none">
       <DropdownMenu>
         <DropdownMenuTrigger asChild>
-          <Button variant="ghost" size="icon" aria-label="Language selector">
-            <Icons.world className={"stroke-white"} />
+          <Button variant="ghost" size="icon">
+            <Icons.world />
             <span className="sr-only">Toggle language</span>
           </Button>
         </DropdownMenuTrigger>
@@ -36,8 +36,7 @@ export default function Language() {
               }`}
               onClick={() => {
                 setValue(language.value)
-              }}
-            >
+              }}>
               {language.label}
             </DropdownMenuItem>
           ))}

@@ -15,20 +15,14 @@ export default function NavLink({ href, name, icon }: NavLinkProps) {
     <li>
       <Link href={href}>
         {icon ? (
-          <Button
-            variant="ghost"
-            size="icon"
-            aria-label={`Navigate to ${name}`}
-          >
-            <IconComponent className={"stroke-secondary dark:stroke-primary"} />
+          <Button variant="ghost" size="icon">
+            <IconComponent />
+            <span className="sr-only">{`Navigate to ${name}`}</span>
           </Button>
         ) : (
-          <Button
-            variant="ghost"
-            size="default"
-            aria-label={`Navigate to ${name}`}
-          >
+          <Button variant="ghost" size="default">
             {name}
+            <span className="sr-only">{`Navigate to ${name}`}</span>
           </Button>
         )}
       </Link>

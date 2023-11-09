@@ -1,21 +1,36 @@
+"use client"
+
+import { useSession } from "next-auth/react"
 import { navbarConfig } from "@/config/navbar"
-import Language from "./Language"
 import NavLink from "./NavLink"
 import Profile from "./Profile"
-import { ModeToggle } from "./ModeToggle"
 import Logo from "../Logo"
+import ButtonSignIn from "../ButtonSignIn"
+import ModeToggle from "../ModeToggle"
+import Language from "../LanguageToggle"
 
 export default function Nav() {
+  const { data: session } = useSession()
   return (
-    <div className="hidden w-full max-w-screen-2xl flex-col items-center justify-between px-6 py-2 sm:flex sm:flex-row">
+    <div className="hidden h-[55px] w-full max-w-screen-2xl flex-col items-center justify-between sm:flex sm:flex-row">
       <Logo />
       <ul className="mt-8 flex items-center sm:mt-0 sm:gap-x-5 md:gap-x-6 lg:gap-x-8">
-        {Object.values(navbarConfig).map(props => (
-          <NavLink key={props.name} {...props} />
-        ))}
-        <Language />
-        <ModeToggle />
-        <Profile />
+        {session ? (
+          <>
+            {Object.values(navbarConfig).map(props => (
+              <NavLink key={props.name} {...props} />
+            ))}
+            <Language />
+            <ModeToggle />
+            <Profile />
+          </>
+        ) : (
+          <>
+            <Language />
+            <ModeToggle />
+            <ButtonSignIn />
+          </>
+        )}
       </ul>
     </div>
   )

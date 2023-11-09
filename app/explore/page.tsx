@@ -1,5 +1,3 @@
-import React from "react";
-
 export default function Explore() {
-  return <div>Explore</div>;
+  return <section className="flex flex-col gap-6">Explore</section>
 }

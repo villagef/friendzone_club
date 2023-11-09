@@ -15,10 +15,6 @@ export const subNavbarConfig = {
     name: "Add Credits",
     href: "/credits",
   },
-  logout: {
-    name: "Logout",
-    href: "/",
-  },
-};
+}
 
-export type SubNavbarConfig = typeof subNavbarConfig;
+export type SubNavbarConfig = typeof subNavbarConfig

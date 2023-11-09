@@ -1,15 +1,14 @@
 "use client"
 
 import Link from "next/link"
-import { useRouter } from "next/navigation"
 import { useState } from "react"
+import { useSession } from "next-auth/react"
 import { subNavbarConfig } from "@/config/subNavbar"
 import { Separator } from "@/components/ui/separator"
 import { navbarConfig, NavLinkProps } from "@/config/navbar"
 import SidebarNavLink from "./SidebarNavLink"
 import UserAvatar from "./UserAvatar"
-import { ModeToggle } from "./ModeToggle"
-import Language from "./Language"
+import ModeToggle from "../ModeToggle"
 import { Icons } from "../icons"
 import { Button } from "../ui/button"
 import {
@@ -22,13 +21,19 @@ import {
   SheetTrigger,
 } from "../ui/sheet"
 import Logo from "../Logo"
+import ButtonSignOut from "../ButtonSignOut"
+import ButtonSignIn from "../ButtonSignIn"
+import ButtonCredits from "../ButtonCredits"
+import Language from "../LanguageToggle"
 
 export default function SidebarNav() {
-  const router = useRouter()
-  const { profile, settings, support, credits, logout } = subNavbarConfig
+  const { data: session } = useSession()
+  const { profile, settings, support } = subNavbarConfig
   const [open, setOpen] = useState(false)
   const links = Object.values(navbarConfig)
   const subLinks = [settings, support] as NavLinkProps[]
+  const userName = session?.user?.name
+  const userAvatar = session?.user?.image
 
   const handleNavOpen = () => {
     setOpen(true)
@@ -38,52 +43,37 @@ export default function SidebarNav() {
     setOpen(false)
   }
 
-  const handleLogout = () => {
-    router.push("/")
-    handleNavClose()
-  }
-
-  return (
+  return session ? (
     <Sheet key={"top"}>
       <div
         className={`${
           open ? "hidden" : "flex sm:hidden"
-        } w-full flex-row items-center justify-between px-6 py-4`}
-      >
+        } w-full flex-row items-center justify-between`}>
         <Logo styling={`pr-2`} />
         <SheetTrigger asChild>
-          <Button
-            variant="ghost"
-            size={"icon"}
-            onClick={handleNavOpen}
-            aria-label="Open side menu"
-          >
-            <Icons.hamburger
-              className={"stroke-secondary dark:stroke-primary"}
-            />
+          <Button variant="ghost" size={"icon"} onClick={handleNavOpen}>
+            <Icons.hamburger />
+            <span className="sr-only">Open side menu</span>
           </Button>
         </SheetTrigger>
       </div>
       <SheetContent
         side="top"
-        className="h-full overflow-y-auto bg-primaryGradientStart text-secondary dark:text-primary"
-      >
+        className="h-full overflow-y-auto bg-gradient-to-b from-primaryGradientStart to-primaryGradientEnd ">
         <SheetHeader>
           <SheetTitle>
-            <SheetTrigger>
-              <Logo width={220} />
-            </SheetTrigger>
+            <div className="flex w-full">
+              <SheetTrigger>
+                <Logo width={180} />
+              </SheetTrigger>
+            </div>
             <SheetClose
               asChild
               onClick={handleNavClose}
-              className="absolute right-3 top-3"
-            >
-              <Button
-                variant="ghost"
-                size={"icon"}
-                aria-label="Close side menu"
-              >
-                <Icons.close className="stroke-secondary dark:text-primary" />
+              className="absolute right-3 top-3">
+              <Button variant="ghost" size={"icon"}>
+                <Icons.close />
+                <span className="sr-only">Close side menu</span>
               </Button>
             </SheetClose>
           </SheetTitle>
@@ -91,12 +81,11 @@ export default function SidebarNav() {
         <Link href={profile.href}>
           <SheetTrigger className="w-full">
             <div
-              className="mt-5 flex justify-center pb-4 text-start"
-              onClick={handleNavClose}
-            >
-              <UserAvatar />
+              className="my-4 flex justify-center text-start"
+              onClick={handleNavClose}>
+              <UserAvatar src={userAvatar} />
               <div className="pl-4">
-                <span className="my-0 py-0 text-lg font-bold">John</span>
+                <span className="my-0 py-0 text-lg font-bold">{userName}</span>
                 <p className="my-0 py-0 text-sm">{profile.name}</p>
               </div>
             </div>
@@ -110,19 +99,9 @@ export default function SidebarNav() {
             </SheetTrigger>
           ))}
         </div>
-        <Link href={credits.href}>
-          <SheetTrigger asChild>
-            <Button
-              variant="primary"
-              size={"xl"}
-              className="my-1.5"
-              onClick={handleNavClose}
-              aria-label="Get more credits"
-            >
-              {credits.name}
-            </Button>
-          </SheetTrigger>
-        </Link>
+        <SheetTrigger asChild>
+          <ButtonCredits onClick={handleNavClose} />
+        </SheetTrigger>
         <div className="flex flex-col items-center justify-center py-4 ">
           {subLinks.map(props => (
             <SheetTrigger key={props.name} asChild>
@@ -131,23 +110,23 @@ export default function SidebarNav() {
           ))}
         </div>
         <SheetFooter>
-          <SheetTrigger asChild>
-            <Button
-              variant="outline"
-              size={"xl"}
-              className="font-bold text-secondary"
-              onClick={handleLogout}
-              aria-label="Logout"
-            >
-              {logout.name}
-            </Button>
-          </SheetTrigger>
+          <ButtonSignOut />
         </SheetFooter>
-        <SheetFooter className="flex flex-row items-center justify-center gap-8 py-8">
+        <SheetFooter className="flex flex-row items-center justify-center gap-8 pt-6">
           <ModeToggle />
           <Language />
         </SheetFooter>
       </SheetContent>
     </Sheet>
+  ) : (
+    <div
+      className={`flex w-full flex-row items-center justify-between sm:hidden`}>
+      <Logo width={190} styling="pr-2" />
+      <div className="flex gap-x-2">
+        <ModeToggle />
+        <Language />
+        <ButtonSignIn />
+      </div>
+    </div>
   )
 }
