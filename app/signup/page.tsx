@@ -1,6 +1,6 @@
 "use client"
 
-import { ReactNode, SyntheticEvent, useState } from "react"
+import { ReactNode, useState } from "react"
 import Link from "next/link"
 import { useRouter } from "next/navigation"
 import { toast } from "sonner"
@@ -10,7 +10,8 @@ import {
   useForm,
   UseFormReturn,
 } from "react-hook-form"
-import { object, string, ZodError } from "zod"
+import { z } from "zod"
+import { zodResolver } from "@hookform/resolvers/zod"
 import Datepicker, { DateType } from "react-tailwindcss-datepicker"
 
 import Authentication from "@/components/Authentication"
@@ -32,34 +33,30 @@ import { COUNTRIES } from "@/lib/consts"
 
 type LabelType = "name" | "gender" | "email" | "dob" | "location" | "password"
 
-interface FormDataProps {
-  gender: string
-  name: string
-  email: string
-  dob: Date | null
-  location: string
-  password: string
-}
-
 interface FieldProps {
   label: LabelType
   type?: string
-  methods: UseFormReturn<FormDataProps, string, FieldValues>
+  methods: UseFormReturn<FieldValues>
   isLoading: boolean
   items?: string[]
 }
 
-const registrationSchema = object({
-  gender: string().min(1, { message: "required" }),
-  name: string().min(2, { message: "required" }),
-  email: string()
+const registrationSchema = z.object({
+  gender: z.string().min(1, { message: "required" }).default(""),
+  name: z.string().min(2, { message: "required" }).default(""),
+  email: z
+    .string()
     .email({ message: "The email is invalid." })
-    .min(1, { message: "required" }),
-  dob: string().min(1, { message: "required" }),
-  location: string().min(1, { message: "required" }),
-  password: string().min(6, {
-    message: "min 6 characters.",
-  }),
+    .min(1, { message: "required" })
+    .default(""),
+  dob: z.string().min(1, { message: "required" }).default(""),
+  location: z.string().min(1, { message: "required" }).default(""),
+  password: z
+    .string()
+    .min(6, {
+      message: "min 6 characters.",
+    })
+    .default(""),
 })
 
 export const AlertInput = ({ children }: { children: React.ReactNode }) =>
@@ -70,7 +67,7 @@ export const AlertInput = ({ children }: { children: React.ReactNode }) =>
   ) : null
 
 export function CalendarForm({ label, methods, isLoading }: FieldProps) {
-  const errorMsg = methods?.formState?.errors[label] as ReactNode
+  const errorMsg = methods?.formState?.errors[label]?.message as ReactNode
   const [value, setValue] = useState<{
     startDate: DateType
     endDate: DateType
@@ -118,7 +115,7 @@ export function CalendarForm({ label, methods, isLoading }: FieldProps) {
 }
 
 export function SelectField({ label, items, methods, isLoading }: FieldProps) {
-  const errorMsg = methods?.formState?.errors[label] as ReactNode
+  const errorMsg = methods?.formState?.errors[label]?.message as ReactNode
 
   return (
     <FormField
@@ -160,7 +157,7 @@ export function InputField({
   methods,
   isLoading,
 }: FieldProps) {
-  const errorMsg = methods?.formState?.errors[label] as ReactNode
+  const errorMsg = methods?.formState?.errors[label]?.message as ReactNode
   return (
     <div className="grid gap-1">
       <Label className="text-[10px] font-semibold">
@@ -193,29 +190,8 @@ export default function SignUpPage() {
   const [isLoading, setIsLoading] = useState<boolean>(false)
   const route = useRouter()
 
-  const methods = useForm<FormDataProps, string, FieldValues>({
-    resolver: data => {
-      try {
-        registrationSchema.parse(data)
-        return { values: data, errors: {} }
-      } catch (error) {
-        return {
-          values: {},
-          errors: (error as ZodError).errors.reduce(
-            (acc, err) => ({ ...acc, [err.path[0]]: err.message }),
-            {} as Record<string, string>,
-          ),
-        }
-      }
-    },
-    defaultValues: {
-      gender: "",
-      name: "",
-      email: "",
-      dob: null,
-      location: "",
-      password: "",
-    },
+  const methods = useForm({
+    resolver: zodResolver(registrationSchema),
   })
 
   async function handleLoginWithCredentials(data: FieldValues) {
@@ -264,7 +240,6 @@ export default function SignUpPage() {
     const _dob = new Date(data.dob as Date)
     try {
       if (isOver18(_dob)) {
-        console.log(_dob)
         await registrationSchema.parseAsync(data)
         await handleLoginWithCredentials(data)
       } else {
@@ -279,6 +254,8 @@ export default function SignUpPage() {
       })
     }
   }
+
+  const allFieldsFilled = Object.values(methods.watch()).every(Boolean)
 
   return (
     <Authentication isSignup>
@@ -341,7 +318,7 @@ export default function SignUpPage() {
                 </div>
                 <Button
                   variant={"primary"}
-                  disabled={isLoading}
+                  disabled={!allFieldsFilled || isLoading}
                   className="mt-4">
                   {isLoading && (
                     <Icons.spinner className="mr-2 h-4 w-4 animate-spin" />

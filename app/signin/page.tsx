@@ -6,8 +6,9 @@ import { signIn, useSession } from "next-auth/react"
 import Link from "next/link"
 import { useRouter } from "next/navigation"
 import { toast } from "sonner"
-import { object, string, ZodError } from "zod"
+import { object, string } from "zod"
 import { FieldValues, FormProvider, useForm } from "react-hook-form"
+import { zodResolver } from "@hookform/resolvers/zod"
 import { Icons } from "@/components/icons"
 import { Label } from "@/components/ui/label"
 import { Input } from "@/components/ui/input"
@@ -17,7 +18,8 @@ import Authentication from "@/components/Authentication"
 const loginSchema = object({
   email: string()
     .email({ message: "The email is invalid." })
-    .min(1, { message: "required" }),
+    .min(1, { message: "required" })
+    .default(""),
   password: string().min(1, {
     message: "required",
   }),
@@ -27,20 +29,7 @@ export default function SignInForm() {
   const { data: session } = useSession()
   const [isLoading, setIsLoading] = React.useState<boolean>(false)
   const methods = useForm({
-    resolver: data => {
-      try {
-        loginSchema.parse(data)
-        return { values: data, errors: {} }
-      } catch (error) {
-        return {
-          values: {},
-          errors: (error as ZodError).errors.reduce(
-            (acc, err) => ({ ...acc, [err.path[0]]: err.message }),
-            {} as Record<string, string>,
-          ),
-        }
-      }
-    },
+    resolver: zodResolver(loginSchema),
     defaultValues: {
       email: "",
       password: "",
@@ -82,6 +71,8 @@ export default function SignInForm() {
       })
   }
 
+  const allFieldsFilled = Object.values(methods.watch()).every(Boolean)
+
   return (
     <Authentication isSignup={!!session}>
       <div className="mx-auto flex w-full flex-col justify-center space-y-6 sm:w-[350px]">
@@ -100,7 +91,10 @@ export default function SignInForm() {
                     Email{" "}
                     {methods.formState.errors.email && (
                       <span className="ml-1 text-xs text-destructive">
-                        {methods.formState.errors.email as React.ReactNode}
+                        {
+                          methods.formState.errors.email
+                            .message as React.ReactNode
+                        }
                       </span>
                     )}
                   </Label>
@@ -120,7 +114,10 @@ export default function SignInForm() {
                   Password{" "}
                   {methods.formState.errors.password && (
                     <span className="ml-1 text-xs text-destructive">
-                      {methods.formState.errors.password as React.ReactNode}
+                      {
+                        methods.formState.errors.password
+                          .message as React.ReactNode
+                      }
                     </span>
                   )}
                 </Label>
@@ -137,7 +134,7 @@ export default function SignInForm() {
                 />
                 <Button
                   variant={"primary"}
-                  disabled={isLoading}
+                  disabled={!allFieldsFilled || isLoading}
                   className="mt-4">
                   {isLoading && (
                     <Icons.spinner className="mr-2 h-4 w-4 animate-spin" />
