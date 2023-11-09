@@ -15,35 +15,13 @@ export const authOptions: NextAuthOptions = {
     CredentialsProvider({
       name: "Credentials",
       credentials: {
-        gender: {
-          label: "Gender:",
-          type: "text",
-          placeholder: "gender",
-        },
-        name: {
-          label: "Name:",
-          type: "text",
-          placeholder: "name",
-        },
         email: {
           label: "Email:",
           type: "email",
-          placeholder: "example@email.com",
-        },
-        dob: {
-          label: "Date of Birth:",
-          type: "email",
-          placeholder: "30.12.1990",
-        },
-        location: {
-          label: "Location:",
-          type: "text",
-          placeholder: "location",
         },
         password: {
           label: "Password:",
           type: "password",
-          placeholder: "password",
         },
       },
       async authorize(credentials: Record<"email" | "password", string> | undefined ) {
@@ -68,7 +46,6 @@ export const authOptions: NextAuthOptions = {
           return null
         }
       }
-
       },
     }),
     GoogleProvider({

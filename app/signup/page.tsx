@@ -49,7 +49,20 @@ interface FieldProps {
   items?: string[]
 }
 
-const AlertInput = ({ children }: { children: React.ReactNode }) =>
+const registrationSchema = object({
+  gender: string().min(1, { message: "required" }),
+  name: string().min(2, { message: "required" }),
+  email: string()
+    .email({ message: "The email is invalid." })
+    .min(1, { message: "required" }),
+  dob: string().min(1, { message: "required" }),
+  location: string().min(1, { message: "required" }),
+  password: string().min(6, {
+    message: "min 6 characters.",
+  }),
+})
+
+export const AlertInput = ({ children }: { children: React.ReactNode }) =>
   Boolean(children) ? (
     <span role="alert" className="text-xs text-destructive">
       {children}
@@ -180,19 +193,6 @@ export default function SignUpPage() {
   const [isLoading, setIsLoading] = useState<boolean>(false)
   const route = useRouter()
 
-  const registrationSchema = object({
-    gender: string().min(1, { message: "required" }),
-    name: string().min(2, { message: "required" }),
-    email: string()
-      .email({ message: "The email is invalid." })
-      .min(1, { message: "required" }),
-    dob: string().min(1, { message: "required" }),
-    location: string().min(1, { message: "required" }),
-    password: string().min(6, {
-      message: "min 6 characters.",
-    }),
-  })
-
   const methods = useForm<FormDataProps, string, FieldValues>({
     resolver: data => {
       try {
@@ -309,7 +309,6 @@ export default function SignUpPage() {
                     items={COUNTRIES.map(country => country.name)}
                   />
                 </div>
-
                 <CalendarForm
                   label="dob"
                   methods={methods}
