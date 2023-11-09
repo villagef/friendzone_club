@@ -1,6 +1,6 @@
 "use client"
 
-import { ReactNode, useState } from "react"
+import { ReactNode, SyntheticEvent, useState } from "react"
 import Link from "next/link"
 import { useRouter } from "next/navigation"
 import { toast } from "sonner"
@@ -67,7 +67,7 @@ export function CalendarForm({ label, methods, isLoading }: FieldProps) {
   })
 
   const handleValueChange = (newValue: DateType) => {
-    setValue({ startDate: newValue , endDate: newValue })
+    setValue({ startDate: newValue, endDate: newValue })
     methods.setValue(label, newValue as Date)
   }
   return (
@@ -176,7 +176,7 @@ export function InputField({
   )
 }
 
-export default function SignUpForm() {
+export default function SignUpPage() {
   const [isLoading, setIsLoading] = useState<boolean>(false)
   const route = useRouter()
 
@@ -234,7 +234,7 @@ export default function SignUpForm() {
         toast.success("Account created successfully", {
           position: "top-right",
         })
-        route.push("/auth/signin")
+        route.push("/signin")
       } else {
         toast.error("This user already exists", {
           position: "top-right",
@@ -264,6 +264,7 @@ export default function SignUpForm() {
     const _dob = new Date(data.dob as Date)
     try {
       if (isOver18(_dob)) {
+        console.log(_dob)
         await registrationSchema.parseAsync(data)
         await handleLoginWithCredentials(data)
       } else {
@@ -279,10 +280,6 @@ export default function SignUpForm() {
     }
   }
 
-  const submithandler = () => {
-    methods.handleSubmit(onSubmit)
-  }
-
   return (
     <Authentication isSignup>
       <div className="mx-auto flex w-full flex-col justify-center space-y-6">
@@ -296,7 +293,7 @@ export default function SignUpForm() {
         </div>
         <div className={"grid gap-6"}>
           <FormProvider {...methods}>
-            <form onSubmit={submithandler} noValidate>
+            <form onSubmit={methods.handleSubmit(onSubmit)} noValidate>
               <div className="grid gap-1">
                 <div className="grid grid-cols-2 gap-x-4">
                   <SelectField
@@ -337,7 +334,7 @@ export default function SignUpForm() {
                 />
                 <div className="text-center text-xs">
                   Are you a member already?
-                  <Link href="/auth/signin">
+                  <Link href="/signin">
                     <span className="mx-2 w-full text-sm font-semibold underline">
                       Sign in
                     </span>

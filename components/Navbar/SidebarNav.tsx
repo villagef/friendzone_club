@@ -2,7 +2,7 @@
 
 import Link from "next/link"
 import { useState } from "react"
-import { Session } from "next-auth"
+import { useSession } from "next-auth/react"
 import { subNavbarConfig } from "@/config/subNavbar"
 import { Separator } from "@/components/ui/separator"
 import { navbarConfig, NavLinkProps } from "@/config/navbar"
@@ -26,12 +26,9 @@ import ButtonSignIn from "../ButtonSignIn"
 import ButtonCredits from "../ButtonCredits"
 import Language from "../LanguageToggle"
 
-interface NavProps {
-  session: Session | null
-}
-
-export default function SidebarNav({ session }: NavProps) {
-  const { profile, settings, support, credits } = subNavbarConfig
+export default function SidebarNav() {
+  const { data: session } = useSession()
+  const { profile, settings, support } = subNavbarConfig
   const [open, setOpen] = useState(false)
   const links = Object.values(navbarConfig)
   const subLinks = [settings, support] as NavLinkProps[]

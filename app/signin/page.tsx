@@ -2,9 +2,10 @@
 
 import React, { useRef } from "react"
 
-import { signIn } from "next-auth/react"
+import { signIn, useSession } from "next-auth/react"
 import Link from "next/link"
 import { useRouter } from "next/navigation"
+import { toast } from "sonner"
 import { Icons } from "@/components/icons"
 import { Label } from "@/components/ui/label"
 import { Input } from "@/components/ui/input"
@@ -12,6 +13,7 @@ import { Button } from "@/components/ui/button"
 import Authentication from "@/components/Authentication"
 
 export default function SignInForm() {
+  const { data: session } = useSession()
   const [isLoading, setIsLoading] = React.useState<boolean>(false)
   const emailRef = useRef<HTMLInputElement>(null)
   const passwordRef = useRef<HTMLInputElement>(null)
@@ -37,11 +39,26 @@ export default function SignInForm() {
     signIn("credentials", {
       ...data,
       redirect: false,
-    }).then(() => route.push("/explore"))
+    })
+      .then(res => {
+        if (res?.ok) {
+          toast.success("Successfully logged in", { position: "top-right" })
+          route.push("/explore")
+        } else {
+          toast.error("Invalid credentials", { position: "top-right" })
+        }
+      })
+      .catch(err => {
+        console.error(err)
+        toast.error("Something went wrong", { position: "top-right" })
+      })
+      .finally(() => {
+        setIsLoading(false)
+      })
   }
 
   return (
-    <Authentication>
+    <Authentication isSignup={!!session}>
       <div className="mx-auto flex w-full flex-col justify-center space-y-6 sm:w-[350px]">
         <div className="flex flex-col space-y-2 text-center">
           <h1 className="text-2xl font-semibold tracking-tight">
@@ -94,7 +111,7 @@ export default function SignInForm() {
           </form>
           <div className="text-center text-xs">
             Not a member?
-            <Link href="/auth/signup">
+            <Link href="/signup">
               <span className="mx-2 w-full text-sm font-semibold underline">
                 Create free account
               </span>

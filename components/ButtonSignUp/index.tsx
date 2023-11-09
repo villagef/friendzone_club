@@ -9,7 +9,7 @@ interface ButtonSignUpProps {
 
 export default function ButtonSignUp({ icon }: ButtonSignUpProps) {
   return (
-    <Link href="/auth/signup">
+    <Link href="/signup">
       <Button variant="primary" size={"lg"}>
         {icon && (
           <Icons.login className={"stroke-secondary dark:stroke-primary"} />

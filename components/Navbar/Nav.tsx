@@ -1,4 +1,6 @@
-import { Session } from "next-auth"
+"use client"
+
+import { useSession } from "next-auth/react"
 import { navbarConfig } from "@/config/navbar"
 import NavLink from "./NavLink"
 import Profile from "./Profile"
@@ -7,11 +9,8 @@ import ButtonSignIn from "../ButtonSignIn"
 import ModeToggle from "../ModeToggle"
 import Language from "../LanguageToggle"
 
-interface NavProps {
-  session: Session | null
-}
-
-export default function Nav({ session }: NavProps) {
+export default function Nav() {
+  const { data: session } = useSession()
   return (
     <div className="hidden h-[55px] w-full max-w-screen-2xl flex-col items-center justify-between sm:flex sm:flex-row">
       <Logo />
