@@ -9,7 +9,7 @@ import Footer from "@/components/Footer"
 import ClientProvider from "@/components/ClientProvider"
 
 const font = FontSans({
-  weight: "400",
+  weight: "300",
   subsets: ["latin"],
 })
 

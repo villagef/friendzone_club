@@ -15,7 +15,7 @@ export default function Authentication({
 }: AuthenticationProps) {
   return (
     <div className="fixed left-0 top-0 z-50 flex h-full w-screen flex-col items-center justify-center bg-gradient-to-b from-primaryGradientStart to-primaryGradientEnd md:grid lg:grid-cols-2 lg:px-0">
-      <div className="relative hidden h-full flex-col bg-transparent p-6 dark:border-r lg:flex">
+      <div className="relative hidden h-full flex-col bg-transparent p-6 dark:border-r dark:border-secondary/20 lg:flex">
         <div className="relative z-20 flex items-center text-lg font-medium">
           <Logo />
         </div>
@@ -41,7 +41,7 @@ export default function Authentication({
             {isSignup && <ButtonSignIn />}
           </div>
         </div>
-        <div className="w-full max-w-[450px] rounded-lg bg-background p-4 py-8 shadow-lg dark:bg-black/80 sm:w-auto sm:p-8 lg:dark:bg-transparent/20">
+        <div className="w-full min-w-[350px] max-w-[450px] rounded-lg bg-background p-4 py-8 shadow-lg dark:bg-black/80 sm:w-auto sm:p-8 lg:dark:bg-transparent/20">
           {children}
         </div>
       </div>

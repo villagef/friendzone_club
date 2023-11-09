@@ -6,19 +6,21 @@ const prisma = new PrismaClient()
 
 interface BodyProps {
     data: {
-    name: string;
-    lastName: string;
-    email: string;
-    password: string;
+        gender: string;
+        name: string;
+        email: string;
+        dob: string;
+        location: string;
+        password: string;
     }
 }
 
 export const POST = async (req: Request) => {
     try{
         const body = await req.json() as BodyProps
-        const {name, lastName, email, password} = body.data
+        const {gender, name, email, dob, location, password} = body.data
         
-        if(!name || !lastName || !email || !password){
+        if(!gender || !name || !dob || !email || !location || !password){
             return new NextResponse("Please fill all fields", {status: 422})
         }
         
@@ -35,9 +37,11 @@ export const POST = async (req: Request) => {
         const hashedPassword = await bcrypt.hash(password, 10)
         const user = await prisma.user.create({
             data: {
+                gender,
                 name,
-                lastName,
                 email,
+                dob,
+                location,
                 password: hashedPassword
             }
         })
