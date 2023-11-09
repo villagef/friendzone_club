@@ -1,11 +1,10 @@
 "use client"
 
-import { ReactNode, useRef, useState } from "react"
+import { useRef, useState } from "react"
 import Link from "next/link"
 import { useRouter } from "next/navigation"
 import { toast } from "sonner"
 import ReCAPTCHA from "react-google-recaptcha"
-
 import {
   FieldValues,
   FormProvider,
@@ -14,28 +13,18 @@ import {
 } from "react-hook-form"
 import { z } from "zod"
 import { zodResolver } from "@hookform/resolvers/zod"
-import Datepicker, { DateType } from "react-tailwindcss-datepicker"
 
 import Authentication from "@/components/Authentication"
 import { Icons } from "@/components/icons"
-import { Label } from "@/components/ui/label"
-import { Input } from "@/components/ui/input"
 import { Button } from "@/components/ui/button"
-import {
-  Select,
-  SelectContent,
-  SelectGroup,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from "@/components/ui/select"
-
-import { FormField } from "@/components/ui/form"
 import { COUNTRIES } from "@/lib/consts"
+import InputCalendar from "@/components/InputCalendar"
+import InputSelect from "@/components/InputSelect"
+import InputText from "@/components/InputText"
 
 type LabelType = "name" | "gender" | "email" | "dob" | "location" | "password"
 
-interface FieldProps {
+export interface FieldProps {
   label: LabelType
   type?: string
   methods: UseFormReturn<FieldValues>
@@ -60,133 +49,6 @@ const registrationSchema = z.object({
     })
     .default(""),
 })
-
-export const AlertInput = ({ children }: { children: React.ReactNode }) =>
-  Boolean(children) ? (
-    <span role="alert" className="text-xs text-destructive">
-      {children}
-    </span>
-  ) : null
-
-export function CalendarForm({ label, methods, isLoading }: FieldProps) {
-  const errorMsg = methods?.formState?.errors[label]?.message as ReactNode
-  const [value, setValue] = useState<{
-    startDate: DateType
-    endDate: DateType
-  }>({
-    startDate: null,
-    endDate: null,
-  })
-
-  const handleValueChange = (newValue: DateType) => {
-    setValue({ startDate: newValue, endDate: newValue })
-    methods.setValue(label, newValue as Date)
-  }
-  return (
-    <FormField
-      name={label}
-      render={({ field }) => (
-        <div className="grid gap-1">
-          <Label className="text-[10px] font-semibold">
-            {(label === "dob" ? "Date of Birth" : label).toUpperCase()}{" "}
-            {errorMsg && (
-              <AlertInput>
-                <span>{errorMsg}</span>
-              </AlertInput>
-            )}
-          </Label>
-          <div className="mb-2">
-            <Datepicker
-              {...field}
-              value={value}
-              onChange={value => handleValueChange(value?.endDate || null)}
-              asSingle={true}
-              maxDate={new Date()}
-              i18n="en"
-              disabled={isLoading}
-              useRange={false}
-              inputClassName={`h-9 w-full rounded-md border border-input bg-transparent px-3 text-primary text-sm shadow-sm transition-colors file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-primary/50 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:cursor-not-allowed disabled:opacity-50 ${
-                errorMsg && "border-destructive"
-              }`}
-            />
-          </div>
-        </div>
-      )}
-    />
-  )
-}
-
-export function SelectField({ label, items, methods, isLoading }: FieldProps) {
-  const errorMsg = methods?.formState?.errors[label]?.message as ReactNode
-
-  return (
-    <FormField
-      {...methods.register(label)}
-      name={label}
-      render={({ field }) => (
-        <div className="grid gap-1">
-          <Label className="text-[10px] font-semibold">
-            {label.toUpperCase()}{" "}
-            {errorMsg && (
-              <AlertInput>
-                <span>{errorMsg}</span>
-              </AlertInput>
-            )}
-          </Label>
-          <Select disabled={isLoading} onValueChange={field.onChange}>
-            <SelectTrigger className="w-full">
-              <SelectValue placeholder={`Select ${label}`} />
-            </SelectTrigger>
-            <SelectContent className="w-full">
-              <SelectGroup>
-                {items?.map(item => (
-                  <SelectItem key={item} value={item}>
-                    {item}
-                  </SelectItem>
-                ))}
-              </SelectGroup>
-            </SelectContent>
-          </Select>
-        </div>
-      )}
-    />
-  )
-}
-
-export function InputField({
-  label,
-  type = "text",
-  methods,
-  isLoading,
-}: FieldProps) {
-  const errorMsg = methods?.formState?.errors[label]?.message as ReactNode
-  return (
-    <div className="grid gap-1">
-      <Label className="text-[10px] font-semibold">
-        {label.toUpperCase()}{" "}
-        {errorMsg && (
-          <AlertInput>
-            <span>{errorMsg}</span>
-          </AlertInput>
-        )}
-      </Label>
-      <Input
-        {...methods.register(label)}
-        id={label}
-        placeholder={label}
-        type={type}
-        autoCapitalize="none"
-        autoComplete={label}
-        autoCorrect="off"
-        disabled={isLoading}
-        required
-        className={`border-destructive text-primary ${
-          !errorMsg && "border-destructive"
-        }}`}
-      />
-    </div>
-  )
-}
 
 export default function SignUpPage() {
   const [isLoading, setIsLoading] = useState<boolean>(false)
@@ -287,36 +149,36 @@ export default function SignUpPage() {
             <form onSubmit={methods.handleSubmit(onSubmit)} noValidate>
               <div className="grid gap-1">
                 <div className="grid grid-cols-2 gap-x-4">
-                  <SelectField
+                  <InputSelect
                     label="gender"
                     isLoading={isLoading}
                     methods={methods}
                     items={["Male", "Female", "Transgender", "Non-binary"]}
                   />
-                  <SelectField
+                  <InputSelect
                     label="location"
                     isLoading={isLoading}
                     methods={methods}
                     items={COUNTRIES.map(country => country.name)}
                   />
                 </div>
-                <CalendarForm
+                <InputCalendar
                   label="dob"
                   methods={methods}
                   isLoading={isLoading}
                 />
-                <InputField
+                <InputText
                   label="name"
                   methods={methods}
                   isLoading={isLoading}
                 />
-                <InputField
+                <InputText
                   label="email"
                   type="email"
                   methods={methods}
                   isLoading={isLoading}
                 />
-                <InputField
+                <InputText
                   label="password"
                   type="password"
                   methods={methods}
