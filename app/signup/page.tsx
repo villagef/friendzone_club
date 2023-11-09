@@ -1,9 +1,11 @@
 "use client"
 
-import { ReactNode, useState } from "react"
+import { ReactNode, useRef, useState } from "react"
 import Link from "next/link"
 import { useRouter } from "next/navigation"
 import { toast } from "sonner"
+import ReCAPTCHA from "react-google-recaptcha"
+
 import {
   FieldValues,
   FormProvider,
@@ -189,6 +191,7 @@ export function InputField({
 export default function SignUpPage() {
   const [isLoading, setIsLoading] = useState<boolean>(false)
   const route = useRouter()
+  const recaptchaRef = useRef<ReCAPTCHA>(null)
 
   const methods = useForm({
     resolver: zodResolver(registrationSchema),
@@ -252,10 +255,19 @@ export default function SignUpPage() {
       toast.error("Something went wrong", {
         position: "top-right",
       })
+    } finally {
+      recaptchaRef?.current?.reset()
     }
+  }
+  const [isVerified, setIsverified] = useState<boolean>(false)
+
+  const onRecaptchaChange = (token: string | null) => {
+    if (!token) return
+    setIsverified(true)
   }
 
   const allFieldsFilled = Object.values(methods.watch()).every(Boolean)
+  const token = process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY
 
   return (
     <Authentication isSignup>
@@ -316,9 +328,17 @@ export default function SignUpPage() {
                     </span>
                   </Link>
                 </div>
+                {allFieldsFilled && token && (
+                  <ReCAPTCHA
+                    ref={recaptchaRef}
+                    onChange={onRecaptchaChange}
+                    sitekey={token}
+                    className="mt-3"
+                  />
+                )}
                 <Button
                   variant={"primary"}
-                  disabled={!allFieldsFilled || isLoading}
+                  disabled={!isVerified || isLoading}
                   className="mt-4">
                   {isLoading && (
                     <Icons.spinner className="mr-2 h-4 w-4 animate-spin" />
