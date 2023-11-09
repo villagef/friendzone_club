@@ -190,6 +190,7 @@ export function InputField({
 
 export default function SignUpPage() {
   const [isLoading, setIsLoading] = useState<boolean>(false)
+  const [captchaToken, setCaptchaToken] = useState<string | null>(null)
   const route = useRouter()
   const recaptchaRef = useRef<ReCAPTCHA>(null)
 
@@ -215,7 +216,7 @@ export default function SignUpPage() {
         })
         route.push("/signin")
       } else {
-        toast.error("This user already exists", {
+        toast.error("Something went wrong", {
           position: "top-right",
         })
       }
@@ -259,14 +260,15 @@ export default function SignUpPage() {
       recaptchaRef?.current?.reset()
     }
   }
-  const [isVerified, setIsverified] = useState<boolean>(false)
 
   const onRecaptchaChange = (token: string | null) => {
     if (!token) return
-    setIsverified(true)
+    setCaptchaToken(token)
   }
 
-  const allFieldsFilled = Object.values(methods.watch()).every(Boolean)
+  const allFieldsFilled =
+    Object.values(methods.watch()).length !== 0 &&
+    Object.values(methods.watch()).every(Boolean)
   const token = process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY
 
   return (
@@ -328,18 +330,18 @@ export default function SignUpPage() {
                     </span>
                   </Link>
                 </div>
-                {allFieldsFilled && token && (
+                {allFieldsFilled && (
                   <ReCAPTCHA
                     ref={recaptchaRef}
                     onChange={onRecaptchaChange}
-                    sitekey={token}
-                    className="mt-3"
+                    sitekey={token!}
+                    className="mt-2"
                   />
                 )}
                 <Button
                   variant={"primary"}
-                  disabled={!isVerified || isLoading}
-                  className="mt-4">
+                  disabled={!captchaToken || isLoading}
+                  className="mt-2">
                   {isLoading && (
                     <Icons.spinner className="mr-2 h-4 w-4 animate-spin" />
                   )}
@@ -349,7 +351,7 @@ export default function SignUpPage() {
             </form>
           </FormProvider>
         </div>
-        <p className="px-8 text-center text-sm text-primary/90">
+        <p className="px-8 text-center text-xs text-primary/90">
           By clicking 'Create account' you agree to our{" "}
           <Link
             href="/support"
