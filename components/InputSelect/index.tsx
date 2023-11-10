@@ -1,5 +1,7 @@
 import { ReactNode } from "react"
-import { Label } from "@radix-ui/react-dropdown-menu"
+import { FieldProps } from "@/app/signup/page"
+import { FormField } from "../ui/form"
+import AlertInput from "../InputAlert"
 import {
   Select,
   SelectContent,
@@ -7,10 +9,8 @@ import {
   SelectItem,
   SelectTrigger,
   SelectValue,
-} from "@radix-ui/react-select"
-import { FieldProps } from "@/app/signup/page"
-import { FormField } from "../ui/form"
-import AlertInput from "../InputAlert"
+} from "../ui/select"
+import { Label } from "../ui/label"
 
 export default function InputSelect({
   label,
@@ -35,10 +35,10 @@ export default function InputSelect({
             )}
           </Label>
           <Select disabled={isLoading} onValueChange={field.onChange}>
-            <SelectTrigger className="w-full">
+            <SelectTrigger>
               <SelectValue placeholder={`Select ${label}`} />
             </SelectTrigger>
-            <SelectContent className="w-full">
+            <SelectContent>
               <SelectGroup>
                 {items?.map(item => (
                   <SelectItem key={item} value={item}>

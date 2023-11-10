@@ -36,22 +36,10 @@ export const COUNTRIES = [
     icon: "sweden.svg",
   },
   {
-    name: "Switzerland",
-    code: "CH",
-    language: "de",
-    icon: "switzerland.svg",
-  },
-  {
     name: "Canada",
     code: "CA",
     language: "en",
     icon: "canada.svg",
-  },
-  {
-    name: "Albania",
-    code: "AL",
-    language: "sq",
-    icon: "albania.svg",
   },
   {
     name: "Austria",
@@ -76,12 +64,6 @@ export const COUNTRIES = [
     code: "HR",
     language: "hr",
     icon: "croatia.svg",
-  },
-  {
-    name: "Cyprus",
-    code: "CY",
-    language: "el",
-    icon: "cyprus.svg",
   },
   {
     name: "Czech Republic",
@@ -150,34 +132,10 @@ export const COUNTRIES = [
     icon: "italy.svg",
   },
   {
-    name: "Latvia",
-    code: "LV",
-    language: "lv",
-    icon: "latvia.svg",
-  },
-  {
-    name: "Lithuania",
-    code: "LT",
-    language: "lt",
-    icon: "lithuania.svg",
-  },
-  {
-    name: "Montenegro",
-    code: "ME",
-    language: "sr",
-    icon: "montenegro.svg",
-  },
-  {
     name: "Netherlands",
     code: "NL",
     language: "nl",
     icon: "netherlands.svg",
-  },
-  {
-    name: "North Macedonia",
-    code: "MK",
-    language: "mk",
-    icon: "north-macedonia.svg",
   },
   {
     name: "Norway",
@@ -196,18 +154,6 @@ export const COUNTRIES = [
     code: "RO",
     language: "ro",
     icon: "romania.svg",
-  },
-  {
-    name: "Russia",
-    code: "RU",
-    language: "ru",
-    icon: "russia.svg",
-  },
-  {
-    name: "Serbia",
-    code: "RS",
-    language: "sr",
-    icon: "serbia.svg",
   },
   {
     name: "Slovakia",

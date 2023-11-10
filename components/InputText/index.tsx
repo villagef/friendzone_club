@@ -1,8 +1,8 @@
 import { ReactNode } from "react"
-import { Label } from "@radix-ui/react-dropdown-menu"
 import { FieldProps } from "@/app/signup/page"
 import { Input } from "../ui/input"
 import AlertInput from "../InputAlert"
+import { Label } from "../ui/label"
 
 export default function InputText({
   label,
