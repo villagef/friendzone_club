@@ -18,6 +18,7 @@ import InputSelect from "@/components/InputSelect"
 import InputText from "@/components/InputText"
 
 const registrationSchema = z.object({
+  id: z.string().optional(),
   gender: z.string().min(1, { message: "required" }).default(""),
   name: z.string().min(2, { message: "required" }).default(""),
   email: z
@@ -33,6 +34,8 @@ const registrationSchema = z.object({
       message: "min 6 characters.",
     })
     .default(""),
+  emailVerified: z.boolean().default(false).optional(),
+  Image: z.string().default("").optional(),
 })
 
 export default function SignUpPage() {
