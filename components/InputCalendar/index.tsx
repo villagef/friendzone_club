@@ -1,9 +1,9 @@
 import React, { ReactNode, useState } from "react"
 import Datepicker, { DateType } from "react-tailwindcss-datepicker"
-import { Label } from "@radix-ui/react-dropdown-menu"
 import { FieldProps } from "@/app/signup/page"
 import { FormField } from "../ui/form"
 import AlertInput from "../InputAlert"
+import { Label } from "../ui/label"
 
 export default function InputCalendar({
   label,

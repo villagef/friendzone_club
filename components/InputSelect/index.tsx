@@ -1,5 +1,7 @@
 import { ReactNode } from "react"
-import { Label } from "@radix-ui/react-dropdown-menu"
+import { FieldValues, UseFormReturn } from "react-hook-form"
+import { FormField } from "../ui/form"
+import AlertInput from "../InputAlert"
 import {
   Select,
   SelectContent,
@@ -7,17 +9,30 @@ import {
   SelectItem,
   SelectTrigger,
   SelectValue,
-} from "@radix-ui/react-select"
-import { FieldProps } from "@/app/signup/page"
-import { FormField } from "../ui/form"
-import AlertInput from "../InputAlert"
+} from "../ui/select"
+import { Label } from "../ui/label"
+
+export interface InputSelectItemsProps {
+  label: string
+  value: string
+  language?: string
+  icon?: string
+}
+
+export interface InputSelectProps {
+  label: string
+  methods: UseFormReturn<FieldValues>
+  isLoading?: boolean
+  items?: InputSelectItemsProps[]
+  type?: string
+}
 
 export default function InputSelect({
   label,
-  items,
   methods,
   isLoading,
-}: FieldProps) {
+  items,
+}: InputSelectProps) {
   const errorMsg = methods?.formState?.errors[label]?.message as ReactNode
 
   return (
@@ -35,14 +50,16 @@ export default function InputSelect({
             )}
           </Label>
           <Select disabled={isLoading} onValueChange={field.onChange}>
-            <SelectTrigger className="w-full">
+            <SelectTrigger>
               <SelectValue placeholder={`Select ${label}`} />
             </SelectTrigger>
-            <SelectContent className="w-full">
+            <SelectContent>
               <SelectGroup>
                 {items?.map(item => (
-                  <SelectItem key={item} value={item}>
-                    {item}
+                  <SelectItem
+                    key={item.label}
+                    value={item.value.toLocaleLowerCase()}>
+                    {item.label}
                   </SelectItem>
                 ))}
               </SelectGroup>
