@@ -2,7 +2,9 @@ import { NextRequestWithAuth } from "next-auth/middleware"
 import { NextResponse } from "next/server"
 
 export const middleware = (request: NextRequestWithAuth) => {
-  const isAuthorized = request.cookies.get("next-auth.session-token")
+  const isAuthorized = request.headers
+    .get("cookie")
+    ?.includes("next-auth.session-token")
   if (isAuthorized) {
     return NextResponse.next()
   } else {
