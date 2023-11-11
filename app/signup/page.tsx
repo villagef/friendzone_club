@@ -17,7 +17,7 @@ import InputCalendar from "@/components/InputCalendar"
 import InputSelect from "@/components/InputSelect"
 import InputText from "@/components/InputText"
 
-export const registrationSchema = z.object({
+const registrationSchema = z.object({
   gender: z.string().min(1, { message: "required" }).default(""),
   name: z.string().min(2, { message: "required" }).default(""),
   email: z
