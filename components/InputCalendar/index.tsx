@@ -1,15 +1,21 @@
 import React, { ReactNode, useState } from "react"
+import { UseFormReturn } from "react-hook-form"
 import Datepicker, { DateType } from "react-tailwindcss-datepicker"
-import { FieldProps } from "@/app/signup/page"
 import { FormField } from "../ui/form"
 import AlertInput from "../InputAlert"
 import { Label } from "../ui/label"
+
+interface InputCalendarProps {
+  label: string
+  methods: UseFormReturn
+  isLoading?: boolean
+}
 
 export default function InputCalendar({
   label,
   methods,
   isLoading,
-}: FieldProps) {
+}: InputCalendarProps) {
   const errorMsg = methods?.formState?.errors[label]?.message as ReactNode
   const [value, setValue] = useState<{
     startDate: DateType
