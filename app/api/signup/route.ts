@@ -12,6 +12,7 @@ interface BodyProps {
         dob: string;
         location: string;
         password: string;
+        emailVerified: boolean;
     }
 }
 
@@ -42,7 +43,9 @@ export const POST = async (req: Request) => {
                 email,
                 dob,
                 location,
-                password: hashedPassword
+                password: hashedPassword,
+                image: "",
+                emailVerified: false
             }
         })
 

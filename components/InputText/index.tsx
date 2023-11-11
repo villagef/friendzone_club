@@ -1,15 +1,15 @@
 import { ReactNode } from "react"
-import { FieldProps } from "@/app/signup/page"
 import { Input } from "../ui/input"
 import AlertInput from "../InputAlert"
 import { Label } from "../ui/label"
+import { InputSelectProps } from "../InputSelect"
 
 export default function InputText({
   label,
-  type = "text",
   methods,
   isLoading,
-}: FieldProps) {
+  type = "text",
+}: InputSelectProps) {
   const errorMsg = methods?.formState?.errors[label]?.message as ReactNode
   return (
     <div className="grid gap-1">

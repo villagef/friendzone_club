@@ -5,34 +5,19 @@ import Link from "next/link"
 import { useRouter } from "next/navigation"
 import { toast } from "sonner"
 import ReCAPTCHA from "react-google-recaptcha"
-import {
-  FieldValues,
-  FormProvider,
-  useForm,
-  UseFormReturn,
-} from "react-hook-form"
+import { FieldValues, FormProvider, useForm } from "react-hook-form"
 import { z } from "zod"
 import { zodResolver } from "@hookform/resolvers/zod"
 
 import Authentication from "@/components/Authentication"
 import { Icons } from "@/components/icons"
 import { Button } from "@/components/ui/button"
-import { COUNTRIES } from "@/lib/consts"
+import { COUNTRIES, GENDERS } from "@/lib/consts"
 import InputCalendar from "@/components/InputCalendar"
 import InputSelect from "@/components/InputSelect"
 import InputText from "@/components/InputText"
 
-type LabelType = "name" | "gender" | "email" | "dob" | "location" | "password"
-
-export interface FieldProps {
-  label: LabelType
-  type?: string
-  methods: UseFormReturn<FieldValues>
-  isLoading: boolean
-  items?: string[]
-}
-
-const registrationSchema = z.object({
+export const registrationSchema = z.object({
   gender: z.string().min(1, { message: "required" }).default(""),
   name: z.string().min(2, { message: "required" }).default(""),
   email: z
@@ -153,13 +138,13 @@ export default function SignUpPage() {
                     label="gender"
                     isLoading={isLoading}
                     methods={methods}
-                    items={["Male", "Female", "Transgender", "Non-binary"]}
+                    items={GENDERS}
                   />
                   <InputSelect
                     label="location"
                     isLoading={isLoading}
                     methods={methods}
-                    items={COUNTRIES.map(country => country.name)}
+                    items={COUNTRIES}
                   />
                 </div>
                 <InputCalendar

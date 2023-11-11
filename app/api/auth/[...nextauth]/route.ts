@@ -52,23 +52,18 @@ const authOptions: NextAuthOptions = {
     GoogleProvider({
       clientId: process.env.GOOGLE_CLIENT_ID as string,
       clientSecret: process.env.GOOGLE_SECRET_ID as string,
+      allowDangerousEmailAccountLinking: true,
     }),
     FacebookProvider({
       clientId: process.env.FACEBOOK_CLIENT_ID as string,
       clientSecret: process.env.FACEBOOK_CLIENT_SECRET as string,
-
+      allowDangerousEmailAccountLinking: true,
     })
   ],
   session: {
     strategy: "jwt",
-    // Seconds - How long until an idle session expires and is no longer valid.
-    maxAge: 30 * 24 * 60 * 60, // 30 days
-    // Seconds - Throttle how frequently to write to database to extend a session.
-    // Use it to limit write operations. Set to 0 to always update the database.
-    // Note: This option is ignored if using JSON Web Tokens
-    updateAge: 24 * 60 * 60, // 24 hours
-    // The session token is usually either a random UUID or string, however if you
-    // need a more customized session token string, you can define your own generate function.
+    maxAge: 30 * 24 * 60 * 60,
+    updateAge: 24 * 60 * 60,
     generateSessionToken: () => {
       return randomUUID?.() ?? randomBytes(32).toString("hex")
     },
@@ -77,18 +72,46 @@ const authOptions: NextAuthOptions = {
     signIn: "/signin",
     signOut: "/",
     newUser: "/",
+    error: "/",
   },
   callbacks: {
-    signIn({ user, account, profile, email, credentials }) {
-      console.log(user, account, profile, email, credentials)
-      return true
+    async signIn({ account, profile}) {
+      if (account?.provider === "google" || account?.provider === "facebook") {
+        const _user = await prisma.user.findUnique({
+          where: {
+            email: profile?.email
+          }
+        })
+
+        if(!_user){
+          return Promise.resolve(false).then(() => {
+            return {
+              error: "Please sign up first"
+            }
+          }).then(() => {
+            return false
+          })
+        } else {
+          // if(!_user.emailVerified){
+          //   return Promise.resolve(false).then(() => {
+          //     return {
+          //       error: "Please verify your email first"
+          //     }
+          //   }).then(() => {
+          //     return false
+          //   })
+          // }
+          return true
+        }
+      }
+        return true
     },
     redirect({ baseUrl }) {
       return baseUrl
     }
   },
   secret: process.env.NEXTAUTH_SECRET,
-  debug: process.env.NODE_ENV === "development",
+  // debug: process.env.NODE_ENV === "development",
 } satisfies NextAuthOptions
 
 // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment

@@ -1,5 +1,5 @@
 import { ReactNode } from "react"
-import { FieldProps } from "@/app/signup/page"
+import { FieldValues, UseFormReturn } from "react-hook-form"
 import { FormField } from "../ui/form"
 import AlertInput from "../InputAlert"
 import {
@@ -12,12 +12,27 @@ import {
 } from "../ui/select"
 import { Label } from "../ui/label"
 
+export interface InputSelectItemsProps {
+  label: string
+  value: string
+  language?: string
+  icon?: string
+}
+
+export interface InputSelectProps {
+  label: string
+  methods: UseFormReturn<FieldValues>
+  isLoading?: boolean
+  items?: InputSelectItemsProps[]
+  type?: string
+}
+
 export default function InputSelect({
   label,
-  items,
   methods,
   isLoading,
-}: FieldProps) {
+  items,
+}: InputSelectProps) {
   const errorMsg = methods?.formState?.errors[label]?.message as ReactNode
 
   return (
@@ -41,8 +56,10 @@ export default function InputSelect({
             <SelectContent>
               <SelectGroup>
                 {items?.map(item => (
-                  <SelectItem key={item} value={item}>
-                    {item}
+                  <SelectItem
+                    key={item.label}
+                    value={item.value.toLocaleLowerCase()}>
+                    {item.label}
                   </SelectItem>
                 ))}
               </SelectGroup>
