@@ -3,79 +3,55 @@
 import { useRef, useState } from "react"
 import Link from "next/link"
 import { useRouter } from "next/navigation"
-import { toast } from "sonner"
-import ReCAPTCHA from "react-google-recaptcha"
-import { FieldValues, FormProvider, useForm } from "react-hook-form"
-import { z } from "zod"
 import { zodResolver } from "@hookform/resolvers/zod"
+import ReCAPTCHA from "react-google-recaptcha"
+import { useForm } from "react-hook-form"
+import { toast } from "sonner"
 
+import { COUNTRIES, GENDERS } from "@/lib/consts"
+import { signupSchema, SignUpSchemaType } from "@/lib/types"
+import { Button } from "@/components/ui/button"
 import Authentication from "@/components/Authentication"
 import { Icons } from "@/components/icons"
-import { Button } from "@/components/ui/button"
-import { COUNTRIES, GENDERS } from "@/lib/consts"
 import InputCalendar from "@/components/InputCalendar"
 import InputSelect from "@/components/InputSelect"
 import InputText from "@/components/InputText"
 
-const registrationSchema = z.object({
-  id: z.string().optional(),
-  gender: z.string().min(1, { message: "required" }).default(""),
-  name: z.string().min(2, { message: "required" }).default(""),
-  email: z
-    .string()
-    .email({ message: "The email is invalid." })
-    .min(1, { message: "required" })
-    .default(""),
-  dob: z.string().min(1, { message: "required" }).default(""),
-  location: z.string().min(1, { message: "required" }).default(""),
-  password: z
-    .string()
-    .min(6, {
-      message: "min 6 characters.",
-    })
-    .default(""),
-  emailVerified: z.boolean().default(false).optional(),
-  Image: z.string().default("").optional(),
-})
-
 export default function SignUpPage() {
-  const [isLoading, setIsLoading] = useState<boolean>(false)
+  const token = process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY
   const [captchaToken, setCaptchaToken] = useState<string | null>(null)
   const route = useRouter()
   const recaptchaRef = useRef<ReCAPTCHA>(null)
 
-  const methods = useForm({
-    resolver: zodResolver(registrationSchema),
+  const {
+    register,
+    handleSubmit,
+    formState: { errors, isSubmitting },
+    reset,
+    setValue,
+    watch,
+  } = useForm<SignUpSchemaType>({
+    resolver: zodResolver(signupSchema),
   })
 
-  async function handleLoginWithCredentials(data: FieldValues) {
-    setIsLoading(true)
+  async function handleSignInWithCredentials(data: SignUpSchemaType) {
+    const res = await fetch("/api/signup", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ data }),
+    })
 
-    try {
-      const res = await fetch("/api/signup", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({ data }),
+    if (res.ok) {
+      toast.success("Account created successfully", {
+        position: "top-right",
       })
-
-      if (res.ok) {
-        toast.success("Account created successfully", {
-          position: "top-right",
-        })
-        route.push("/signin")
-      } else {
-        toast.error("Something went wrong", {
-          position: "top-right",
-        })
-      }
-    } catch (error) {
+      route.push("/signin")
+    } else {
       toast.error("Something went wrong", {
         position: "top-right",
       })
-    } finally {
-      setIsLoading(false)
     }
   }
 
@@ -90,12 +66,12 @@ export default function SignUpPage() {
     }
   }
 
-  const onSubmit = async (data: FieldValues) => {
-    const _dob = new Date(data.dob as Date)
+  const onSubmit = async (data: SignUpSchemaType) => {
+    const _dob = new Date(data.dob)
     try {
       if (isOver18(_dob)) {
-        await registrationSchema.parseAsync(data)
-        await handleLoginWithCredentials(data)
+        await signupSchema.parseAsync(data)
+        await handleSignInWithCredentials(data)
       } else {
         toast.error("You must be over 18 years old", {
           position: "top-right",
@@ -107,6 +83,7 @@ export default function SignUpPage() {
         position: "top-right",
       })
     } finally {
+      reset()
       recaptchaRef?.current?.reset()
     }
   }
@@ -117,9 +94,7 @@ export default function SignUpPage() {
   }
 
   const allFieldsFilled =
-    Object.values(methods.watch()).length !== 0 &&
-    Object.values(methods.watch()).every(Boolean)
-  const token = process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY
+    Object.values(watch()).length !== 0 && Object.values(watch()).every(Boolean)
 
   return (
     <Authentication isSignup>
@@ -133,85 +108,95 @@ export default function SignUpPage() {
           </p>
         </div>
         <div className={"grid gap-6"}>
-          <FormProvider {...methods}>
-            <form onSubmit={methods.handleSubmit(onSubmit)} noValidate>
-              <div className="grid gap-1">
-                <div className="grid grid-cols-2 gap-x-4">
-                  <InputSelect
-                    label="gender"
-                    isLoading={isLoading}
-                    methods={methods}
-                    items={GENDERS}
-                  />
-                  <InputSelect
-                    label="location"
-                    isLoading={isLoading}
-                    methods={methods}
-                    items={COUNTRIES}
-                  />
-                </div>
-                <InputCalendar
-                  label="dob"
-                  methods={methods}
-                  isLoading={isLoading}
+          <form onSubmit={handleSubmit(onSubmit)} noValidate>
+            <div className="grid gap-1">
+              <div className="grid grid-cols-2 gap-x-4">
+                <InputSelect
+                  label="gender"
+                  isLoading={isSubmitting}
+                  register={register}
+                  setValue={setValue}
+                  errors={errors}
+                  items={GENDERS}
                 />
-                <InputText
-                  label="name"
-                  methods={methods}
-                  isLoading={isLoading}
+                <InputSelect
+                  label="location"
+                  isLoading={isSubmitting}
+                  register={register}
+                  setValue={setValue}
+                  errors={errors}
+                  items={COUNTRIES}
                 />
-                <InputText
-                  label="email"
-                  type="email"
-                  methods={methods}
-                  isLoading={isLoading}
-                />
-                <InputText
-                  label="password"
-                  type="password"
-                  methods={methods}
-                  isLoading={isLoading}
-                />
-                <div className="text-center text-xs">
-                  Are you a member already?
-                  <Link href="/signin">
-                    <span className="mx-2 w-full text-sm font-semibold underline">
-                      Sign in
-                    </span>
-                  </Link>
-                </div>
-                {allFieldsFilled && (
-                  <ReCAPTCHA
-                    ref={recaptchaRef}
-                    onChange={onRecaptchaChange}
-                    sitekey={token!}
-                    className="mt-2"
-                  />
-                )}
-                <Button
-                  variant={"primary"}
-                  disabled={!captchaToken || isLoading}
-                  className="mt-2">
-                  {isLoading && (
-                    <Icons.spinner className="mr-2 h-4 w-4 animate-spin" />
-                  )}
-                  Create account
-                </Button>
               </div>
-            </form>
-          </FormProvider>
+              <InputCalendar
+                label="dob"
+                isLoading={isSubmitting}
+                register={register}
+                setValue={setValue}
+                errors={errors}
+              />
+              <InputText
+                label="name"
+                isLoading={isSubmitting}
+                register={register}
+                errors={errors}
+              />
+              <InputText
+                label="email"
+                type="email"
+                isLoading={isSubmitting}
+                register={register}
+                errors={errors}
+              />
+              <InputText
+                label="password"
+                type="password"
+                isLoading={isSubmitting}
+                register={register}
+                errors={errors}
+              />
+              <div className="text-center text-xs">
+                Are you a member already?
+                <Link href="/signin">
+                  <span className="mx-2 w-full text-sm font-semibold underline">
+                    Sign in
+                  </span>
+                </Link>
+              </div>
+              {allFieldsFilled && (
+                <ReCAPTCHA
+                  ref={recaptchaRef}
+                  onChange={onRecaptchaChange}
+                  sitekey={token!}
+                  className="mt-2"
+                />
+              )}
+              <Button
+                variant={"primary"}
+                disabled={!captchaToken || isSubmitting}
+                className="mt-2"
+              >
+                {isSubmitting && (
+                  <Icons.spinner className="mr-2 h-4 w-4 animate-spin" />
+                )}
+                Create account
+              </Button>
+            </div>
+          </form>
         </div>
         <p className="px-8 text-center text-xs text-primary/90">
           By clicking 'Create account' you agree to our{" "}
           <Link
             href="/support"
-            className="font-semibold underline underline-offset-4 hover:text-button">
+            className="font-semibold underline underline-offset-4 hover:text-button"
+          >
             Terms&Conditions
           </Link>{" "}
           and{" "}
           <Link
             href="/support"
-            className="font-semibold underline underline-offset-4 hover:text-button">
+            className="font-semibold underline underline-offset-4 hover:text-button"
+          >
             Privacy Policy
           </Link>
           .

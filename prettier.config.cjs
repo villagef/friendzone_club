@@ -5,6 +5,7 @@ module.exports = {
   singleQuote: false,
   quoteProps: "as-needed",
   jsxSingleQuote: false,
+  printWidth: 80,
   tabWidth: 2,
   trailingComma: "all",
   importOrder: [

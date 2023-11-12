@@ -16,11 +16,10 @@
     "@next/next/no-html-link-for-pages": "off",
     "tailwindcss/no-custom-classname": "off",
     "tailwindcss/classnames-order": "error",
-    "react/no-unescaped-entities": "off"
+    "react/no-unescaped-entities": "off",
+    "@typescript-eslint/no-unused-vars": "off"
   },
-  "ignorePatterns": [
-    "next.config.js"
-  ],
+  "ignorePatterns": ["next.config.js"],
   "settings": {
     "tailwindcss": {
       "callees": ["cn", "cva"],

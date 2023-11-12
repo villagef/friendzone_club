@@ -1,19 +1,19 @@
 "use client"
 
 import React from "react"
-
-import { signIn, useSession } from "next-auth/react"
 import Link from "next/link"
 import { useRouter } from "next/navigation"
+import { zodResolver } from "@hookform/resolvers/zod"
+import { signIn, useSession } from "next-auth/react"
+import { FieldValues, FormProvider, useForm } from "react-hook-form"
 import { toast } from "sonner"
 import { object, string } from "zod"
-import { FieldValues, FormProvider, useForm } from "react-hook-form"
-import { zodResolver } from "@hookform/resolvers/zod"
-import { Icons } from "@/components/icons"
-import { Label } from "@/components/ui/label"
-import { Input } from "@/components/ui/input"
+
 import { Button } from "@/components/ui/button"
+import { Input } from "@/components/ui/input"
+import { Label } from "@/components/ui/label"
 import Authentication from "@/components/Authentication"
+import { Icons } from "@/components/icons"
 
 const loginSchema = object({
   email: string()
@@ -50,7 +50,7 @@ export default function SignInForm() {
       ...data,
       redirect: false,
     })
-      .then(res => {
+      .then((res) => {
         if (res?.ok) {
           toast.success("Successfully logged in", { position: "top-right" })
           route.push("/explore")
@@ -58,7 +58,7 @@ export default function SignInForm() {
           toast.error("Invalid credentials", { position: "top-right" })
         }
       })
-      .catch(err => {
+      .catch((err) => {
         console.error(err)
         toast.error("Something went wrong", { position: "top-right" })
       })
@@ -131,7 +131,8 @@ export default function SignInForm() {
                 <Button
                   variant={"primary"}
                   disabled={!allFieldsFilled || isLoading}
-                  className="mt-4">
+                  className="mt-4"
+                >
                   {isLoading && (
                     <Icons.spinner className="mr-2 h-4 w-4 animate-spin" />
                   )}
@@ -153,7 +154,7 @@ export default function SignInForm() {
               <span className="w-full border-t" />
             </div>
             <div className="relative flex justify-center text-xs uppercase">
-              <span className="bg-transparent px-2">Or continue with</span>
+              <span className="bg-foreground px-2">Or continue with</span>
             </div>
           </div>
           <div className="flex flex-col gap-y-2">
@@ -161,7 +162,8 @@ export default function SignInForm() {
               onClick={handleSignInWithGoogle}
               variant="outline"
               type="button"
-              disabled={isLoading}>
+              disabled={isLoading}
+            >
               {isLoading ? (
                 <Icons.spinner className="mr-2 h-4 w-4 animate-spin" />
               ) : (
