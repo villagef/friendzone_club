@@ -1,4 +1,3 @@
-import { forwardRef } from "react"
 import Link from "next/link"
 import { Icons } from "../icons"
 import { Button } from "../ui/button"
@@ -10,8 +9,7 @@ interface NavLinkProps {
   onClick: () => void
 }
 
-const SidebarNavLink = forwardRef(
-  ({ href, name, icon, onClick }: NavLinkProps, _ref) => {
+export default function SidebarNavLink ({ href, name, icon, onClick }: NavLinkProps) {
     const IconComponent = icon && Icons[icon]
     return (
       <Link href={href} onClick={onClick} className="my-1 w-full">
@@ -27,9 +25,4 @@ const SidebarNavLink = forwardRef(
         )}
       </Link>
     )
-  },
-)
-
-SidebarNavLink.displayName = "SidebarNavLink"
-
-export default SidebarNavLink
+  }

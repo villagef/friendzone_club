@@ -1,65 +1,25 @@
 {
   "$schema": "https://json.schemastore.org/eslintrc",
   "root": true,
+  "extends": [
+    "next/core-web-vitals",
+    "prettier",
+    "plugin:tailwindcss/recommended",
+    "plugin:@typescript-eslint/recommended"
+  ],
   "plugins": ["@typescript-eslint", "tailwindcss"],
   "parser": "@typescript-eslint/parser",
   "parserOptions": {
     "project": "./tsconfig.json"
   },
-  "extends": [
-    "next/core-web-vitals",
-    "prettier",
-    "plugin:tailwindcss/recommended",
-    "plugin:@typescript-eslint/recommended",
-    "plugin:@typescript-eslint/recommended",
-    "plugin:@typescript-eslint/recommended-requiring-type-checking"
-  ],
   "rules": {
-    "no-void": "off",
-    "import/export": "off",
-    "import/namespace": "off",
-    "@typescript-eslint/explicit-module-boundary-types": "off",
-    "react/state-in-constructor": "off",
-    "import/prefer-default-export": "off",
-    "react/require-default-props": "off",
-    "react/prop-types": "off",
-    "react-hooks/exhaustive-deps": "off",
-    "react/react-in-jsx-scope": "off",
     "@next/next/no-html-link-for-pages": "off",
     "tailwindcss/no-custom-classname": "off",
     "tailwindcss/classnames-order": "error",
-    "no-console": "off",
-    "react/no-unescaped-entities": "off",
-    "@next/next/no-page-custom-font": "off",
-    "@typescript-eslint/no-unused-vars": "off",
-    "@typescript-eslint/no-floating-promises": "off",
-    "@typescript-eslint/no-misused-promises": "off",
-    " @typescript-eslint/no-unsafe-assignment": "off",
-    "sort-imports": [
-      "error",
-      {
-        "ignoreCase": true,
-        "ignoreDeclarationSort": true
-      }
-    ],
-    "import/order": [
-      1,
-      {
-        "groups": [
-          "builtin",
-          "external",
-          "internal",
-          "sibling",
-          "parent",
-          "index"
-        ]
-      }
-    ]
+    "react/no-unescaped-entities": "off"
   },
   "ignorePatterns": [
-    "next.config.js",
-    "app/api/auth/[...nextauth]/route.ts",
-    "app/api/auth/[...nextauth]/options.ts"
+    "next.config.js"
   ],
   "settings": {
     "tailwindcss": {
