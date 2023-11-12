@@ -2,9 +2,9 @@ import { randomBytes, randomUUID } from "crypto"
 import bcrypt from "bcrypt"
 import NextAuth from "next-auth"
 import type { NextAuthOptions } from "next-auth"
-import GoogleProvider from "next-auth/providers/google"
-import FacebookProvider from "next-auth/providers/facebook"
+import EmailProvider from "next-auth/providers/email"
 import CredentialsProvider from "next-auth/providers/credentials"
+import GoogleProvider from "next-auth/providers/google"
 import { PrismaAdapter } from "@auth/prisma-adapter"
 import { PrismaClient } from "@prisma/client"
 
@@ -13,6 +13,24 @@ const prisma = new PrismaClient()
 const authOptions: NextAuthOptions = {
   adapter: PrismaAdapter(prisma),
   providers: [
+    EmailProvider({
+      server: {
+        host: process.env.EMAIL_SERVER_HOST || "http://localhost:3000",
+        port: Number(process.env.EMAIL_SERVER_PORT),
+        auth: {
+          user: process.env.EMAIL_SERVER_USER || "",
+          pass: process.env.EMAIL_SERVER_PASSWORD || "",
+        },
+      },
+      from: process.env.EMAIL_FROM || "default@default.com",
+      maxAge: 24 * 60 * 60, // How long email links are valid for (default 24h)
+      type: "email",
+      ...(process.env.NODE_ENV !== "production" ? {
+        sendVerificationRequest(params) {
+          console.log("LOGIN LINK", params.url)
+        }
+      } : {}) 
+    }),
     CredentialsProvider({
       name: "Credentials",
       credentials: {
@@ -54,11 +72,6 @@ const authOptions: NextAuthOptions = {
       clientSecret: process.env.GOOGLE_SECRET_ID as string,
       allowDangerousEmailAccountLinking: true,
     }),
-    FacebookProvider({
-      clientId: process.env.FACEBOOK_CLIENT_ID as string,
-      clientSecret: process.env.FACEBOOK_CLIENT_SECRET as string,
-      allowDangerousEmailAccountLinking: true,
-    })
   ],
   session: {
     strategy: "jwt",
@@ -76,7 +89,7 @@ const authOptions: NextAuthOptions = {
   },
   callbacks: {
     async signIn({ account, profile}) {
-      if (account?.provider === "google" || account?.provider === "facebook") {
+      if (account?.provider === "google") {
         const _user = await prisma.user.findUnique({
           where: {
             email: profile?.email

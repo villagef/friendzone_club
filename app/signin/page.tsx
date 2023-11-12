@@ -39,13 +39,9 @@ export default function SignInForm() {
   const handleSignInWithGoogle = (event: React.SyntheticEvent) => {
     event.preventDefault()
     setIsLoading(true)
-    signIn("google")
-  }
-
-  const handleSignInWithFacebook = (event: React.SyntheticEvent) => {
-    event.preventDefault()
-    setIsLoading(true)
-    signIn("facebook")
+    signIn("google").finally(() => {
+      setIsLoading(false)
+    })
   }
 
   function onSubmit(data: FieldValues) {
@@ -157,7 +153,7 @@ export default function SignInForm() {
               <span className="w-full border-t" />
             </div>
             <div className="relative flex justify-center text-xs uppercase">
-              <span className="bg-background px-2">Or continue with</span>
+              <span className="bg-transparent px-2">Or continue with</span>
             </div>
           </div>
           <div className="flex flex-col gap-y-2">
@@ -172,18 +168,6 @@ export default function SignInForm() {
                 <Icons.google className="mr-2" />
               )}
               Google
-            </Button>
-            <Button
-              onClick={handleSignInWithFacebook}
-              variant="outline"
-              type="button"
-              disabled={isLoading}>
-              {isLoading ? (
-                <Icons.spinner className="mr-2 h-4 w-4 animate-spin" />
-              ) : (
-                <Icons.facebook className="mr-2" />
-              )}
-              Facebook
             </Button>
           </div>
         </div>
