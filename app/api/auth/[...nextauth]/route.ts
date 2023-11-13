@@ -1,12 +1,12 @@
 import { randomBytes, randomUUID } from "crypto"
+import { PrismaAdapter } from "@auth/prisma-adapter"
+import { PrismaClient } from "@prisma/client"
 import bcrypt from "bcrypt"
 import NextAuth from "next-auth"
 import type { NextAuthOptions } from "next-auth"
-import EmailProvider from "next-auth/providers/email"
 import CredentialsProvider from "next-auth/providers/credentials"
+import EmailProvider from "next-auth/providers/email"
 import GoogleProvider from "next-auth/providers/google"
-import { PrismaAdapter } from "@auth/prisma-adapter"
-import { PrismaClient } from "@prisma/client"
 
 const prisma = new PrismaClient()
 
@@ -25,11 +25,13 @@ const authOptions: NextAuthOptions = {
       from: process.env.EMAIL_FROM || "default@default.com",
       maxAge: 24 * 60 * 60, // How long email links are valid for (default 24h)
       type: "email",
-      ...(process.env.NODE_ENV !== "production" ? {
-        sendVerificationRequest(params) {
-          console.log("LOGIN LINK", params.url)
-        }
-      } : {}) 
+      ...(process.env.NODE_ENV !== "production"
+        ? {
+            sendVerificationRequest(params) {
+              console.log("LOGIN LINK", params.url)
+            },
+          }
+        : {}),
     }),
     CredentialsProvider({
       name: "Credentials",
@@ -43,28 +45,33 @@ const authOptions: NextAuthOptions = {
           type: "password",
         },
       },
-      async authorize(credentials: Record<"email" | "password", string> | undefined ) {
-        if( !credentials?.email || !credentials?.password){
+      async authorize(
+        credentials: Record<"email" | "password", string> | undefined,
+      ) {
+        if (!credentials?.email || !credentials?.password) {
           return null
         }
 
-      const user = await prisma.user.findUnique({
-        where: {
-          email: credentials.email
-        }
-      })
+        const user = await prisma.user.findUnique({
+          where: {
+            email: credentials.email,
+          },
+        })
 
-      if(!user){
-        return null
-      } else {
-        const match = await bcrypt.compare(credentials.password, user.password)
-
-        if(match){
-          return user
+        if (!user) {
+          return null
         } else {
-          return null
+          const match = await bcrypt.compare(
+            credentials.password,
+            user.password,
+          )
+
+          if (match) {
+            return user
+          } else {
+            return null
+          }
         }
-      }
       },
     }),
     GoogleProvider({
@@ -88,22 +95,24 @@ const authOptions: NextAuthOptions = {
     error: "/",
   },
   callbacks: {
-    async signIn({ account, profile}) {
+    async signIn({ account, profile }) {
       if (account?.provider === "google") {
         const _user = await prisma.user.findUnique({
           where: {
-            email: profile?.email
-          }
+            email: profile?.email,
+          },
         })
 
-        if(!_user){
-          return Promise.resolve(false).then(() => {
-            return {
-              error: "Please sign up first"
-            }
-          }).then(() => {
-            return false
-          })
+        if (!_user) {
+          return Promise.resolve(false)
+            .then(() => {
+              return {
+                error: "Please sign up first",
+              }
+            })
+            .then(() => {
+              return false
+            })
         } else {
           // if(!_user.emailVerified){
           //   return Promise.resolve(false).then(() => {
@@ -117,11 +126,11 @@ const authOptions: NextAuthOptions = {
           return true
         }
       }
-        return true
+      return true
     },
     redirect({ baseUrl }) {
       return baseUrl
-    }
+    },
   },
   secret: process.env.NEXTAUTH_SECRET,
   // debug: process.env.NODE_ENV === "development",

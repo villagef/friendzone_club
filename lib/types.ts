@@ -8,13 +8,14 @@ export const signupSchema = z.object({
   name: z.string().min(2, { message: "required" }).default(""),
   email: z
     .string()
-    .email({ message: "The email is invalid." })
+    .email({ message: "invalid email" })
     .min(1, { message: "required" })
+    .max(64, { message: "too long email" })
     .default(""),
   password: z
     .string()
     .min(6, {
-      message: "min 6 characters.",
+      message: "min 6 characters",
     })
     .default(""),
 })
@@ -27,9 +28,9 @@ export type SignupSchemaKeys = keyof SignUpSchemaType
 export const signinSchema = z.object({
   email: z
     .string()
-    .email({ message: "The email is invalid." })
+    .email({ message: "invalid email" })
     .min(1, { message: "required" })
-    .default(""),
+    .max(64, { message: "too long email" }),
   password: z.string().min(1, {
     message: "required",
   }),
@@ -38,3 +39,16 @@ export const signinSchema = z.object({
 export type SignInSchemaType = z.infer<typeof signinSchema>
 
 export type SignInSchemaKeys = keyof SignInSchemaType
+
+//PASSWORD RESET SCHEMA
+export const passwordResetSchema = z.object({
+  email: z
+    .string()
+    .email({ message: "invalid email" })
+    .min(1, { message: "required" })
+    .max(64, { message: "too long email" }),
+})
+
+export type PasswordResetSchemaType = z.infer<typeof passwordResetSchema>
+
+export type PasswordResetSchemaKeys = keyof PasswordResetSchemaType

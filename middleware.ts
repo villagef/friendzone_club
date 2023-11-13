@@ -1,5 +1,5 @@
-import { NextRequestWithAuth } from "next-auth/middleware"
 import { NextResponse } from "next/server"
+import { NextRequestWithAuth } from "next-auth/middleware"
 
 export const middleware = (request: NextRequestWithAuth) => {
   const isAuthorized = request.headers

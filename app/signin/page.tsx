@@ -85,7 +85,7 @@ export default function SignInForm() {
                   className="text-primary"
                 />
               </div>
-              <Label className="" htmlFor="password">
+              <Label htmlFor="password">
                 Password{" "}
                 {errors.password && (
                   <span className="ml-1 text-xs text-destructive">
@@ -102,8 +102,14 @@ export default function SignInForm() {
                 autoComplete="password"
                 autoCorrect="off"
                 disabled={isSubmitting}
-                className="text-primary"
+                className="mb-0 text-primary"
               />
+              <Link
+                href="/password-reset"
+                className="text-right text-xs text-primary"
+              >
+                Forgot password?
+              </Link>
               <Button
                 variant={"primary"}
                 disabled={!allFieldsFilled || isSubmitting}
