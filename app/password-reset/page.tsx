@@ -1,7 +1,8 @@
 "use client"
 
-import React from "react"
+import React, { useRef, useState } from "react"
 import { zodResolver } from "@hookform/resolvers/zod"
+import ReCAPTCHA from "react-google-recaptcha"
 import { useForm } from "react-hook-form"
 import { toast } from "sonner"
 
@@ -13,7 +14,10 @@ import Authentication from "@/components/Authentication"
 import { Icons } from "@/components/icons"
 
 export default function PasswordResetPage() {
+  const token = process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY
+  const [captchaToken, setCaptchaToken] = useState<string | null>(null)
   const [emailSend, setEmailSend] = React.useState(false)
+  const recaptchaRef = useRef<ReCAPTCHA>(null)
   const {
     register,
     watch,
@@ -30,13 +34,19 @@ export default function PasswordResetPage() {
   }
 
   const onSubmit = (data: PasswordResetSchemaType) => {
+    reset()
     console.log(data.email)
     setEmailSend(true)
     toast.success("Successfully sent email", { position: "top-right" })
-    reset()
   }
 
-  const allFieldsFilled = Object.values(watch()).every(Boolean)
+  const onRecaptchaChange = (token: string | null) => {
+    if (!token) return
+    setCaptchaToken(token)
+  }
+
+  const allFieldsFilled =
+    Object.values(watch()).length === 1 && Object.values(watch()).every(Boolean)
 
   return (
     <Authentication>
@@ -93,9 +103,17 @@ export default function PasswordResetPage() {
                       className="text-primary"
                     />
                   </div>
+                  {allFieldsFilled && (
+                    <ReCAPTCHA
+                      ref={recaptchaRef}
+                      onChange={onRecaptchaChange}
+                      sitekey={token!}
+                      className="mt-2"
+                    />
+                  )}
                   <Button
                     variant={"primary"}
-                    disabled={!allFieldsFilled || isSubmitting}
+                    disabled={errors.email ? true : false || !captchaToken}
                     className="mt-2"
                     type="submit"
                   >

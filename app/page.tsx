@@ -1,8 +1,9 @@
 import Image from "next/image"
+
 import { firstSection, heroSection } from "@/config/home"
+import ButtonSignUp from "@/components/ButtonSignUp"
 import FAQSection from "@/components/FAQSection"
 import ReviewsSection from "@/components/ReviewsSection"
-import ButtonSignUp from "@/components/ButtonSignUp"
 
 export default function Home() {
   return (
