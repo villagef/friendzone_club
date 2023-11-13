@@ -1,7 +1,9 @@
 "use client"
 
 import React, { useRef, useState } from "react"
+import { useRouter } from "next/navigation"
 import { zodResolver } from "@hookform/resolvers/zod"
+import { useSession } from "next-auth/react"
 import ReCAPTCHA from "react-google-recaptcha"
 import { useForm } from "react-hook-form"
 import { toast } from "sonner"
@@ -12,9 +14,12 @@ import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import Authentication from "@/components/Authentication"
 import { Icons } from "@/components/icons"
+import Spinner from "@/components/Spinner/inde"
 
 export default function PasswordResetPage() {
   const token = process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY
+  const { status } = useSession()
+  const route = useRouter()
   const [captchaToken, setCaptchaToken] = useState<string | null>(null)
   const [emailSend, setEmailSend] = React.useState(false)
   const recaptchaRef = useRef<ReCAPTCHA>(null)
@@ -48,6 +53,8 @@ export default function PasswordResetPage() {
   const allFieldsFilled =
     Object.values(watch()).length === 1 && Object.values(watch()).every(Boolean)
 
+  if (status === "loading") return <Spinner />
+  if (status === "authenticated") return route.push("/explore")
   return (
     <Authentication>
       {emailSend ? (

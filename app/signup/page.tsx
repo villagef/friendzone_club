@@ -4,6 +4,7 @@ import { useRef, useState } from "react"
 import Link from "next/link"
 import { useRouter } from "next/navigation"
 import { zodResolver } from "@hookform/resolvers/zod"
+import { useSession } from "next-auth/react"
 import ReCAPTCHA from "react-google-recaptcha"
 import { useForm } from "react-hook-form"
 import { toast } from "sonner"
@@ -16,11 +17,13 @@ import { Icons } from "@/components/icons"
 import InputCalendar from "@/components/InputCalendar"
 import InputSelect from "@/components/InputSelect"
 import InputText from "@/components/InputText"
+import Spinner from "@/components/Spinner/inde"
 
 export default function SignUpPage() {
   const token = process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY
-  const [captchaToken, setCaptchaToken] = useState<string | null>(null)
+  const { status } = useSession()
   const route = useRouter()
+  const [captchaToken, setCaptchaToken] = useState<string | null>(null)
   const recaptchaRef = useRef<ReCAPTCHA>(null)
 
   const {
@@ -96,6 +99,8 @@ export default function SignUpPage() {
   const allFieldsFilled =
     Object.values(watch()).length !== 0 && Object.values(watch()).every(Boolean)
 
+  if (status === "loading") return <Spinner />
+  if (status === "authenticated") return route.push("/explore")
   return (
     <Authentication isSignup>
       <div className="mx-auto flex w-full flex-col justify-center space-y-6">

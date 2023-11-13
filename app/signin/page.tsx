@@ -14,9 +14,12 @@ import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import Authentication from "@/components/Authentication"
 import { Icons } from "@/components/icons"
+import Spinner from "@/components/Spinner/inde"
 
-export default function SignInForm() {
-  const { data: session } = useSession()
+export default function SignInPage() {
+  const { data: session, status } = useSession()
+  const route = useRouter()
+
   const {
     register,
     watch,
@@ -25,7 +28,7 @@ export default function SignInForm() {
   } = useForm<SignInSchemaType>({
     resolver: zodResolver(signinSchema),
   })
-  const route = useRouter()
+
   const handleSignInWithGoogle = (event: React.SyntheticEvent) => {
     event.preventDefault()
     signIn("google")
@@ -52,109 +55,113 @@ export default function SignInForm() {
 
   const allFieldsFilled = Object.values(watch()).every(Boolean)
 
+  if (status === "loading") return <Spinner />
+  if (status === "authenticated") return route.push("/explore")
   return (
-    <Authentication isSignup={!!session}>
-      <div className="mx-auto flex w-full flex-col justify-center space-y-6 sm:w-[350px]">
-        <div className="flex flex-col space-y-2 text-center">
-          <h1 className="text-2xl font-semibold tracking-tight">
-            Sign in to your account
-          </h1>
-          <p className="text-sm">Enter your credentails below to sign in</p>
-        </div>
-        <div className={"grid gap-6"}>
-          <form onSubmit={handleSubmit(onSubmit)} noValidate>
-            <div className="grid gap-2">
-              <div className="grid gap-1">
-                <Label className="" htmlFor="email">
-                  Email{" "}
-                  {errors.email && (
+    status === "unauthenticated" && (
+      <Authentication isSignup={!!session}>
+        <div className="mx-auto flex w-full flex-col justify-center space-y-6 sm:w-[350px]">
+          <div className="flex flex-col space-y-2 text-center">
+            <h1 className="text-2xl font-semibold tracking-tight">
+              Sign in to your account
+            </h1>
+            <p className="text-sm">Enter your credentails below to sign in</p>
+          </div>
+          <div className={"grid gap-6"}>
+            <form onSubmit={handleSubmit(onSubmit)} noValidate>
+              <div className="grid gap-2">
+                <div className="grid gap-1">
+                  <Label className="" htmlFor="email">
+                    Email{" "}
+                    {errors.email && (
+                      <span className="ml-1 text-xs text-destructive">
+                        {errors.email.message as React.ReactNode}
+                      </span>
+                    )}
+                  </Label>
+                  <Input
+                    id="email"
+                    {...register("email")}
+                    placeholder="name@example.com"
+                    type="email"
+                    autoCapitalize="none"
+                    autoComplete="email"
+                    autoCorrect="off"
+                    disabled={isSubmitting}
+                    className="text-primary"
+                  />
+                </div>
+                <Label htmlFor="password">
+                  Password{" "}
+                  {errors.password && (
                     <span className="ml-1 text-xs text-destructive">
-                      {errors.email.message as React.ReactNode}
+                      {errors.password.message as React.ReactNode}
                     </span>
                   )}
                 </Label>
                 <Input
-                  id="email"
-                  {...register("email")}
-                  placeholder="name@example.com"
-                  type="email"
+                  id="password"
+                  {...register("password")}
+                  placeholder="password"
+                  type="password"
                   autoCapitalize="none"
-                  autoComplete="email"
+                  autoComplete="password"
                   autoCorrect="off"
                   disabled={isSubmitting}
-                  className="text-primary"
+                  className="mb-0 text-primary"
                 />
+                <Link
+                  href="/password-reset"
+                  className="text-right text-xs text-primary"
+                >
+                  Forgot password?
+                </Link>
+                <Button
+                  variant={"primary"}
+                  disabled={!allFieldsFilled || isSubmitting}
+                  className="mt-4"
+                >
+                  {isSubmitting && (
+                    <Icons.spinner className="mr-2 h-4 w-4 animate-spin" />
+                  )}
+                  Sign in
+                </Button>
               </div>
-              <Label htmlFor="password">
-                Password{" "}
-                {errors.password && (
-                  <span className="ml-1 text-xs text-destructive">
-                    {errors.password.message as React.ReactNode}
-                  </span>
-                )}
-              </Label>
-              <Input
-                id="password"
-                {...register("password")}
-                placeholder="password"
-                type="password"
-                autoCapitalize="none"
-                autoComplete="password"
-                autoCorrect="off"
-                disabled={isSubmitting}
-                className="mb-0 text-primary"
-              />
-              <Link
-                href="/password-reset"
-                className="text-right text-xs text-primary"
-              >
-                Forgot password?
+            </form>
+            <div className="text-center text-xs">
+              Not a member?
+              <Link href="/signup">
+                <span className="mx-2 w-full text-sm font-semibold underline">
+                  Create free account
+                </span>
               </Link>
+            </div>
+            <div className="relative">
+              <div className="absolute inset-0 flex items-center">
+                <span className="w-full border-t" />
+              </div>
+              <div className="relative flex justify-center text-xs uppercase">
+                <span className="bg-foreground px-2">Or continue with</span>
+              </div>
+            </div>
+            <div className="flex flex-col gap-y-2">
               <Button
-                variant={"primary"}
-                disabled={!allFieldsFilled || isSubmitting}
-                className="mt-4"
+                onClick={handleSignInWithGoogle}
+                variant="outline"
+                type="button"
+                disabled={isSubmitting}
               >
-                {isSubmitting && (
+                {isSubmitting ? (
                   <Icons.spinner className="mr-2 h-4 w-4 animate-spin" />
+                ) : (
+                  <Icons.google className="mr-2" />
                 )}
-                Sign in
+                Google
               </Button>
             </div>
-          </form>
-          <div className="text-center text-xs">
-            Not a member?
-            <Link href="/signup">
-              <span className="mx-2 w-full text-sm font-semibold underline">
-                Create free account
-              </span>
-            </Link>
-          </div>
-          <div className="relative">
-            <div className="absolute inset-0 flex items-center">
-              <span className="w-full border-t" />
-            </div>
-            <div className="relative flex justify-center text-xs uppercase">
-              <span className="bg-foreground px-2">Or continue with</span>
-            </div>
-          </div>
-          <div className="flex flex-col gap-y-2">
-            <Button
-              onClick={handleSignInWithGoogle}
-              variant="outline"
-              type="button"
-              disabled={isSubmitting}
-            >
-              {isSubmitting ? (
-                <Icons.spinner className="mr-2 h-4 w-4 animate-spin" />
-              ) : (
-                <Icons.google className="mr-2" />
-              )}
-              Google
-            </Button>
           </div>
         </div>
-      </div>
-    </Authentication>
+      </Authentication>
+    )
   )
 }
