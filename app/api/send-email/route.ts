@@ -1,8 +1,12 @@
 import { NextResponse } from "next/server"
+import bcrypt from "bcrypt"
 import nodemailer from "nodemailer"
 
-export const POST = async () => {
+export const POST = async (req: Request) => {
   try {
+    const body = await req.json()
+    const { id, email } = body.data
+
     const transport = nodemailer.createTransport({
       host: process.env.EMAIL_SERVER_HOST as string,
       port: process.env.EMAIL_SERVER_PORT as unknown as number,
@@ -11,12 +15,12 @@ export const POST = async () => {
         pass: process.env.EMAIL_SERVER_PASSWORD as string,
       },
     })
-    const token = "123456789"
+    const token = await bcrypt.hash(id, 10)
     const href = `${process.env.NEXTAUTH_URL}/verify-account?token=${token}`
 
     const mailOptions = {
       from: process.env.EMAIL_FROM as string,
-      to: "filwyd123@gmail.com",
+      to: email,
       subject: "Verify Email",
       html: `
       <div style="width: 100%; height:100%; display: flex; flex-direction: column; align-items: center; justify-content: center; background: white; "Gill Sans", sans-serif">

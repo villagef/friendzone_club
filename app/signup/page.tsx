@@ -1,5 +1,6 @@
 "use client"
 
+import { randomBytes } from "crypto"
 import { useRef, useState } from "react"
 import Link from "next/link"
 import { useRouter } from "next/navigation"
@@ -17,7 +18,7 @@ import { Icons } from "@/components/icons"
 import InputCalendar from "@/components/InputCalendar"
 import InputSelect from "@/components/InputSelect"
 import InputText from "@/components/InputText"
-import Spinner from "@/components/Spinner/inde"
+import Spinner from "@/components/Spinner"
 
 export default function SignUpPage() {
   const token = process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY
@@ -38,18 +39,29 @@ export default function SignUpPage() {
   })
 
   async function handleSignInWithCredentials(data: SignUpSchemaType) {
+    const emailVerificationToken = randomBytes(32).toString("hex")
+    const _data = { ...data, emailVerificationToken }
     const res = await fetch("/api/signup", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify({ data }),
+      body: JSON.stringify(_data),
     })
 
     if (res.ok) {
-      toast.success("Account created successfully", {
-        position: "top-right",
-      })
+      await handleVerifyEmail(emailVerificationToken, data.email)
+        .then(() => {
+          toast.success("Account created successfully", {
+            position: "top-right",
+          })
+        })
+        .catch(() => {
+          toast.error("Something went wrong", {
+            position: "top-right",
+          })
+        })
+
       route.push("/signin")
     } else {
       toast.error("Something went wrong", {
@@ -58,25 +70,15 @@ export default function SignUpPage() {
     }
   }
 
-  async function handleVerifyEmail() {
-    const res = await fetch("/api/sendVerifyEmail", {
+  async function handleVerifyEmail(id: string, email: string) {
+    const data = { id, email }
+    await fetch("/api/send-email", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
       },
-      body: null,
+      body: JSON.stringify({ data }),
     })
-
-    if (res.ok) {
-      console.log(res)
-      toast.success("Email sent successfully", {
-        position: "top-right",
-      })
-    } else {
-      toast.error("Something went wrong", {
-        position: "top-right",
-      })
-    }
   }
 
   function isOver18(date: Date): boolean {
@@ -96,7 +98,6 @@ export default function SignUpPage() {
       if (isOver18(_dob)) {
         await signupSchema.parseAsync(data)
         await handleSignInWithCredentials(data)
-        await handleVerifyEmail()
         reset()
       } else {
         toast.error("You must be over 18 years old", {

@@ -12,7 +12,7 @@ export const POST = async (req: Request) => {
       where: {
         emailVerificationToken: token,
         emailVerificationTokenExpiry: {
-          gte: new Date().toLocaleString(),
+          gte: new Date(),
         },
       },
     })

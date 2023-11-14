@@ -59,6 +59,9 @@ export default function InputCalendar({
           onChange={(value) => handleValueChange(value?.endDate)}
           asSingle={true}
           maxDate={new Date()}
+          startFrom={
+            new Date(new Date().setFullYear(new Date().getFullYear() - 18))
+          }
           i18n="en"
           disabled={isLoading}
           useRange={false}

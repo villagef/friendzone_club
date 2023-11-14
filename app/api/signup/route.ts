@@ -6,14 +6,18 @@ import { SignUpSchemaType } from "@/lib/types"
 
 const prisma = new PrismaClient()
 
-interface BodyProps {
-  data: SignUpSchemaType
-}
-
 export const POST = async (req: Request) => {
   try {
-    const body: BodyProps = await req.json()
-    const { gender, name, email, dob, location, password } = body.data
+    const body: SignUpSchemaType = await req.json()
+    const {
+      gender,
+      name,
+      email,
+      dob,
+      location,
+      password,
+      emailVerificationToken,
+    } = body
 
     if (!gender || !name || !dob || !email || !location || !password) {
       return new NextResponse("Please fill all fields", { status: 422 })
@@ -41,8 +45,10 @@ export const POST = async (req: Request) => {
         dob,
         location,
         password: hashedPassword,
-        image: "",
-        emailVerified: false,
+        emailVerificationToken: emailVerificationToken,
+        emailVerificationTokenExpiry: new Date(
+          new Date().getTime() + 12 * 60 * 60 * 1000,
+        ),
       },
     })
 

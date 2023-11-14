@@ -14,7 +14,7 @@ import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import Authentication from "@/components/Authentication"
 import { Icons } from "@/components/icons"
-import Spinner from "@/components/Spinner/inde"
+import Spinner from "@/components/Spinner"
 
 export default function PasswordResetPage() {
   const token = process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY

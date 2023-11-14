@@ -45,8 +45,8 @@ model User {
     passwordResetToken           String?   @default("")
     passwordResetTokenExpiry     DateTime? @default(now())
     emailVerified                Boolean?  @default(false)
-    emailVerificationToken       String?   @default("")
-    emailVerificationTokenExpiry DateTime? @default(now())
+    emailVerificationToken       String
+    emailVerificationTokenExpiry DateTime
     image                        String?   @default("")
     createdAt                    DateTime  @default(now())
     updatedAt                    DateTime  @updatedAt
