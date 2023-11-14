@@ -6,8 +6,7 @@ const prisma = new PrismaClient()
 export const POST = async (req: Request) => {
   try {
     const body = await req.json()
-    const { token } = body.data
-
+    const { token } = body
     const user = await prisma.user.findFirst({
       where: {
         emailVerificationToken: token,
@@ -19,23 +18,36 @@ export const POST = async (req: Request) => {
 
     if (!user) {
       return NextResponse.json({ error: "Invalid token" }, { status: 422 })
+    } else {
+      if (user.emailVerified) {
+        return NextResponse.json(
+          { error: "Email already verified" },
+          { status: 422 },
+        )
+      } else {
+        const update = await prisma.user.update({
+          where: {
+            email: user.email,
+          },
+          data: {
+            emailVerified: true,
+            emailVerificationTokenExpiry: new Date(),
+          },
+        })
+
+        if (!update) {
+          return NextResponse.json(
+            { error: "Error verifying email" },
+            { status: 500 },
+          )
+        }
+        return NextResponse.json({ message: "Email verified" }, { status: 200 })
+      }
     }
-
-    await prisma.user.update({
-      where: {
-        email: user.email,
-      },
-      data: {
-        emailVerified: true,
-        emailVerificationToken: "",
-        emailVerificationTokenExpiry: "",
-      },
-    })
-
-    return NextResponse.json({ message: "Email verified" }, { status: 200 })
-  } catch (error) {
-    let message = "Unknown Error"
-    if (error instanceof Error) message = error.message
-    return NextResponse.json({ error: message }, { status: 500 })
+  } catch {
+    return NextResponse.json(
+      { error: "Error verifying email" },
+      { status: 500 },
+    )
   }
 }

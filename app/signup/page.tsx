@@ -39,7 +39,7 @@ export default function SignUpPage() {
   })
 
   async function handleSignInWithCredentials(data: SignUpSchemaType) {
-    const emailVerificationToken = randomBytes(32).toString("hex")
+    const emailVerificationToken = randomBytes(16).toString("hex")
     const _data = { ...data, emailVerificationToken }
     const res = await fetch("/api/signup", {
       method: "POST",
@@ -55,6 +55,7 @@ export default function SignUpPage() {
           toast.success("Account created successfully", {
             position: "top-right",
           })
+          reset()
         })
         .catch(() => {
           toast.error("Something went wrong", {
@@ -62,7 +63,7 @@ export default function SignUpPage() {
           })
         })
 
-      route.push("/signin")
+      route.push("/account/verify")
     } else {
       toast.error("Something went wrong", {
         position: "top-right",
@@ -98,7 +99,6 @@ export default function SignUpPage() {
       if (isOver18(_dob)) {
         await signupSchema.parseAsync(data)
         await handleSignInWithCredentials(data)
-        reset()
       } else {
         toast.error("You must be over 18 years old", {
           position: "top-right",

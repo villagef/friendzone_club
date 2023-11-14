@@ -16,7 +16,7 @@ export const POST = async (req: Request) => {
       },
     })
     const token = await bcrypt.hash(id, 10)
-    const href = `${process.env.NEXTAUTH_URL}/verify-account?token=${token}`
+    const href = `${process.env.NEXTAUTH_URL}/account/verify?token=${token}`
 
     const mailOptions = {
       from: process.env.EMAIL_FROM as string,
