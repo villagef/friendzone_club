@@ -2,6 +2,7 @@ import { z } from "zod"
 
 //SIGNUP SCHEMA
 export const signupSchema = z.object({
+  id: z.string().optional().default(""),
   gender: z.string().min(1, { message: "required" }).default(""),
   location: z.string().min(1, { message: "required" }).default(""),
   dob: z.string().min(1, { message: "required" }).default(""),
@@ -18,6 +19,12 @@ export const signupSchema = z.object({
       message: "min 6 characters",
     })
     .default(""),
+  passwordResetToken: z.string().optional().default(""),
+  passwordResetTokenExpiry: z.string().optional().default(""),
+  emailVerified: z.boolean().optional().default(false),
+  emailVerificationToken: z.string().optional().default(""),
+  emailVerificationTokenExpiry: z.string().optional().default(""),
+  image: z.string().optional().default(""),
 })
 
 export type SignUpSchemaType = z.infer<typeof signupSchema>

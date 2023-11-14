@@ -58,6 +58,27 @@ export default function SignUpPage() {
     }
   }
 
+  async function handleVerifyEmail() {
+    const res = await fetch("/api/sendVerifyEmail", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: null,
+    })
+
+    if (res.ok) {
+      console.log(res)
+      toast.success("Email sent successfully", {
+        position: "top-right",
+      })
+    } else {
+      toast.error("Something went wrong", {
+        position: "top-right",
+      })
+    }
+  }
+
   function isOver18(date: Date): boolean {
     const now = new Date()
     const ofAge = new Date(now.setFullYear(now.getFullYear() - 18))
@@ -75,6 +96,8 @@ export default function SignUpPage() {
       if (isOver18(_dob)) {
         await signupSchema.parseAsync(data)
         await handleSignInWithCredentials(data)
+        await handleVerifyEmail()
+        reset()
       } else {
         toast.error("You must be over 18 years old", {
           position: "top-right",
@@ -86,7 +109,6 @@ export default function SignUpPage() {
         position: "top-right",
       })
     } finally {
-      reset()
       recaptchaRef?.current?.reset()
     }
   }
