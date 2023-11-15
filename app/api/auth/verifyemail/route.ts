@@ -31,6 +31,7 @@ export const POST = async (req: Request) => {
           },
           data: {
             emailVerified: true,
+            emailVerificationToken: "",
             emailVerificationTokenExpiry: new Date(),
           },
         })

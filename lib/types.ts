@@ -28,7 +28,6 @@ export const signupSchema = z.object({
 })
 
 export type SignUpSchemaType = z.infer<typeof signupSchema>
-
 export type SignupSchemaKeys = keyof SignUpSchemaType
 
 //SIGNIN SCHEMA
@@ -44,7 +43,6 @@ export const signinSchema = z.object({
 })
 
 export type SignInSchemaType = z.infer<typeof signinSchema>
-
 export type SignInSchemaKeys = keyof SignInSchemaType
 
 //PASSWORD RESET SCHEMA
@@ -54,8 +52,24 @@ export const passwordResetSchema = z.object({
     .email({ message: "invalid email" })
     .min(1, { message: "required" })
     .max(64, { message: "too long email" }),
+  recaptchaToken: z.string().min(1, { message: "required" }),
 })
 
 export type PasswordResetSchemaType = z.infer<typeof passwordResetSchema>
-
 export type PasswordResetSchemaKeys = keyof PasswordResetSchemaType
+
+//VERIFICATION TOKEN RESET SCHEMA
+export const verificationTokenResetSchema = z.object({
+  email: z
+    .string()
+    .email({ message: "invalid email" })
+    .min(1, { message: "required" })
+    .max(64, { message: "too long email" }),
+  recaptchaToken: z.string().min(1, { message: "required" }),
+})
+
+export type VerificationTokenResetSchemaResetSchemaType = z.infer<
+  typeof verificationTokenResetSchema
+>
+export type VerificationTokenResetSchemaResetSchemaKeys =
+  keyof VerificationTokenResetSchemaResetSchemaType

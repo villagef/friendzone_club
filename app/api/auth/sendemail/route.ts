@@ -1,11 +1,18 @@
 import { NextResponse } from "next/server"
-import bcrypt from "bcrypt"
 import nodemailer from "nodemailer"
 
 export const POST = async (req: Request) => {
   try {
     const body = await req.json()
-    const { id, email } = body.data
+    const { email, token } = body.data
+    const href = `${process.env.NEXTAUTH_URL}/verify?token=${token}`
+
+    if (!email && !token) {
+      return NextResponse.json(
+        { error: "No email and token provided" },
+        { status: 422 },
+      )
+    }
 
     const transport = nodemailer.createTransport({
       host: process.env.EMAIL_SERVER_HOST as string,
@@ -15,8 +22,6 @@ export const POST = async (req: Request) => {
         pass: process.env.EMAIL_SERVER_PASSWORD as string,
       },
     })
-    const token = await bcrypt.hash(id, 10)
-    const href = `${process.env.NEXTAUTH_URL}/account/verify?token=${token}`
 
     const mailOptions = {
       from: process.env.EMAIL_FROM as string,
@@ -46,7 +51,10 @@ export const POST = async (req: Request) => {
       return NextResponse.json({ error: "Email not sent" }, { status: 500 })
     }
 
-    return NextResponse.json({ message: "Email sent" }, { status: 200 })
+    return NextResponse.json(
+      { message: "Email with new token sent" },
+      { status: 200 },
+    )
   } catch (error) {
     return NextResponse.json({ error })
   }

@@ -12,9 +12,7 @@ import { passwordResetSchema, PasswordResetSchemaType } from "@/lib/types"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
-import Authentication from "@/components/Authentication"
 import { Icons } from "@/components/icons"
-import Spinner from "@/components/Spinner"
 
 export default function PasswordResetPage() {
   const token = process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY
@@ -53,10 +51,9 @@ export default function PasswordResetPage() {
   const allFieldsFilled =
     Object.values(watch()).length === 1 && Object.values(watch()).every(Boolean)
 
-  if (status === "loading") return <Spinner />
   if (status === "authenticated") return route.push("/explore")
   return (
-    <Authentication>
+    <>
       {emailSend ? (
         <>
           <div className="mx-auto flex w-full flex-col justify-center space-y-6 sm:w-[350px]">
@@ -135,6 +132,6 @@ export default function PasswordResetPage() {
           </div>
         </>
       )}
-    </Authentication>
+    </>
   )
 }
