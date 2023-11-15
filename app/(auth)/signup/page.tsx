@@ -4,6 +4,7 @@ import { randomBytes } from "crypto"
 import { useRef, useState } from "react"
 import Link from "next/link"
 import { useRouter } from "next/navigation"
+import useStore from "@/store"
 import { zodResolver } from "@hookform/resolvers/zod"
 import { useSession } from "next-auth/react"
 import ReCAPTCHA from "react-google-recaptcha"
@@ -25,6 +26,7 @@ export default function SignUpPage() {
   const route = useRouter()
   const [captchaToken, setCaptchaToken] = useState<string | null>(null)
   const recaptchaRef = useRef<ReCAPTCHA>(null)
+  const { setEmail } = useStore()
 
   const {
     register,
@@ -40,6 +42,7 @@ export default function SignUpPage() {
   async function handleSignInWithCredentials(data: SignUpSchemaType) {
     const token = randomBytes(10).toString("hex")
     const _data = { ...data, token: token }
+    setEmail(data.email)
 
     const resSignup = await fetch("/api/auth/signup", {
       method: "POST",
@@ -60,12 +63,12 @@ export default function SignUpPage() {
         reset()
         route.push("/verify")
       } else {
-        toast.error(resEmail.error || "Something went wrong 1", {
+        toast.error(resEmail.error, {
           position: "top-right",
         })
       }
     } else {
-      toast.error(responseSignup.error || "Something went wrong 2", {
+      toast.error(responseSignup.error, {
         position: "top-right",
       })
     }
