@@ -5,22 +5,13 @@ export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs))
 }
 
-export async function handleSendEmail(email: string, token: string) {
-  const data = { email, token }
-  const res = await fetch("/api/auth/sendemail", {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify({ data }),
-  })
-
-  return await res.json()
-}
-
-export async function handleUpdateVarifyToken(email: string, token: string) {
-  const data = { email, token }
-  const res = await fetch("/api/auth/sendVerifyToken", {
+export async function handleTokenFetch(
+  token: string,
+  target: string,
+  email?: string | null,
+) {
+  const data = email ? { email, token } : { token }
+  const res = await fetch(target, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",

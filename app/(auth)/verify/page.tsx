@@ -4,6 +4,7 @@ import { useEffect, useState } from "react"
 import { useRouter, useSearchParams } from "next/navigation"
 import { toast } from "sonner"
 
+import { handleTokenFetch } from "@/lib/utils"
 import Spinner from "@/components/Spinner"
 
 import SendEmailAgainForm from "./SendEmailAgainForm"
@@ -11,8 +12,8 @@ import VerifyEmailAgainForm from "./VerifyEmailAgainForm"
 
 export default function VerifyAccount() {
   const [status, setStatus] = useState<"success" | "error" | null>(null)
-  const searchParams = useSearchParams()
   const route = useRouter()
+  const searchParams = useSearchParams()
   const token = searchParams.get("token") || null
 
   async function handleVerifyEmail(token: string) {
@@ -21,13 +22,7 @@ export default function VerifyAccount() {
         setStatus("error")
       }
 
-      const res = await fetch("/api/auth/verifyemail", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({ token: token }),
-      })
+      const res = await handleTokenFetch(token, "/api/auth/verifyEmail")
 
       if (res.ok) {
         setStatus("success")

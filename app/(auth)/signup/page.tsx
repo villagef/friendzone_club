@@ -13,7 +13,7 @@ import { toast } from "sonner"
 
 import { COUNTRIES, GENDERS } from "@/lib/consts"
 import { signupSchema, SignUpSchemaType } from "@/lib/types"
-import { handleSendEmail, isOver18 } from "@/lib/utils"
+import { handleTokenFetch, isOver18 } from "@/lib/utils"
 import { Button } from "@/components/ui/button"
 import { Icons } from "@/components/icons"
 import InputCalendar from "@/components/InputCalendar"
@@ -55,7 +55,11 @@ export default function SignUpPage() {
     const responseSignup = await resSignup.json()
 
     if (resSignup.ok) {
-      const resEmail = await handleSendEmail(data.email!, token)
+      const resEmail = await handleTokenFetch(
+        token,
+        "/api/auth/sendVerifyEmail",
+        data.email!,
+      )
       if (resEmail.message) {
         toast.success("Account created successfully", {
           position: "top-right",
