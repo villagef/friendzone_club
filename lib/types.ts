@@ -58,6 +58,31 @@ export const passwordResetSchema = z.object({
 export type PasswordResetSchemaType = z.infer<typeof passwordResetSchema>
 export type PasswordResetSchemaKeys = keyof PasswordResetSchemaType
 
+//PASSWORD RESET SCHEMA
+export const newPasswordSchema = z
+  .object({
+    password: z
+      .string()
+      .min(6, {
+        message: "min 6 characters",
+      })
+      .default(""),
+    confirmPassword: z
+      .string()
+      .min(6, {
+        message: "min 6 characters",
+      })
+      .default(""),
+    recaptchaToken: z.string().min(1, { message: "required" }),
+  })
+  .refine((data) => data.password === data.confirmPassword, {
+    message: "Passwords don't match",
+    path: ["confirmPassword"],
+  })
+
+export type NewPasswordSchemaType = z.infer<typeof newPasswordSchema>
+export type NewPasswordSchemaKeys = keyof NewPasswordSchemaType
+
 //VERIFICATION TOKEN RESET SCHEMA
 export const verificationTokenResetSchema = z.object({
   email: z
