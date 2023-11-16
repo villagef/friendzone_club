@@ -19,6 +19,7 @@ import { Icons } from "@/components/icons"
 import InputCalendar from "@/components/InputCalendar"
 import InputSelect from "@/components/InputSelect"
 import InputText from "@/components/InputText"
+import Spinner from "@/components/Spinner"
 
 export default function SignUpPage() {
   const token = process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY
@@ -108,7 +109,7 @@ export default function SignUpPage() {
     Object.values(watch()).length !== 0 && Object.values(watch()).every(Boolean)
 
   if (status === "authenticated") return route.push("/explore")
-  return (
+  return status === "unauthenticated" ? (
     <div className="mx-auto flex w-full flex-col justify-center space-y-6">
       <div className="flex flex-col space-y-2 text-center">
         <h1 className="text-2xl font-semibold tracking-tight">
@@ -213,5 +214,7 @@ export default function SignUpPage() {
         .
       </p>
     </div>
+  ) : (
+    <Spinner />
   )
 }
