@@ -1,6 +1,6 @@
 "use client"
 
-import React from "react"
+import React, { useState } from "react"
 import Link from "next/link"
 import { useRouter } from "next/navigation"
 import { zodResolver } from "@hookform/resolvers/zod"
@@ -13,6 +13,8 @@ import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import { Icons } from "@/components/icons"
+import InputPassword from "@/components/InputPassword"
+import InputText from "@/components/InputText"
 import Spinner from "@/components/Spinner"
 
 export default function SignInPage() {
@@ -52,8 +54,6 @@ export default function SignInPage() {
       })
   }
 
-  const allFieldsFilled = Object.values(watch()).every(Boolean)
-
   if (status === "authenticated") return route.push("/explore")
   return status === "unauthenticated" ? (
     <div className="mx-auto flex w-full flex-col justify-center space-y-6 sm:w-[350px]">
@@ -66,55 +66,29 @@ export default function SignInPage() {
       <div className={"grid gap-6"}>
         <form onSubmit={handleSubmit(onSubmit)} noValidate>
           <div className="grid gap-2">
-            <div className="grid gap-1">
-              <Label className="" htmlFor="email">
-                Email{" "}
-                {errors.email && (
-                  <span className="ml-1 text-xs text-destructive">
-                    {errors.email.message as React.ReactNode}
-                  </span>
-                )}
-              </Label>
-              <Input
-                id="email"
-                {...register("email")}
-                placeholder="name@example.com"
-                type="email"
-                autoCapitalize="none"
-                autoComplete="email"
-                autoCorrect="off"
-                disabled={isSubmitting}
-                className="text-primary"
-              />
-            </div>
-            <Label htmlFor="password">
-              Password{" "}
-              {errors.password && (
-                <span className="ml-1 text-xs text-destructive">
-                  {errors.password.message as React.ReactNode}
-                </span>
-              )}
-            </Label>
-            <Input
-              id="password"
-              {...register("password")}
-              placeholder="password"
-              type="password"
-              autoCapitalize="none"
-              autoComplete="password"
-              autoCorrect="off"
-              disabled={isSubmitting}
-              className="mb-0 text-primary"
+            <InputText
+              label="email"
+              type="email"
+              isLoading={isSubmitting}
+              register={register}
+              errors={errors}
             />
-            <Link
-              href="/password-reset"
-              className="text-right text-xs text-primary"
-            >
-              Forgot password?
-            </Link>
+            <InputPassword
+              register={register}
+              errors={errors}
+              disabled={isSubmitting}
+            />
+            <div className="w-full text-right">
+              <Link
+                href="/password-reset"
+                className="text-right text-xs text-primary"
+              >
+                Forgot password?
+              </Link>
+            </div>
             <Button
               variant={"primary"}
-              disabled={!allFieldsFilled || isSubmitting}
+              disabled={!watch().password}
               className="mt-4"
             >
               {isSubmitting && (

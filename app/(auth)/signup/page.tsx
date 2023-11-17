@@ -17,6 +17,7 @@ import { handleTokenFetch, isOver18 } from "@/lib/utils"
 import { Button } from "@/components/ui/button"
 import { Icons } from "@/components/icons"
 import InputCalendar from "@/components/InputCalendar"
+import InputPassword from "@/components/InputPassword"
 import InputSelect from "@/components/InputSelect"
 import InputText from "@/components/InputText"
 import Spinner from "@/components/Spinner"
@@ -160,12 +161,17 @@ export default function SignUpPage() {
               register={register}
               errors={errors}
             />
-            <InputText
+            {/* <InputText
               label="password"
               type="password"
               isLoading={isSubmitting}
               register={register}
               errors={errors}
+            />             */}
+            <InputPassword
+              register={register}
+              errors={errors}
+              disabled={isSubmitting}
             />
             <div className="text-center text-xs">
               Are you a member already?
