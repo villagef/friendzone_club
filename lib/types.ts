@@ -21,8 +21,23 @@ export const signupSchema = z.object({
     .default(""),
   password: z
     .string()
-    .min(6, {
-      message: "min 6 characters",
+    .min(8, {
+      message: "min 8 characters",
+    })
+    .max(32, {
+      message: "max 32 characters",
+    })
+    .regex(new RegExp(".*[A-Z].*"), {
+      message: "must contain at least one uppercase letter",
+    })
+    .regex(new RegExp(".*[a-z].*"), {
+      message: "must contain at least one lowercase letter",
+    })
+    .regex(new RegExp(".*[0-9].*"), {
+      message: "must contain at least one number",
+    })
+    .regex(new RegExp(".*[`~<>?,./!@#$%^&*()\\-_+=\"'|{}\\[\\];:\\\\].*"), {
+      message: "must contain at least one special character",
     })
     .default(""),
   passwordResetToken: z.string().optional().default(""),
@@ -43,7 +58,7 @@ export const signinSchema = z.object({
     .email({ message: "invalid email" })
     .min(1, { message: "required" })
     .max(64, { message: "too long email" }),
-  password: z.string().min(1, {
+  password: z.string().min(8, {
     message: "required",
   }),
 })
@@ -69,16 +84,23 @@ export const newPasswordSchema = z
   .object({
     password: z
       .string()
-      .min(6, {
-        message: "min 6 characters",
+      .min(8, {
+        message: "min 8 characters",
+      })
+      .regex(new RegExp(".*[A-Z].*"), {
+        message: "must contain at least one uppercase letter",
+      })
+      .regex(new RegExp(".*[a-z].*"), {
+        message: "must contain at least one lowercase letter",
+      })
+      .regex(new RegExp(".*[0-9].*"), {
+        message: "must contain at least one number",
+      })
+      .regex(new RegExp(".*[`~<>?,./!@#$%^&*()\\-_+=\"'|{}\\[\\];:\\\\].*"), {
+        message: "must contain at least one special character",
       })
       .default(""),
-    confirmPassword: z
-      .string()
-      .min(6, {
-        message: "min 6 characters",
-      })
-      .default(""),
+    confirmPassword: z.string().default(""),
     recaptchaToken: z.string().min(1, { message: "required" }),
   })
   .refine((data) => data.password === data.confirmPassword, {
@@ -94,7 +116,7 @@ export const verificationTokenResetSchema = z.object({
   email: z
     .string()
     .email({ message: "invalid email" })
-    .min(1, { message: "required" })
+    .min(6, { message: "required" })
     .max(64, { message: "too long email" }),
   recaptchaToken: z.string().min(1, { message: "required" }),
 })

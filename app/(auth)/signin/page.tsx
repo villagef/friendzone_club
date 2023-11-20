@@ -78,7 +78,7 @@ export default function SignInPage() {
             />
             <div className="w-full text-right">
               <Link
-                href="/password-reset"
+                href="/forgot-password"
                 className="text-right text-xs text-primary"
               >
                 Forgot password?

@@ -1,8 +1,6 @@
-import { ReactNode } from "react"
-
 import { ErrorSchemaType, RegisterSchemaType } from "@/lib/types"
 
-import AlertInput from "../InputAlert"
+import InputLabel from "../InputLabel"
 import { Input } from "../ui/input"
 import { Label } from "../ui/label"
 
@@ -21,16 +19,11 @@ export default function InputText({
   errors,
   type = "text",
 }: InputTextProps) {
-  const errorMsg = errors[label]?.message as ReactNode
+  const errorMsg = errors[label]?.message
   return (
     <div className="grid gap-1">
       <Label className="text-[10px] font-semibold">
-        {label.toUpperCase()}{" "}
-        {errorMsg && (
-          <AlertInput>
-            <span>{errorMsg}</span>
-          </AlertInput>
-        )}
+        {label.toUpperCase()} {errorMsg && <InputLabel message={errorMsg} />}
       </Label>
       <Input
         {...register(label)}

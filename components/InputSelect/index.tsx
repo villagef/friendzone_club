@@ -1,5 +1,3 @@
-import { ReactNode } from "react"
-
 import {
   ErrorSchemaType,
   RegisterSchemaType,
@@ -7,7 +5,7 @@ import {
   SignupSchemaKeys,
 } from "@/lib/types"
 
-import AlertInput from "../InputAlert"
+import InputLabel from "../InputLabel"
 import { Label } from "../ui/label"
 import {
   Select,
@@ -43,7 +41,7 @@ export default function InputSelect({
   errors,
   items,
 }: InputSelectProps) {
-  const errorMsg = errors[label]?.message as ReactNode
+  const errorMsg = errors[label]?.message
 
   const handleValueChange = (newValue: string) => {
     if (!newValue) return
@@ -53,12 +51,7 @@ export default function InputSelect({
   return (
     <div className="grid gap-1">
       <Label className="text-[10px] font-semibold">
-        {label.toUpperCase()}{" "}
-        {errorMsg && (
-          <AlertInput>
-            <span>{errorMsg}</span>
-          </AlertInput>
-        )}
+        {label.toUpperCase()} {errorMsg && <InputLabel message={errorMsg} />}
       </Label>
       <Select
         disabled={isLoading}

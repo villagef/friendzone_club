@@ -5,6 +5,7 @@ import React, { useState } from "react"
 import { ErrorSchemaType, RegisterSchemaType } from "@/lib/types"
 
 import { Icons } from "../icons"
+import InputLabel from "../InputLabel"
 import { Button } from "../ui/button"
 import { Input } from "../ui/input"
 import { Label } from "../ui/label"
@@ -24,22 +25,17 @@ export default function InputPassword({
   const togglePasswordVisibility = () => {
     setShowPassword((prevShowPassword) => !prevShowPassword)
   }
-
+  const errorMsg = errors["password"]?.message
   return (
-    <div>
-      <Label htmlFor="password" className="text-xs">
-        Password{" "}
-        {errors.password && (
-          <span className="ml-1 text-[10px] text-destructive">
-            {errors.password.message as React.ReactNode}
-          </span>
-        )}
+    <div className="grid gap-1">
+      <Label htmlFor="password" className="text-[10px] font-semibold">
+        PASSWORD {errorMsg && <InputLabel message={errorMsg} />}
       </Label>
       <div className="relative">
         <Input
           id="password"
           {...register("password")}
-          placeholder="password (min 6 characters)"
+          placeholder="password (min 8 characters)"
           type={showPassword ? "text" : "password"}
           autoCapitalize="none"
           autoComplete="new-password"

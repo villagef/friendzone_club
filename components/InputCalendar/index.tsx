@@ -1,4 +1,4 @@
-import React, { ReactNode, useState } from "react"
+import React, { useState } from "react"
 import Datepicker, { DateType } from "react-tailwindcss-datepicker"
 
 import {
@@ -8,7 +8,7 @@ import {
   SignupSchemaKeys,
 } from "@/lib/types"
 
-import AlertInput from "../InputAlert"
+import InputLabel from "../InputLabel"
 import { Label } from "../ui/label"
 
 interface InputCalendarProps {
@@ -32,7 +32,7 @@ export default function InputCalendar({
   setValue,
   errors,
 }: InputCalendarProps) {
-  const errorMsg = errors[label]?.message as ReactNode
+  const errorMsg = errors[label]?.message
   const [calendarValue, setCalendarValue] = useState<{
     startDate: DateType
     endDate: DateType
@@ -50,11 +50,7 @@ export default function InputCalendar({
     <div className="grid gap-1">
       <Label className="text-[10px] font-semibold">
         {(label === "dob" ? "Date of Birth" : label).toUpperCase()}{" "}
-        {errorMsg && (
-          <AlertInput>
-            <span>{errorMsg}</span>
-          </AlertInput>
-        )}
+        {errorMsg && <InputLabel message={errorMsg} />}
       </Label>
       <div className="mb-2">
         <DatepickerComponent
