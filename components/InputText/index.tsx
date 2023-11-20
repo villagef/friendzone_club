@@ -1,28 +1,32 @@
-import { ReactNode } from "react"
+import { ErrorSchemaType, RegisterSchemaType } from "@/lib/types"
+
+import InputLabel from "../InputLabel"
 import { Input } from "../ui/input"
-import AlertInput from "../InputAlert"
 import { Label } from "../ui/label"
-import { InputSelectProps } from "../InputSelect"
+
+export interface InputTextProps {
+  label: string
+  isLoading?: boolean
+  register: RegisterSchemaType
+  errors: ErrorSchemaType
+  type?: string
+}
 
 export default function InputText({
   label,
-  methods,
   isLoading,
+  register,
+  errors,
   type = "text",
-}: InputSelectProps) {
-  const errorMsg = methods?.formState?.errors[label]?.message as ReactNode
+}: InputTextProps) {
+  const errorMsg = errors[label]?.message
   return (
     <div className="grid gap-1">
       <Label className="text-[10px] font-semibold">
-        {label.toUpperCase()}{" "}
-        {errorMsg && (
-          <AlertInput>
-            <span>{errorMsg}</span>
-          </AlertInput>
-        )}
+        {label.toUpperCase()} {errorMsg && <InputLabel message={errorMsg} />}
       </Label>
       <Input
-        {...methods.register(label)}
+        {...register(label)}
         id={label}
         placeholder={label}
         type={type}

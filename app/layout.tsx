@@ -1,12 +1,16 @@
 import type { Metadata } from "next"
 import { Inter as FontSans } from "next/font/google"
+import { Analytics } from "@vercel/analytics/react"
 import { Toaster } from "sonner"
+
 import { ThemeProvider } from "@/components/theme-provider"
+
 import "./globals.css"
+
 import { cn } from "@/lib/utils"
-import MainNav from "@/components/Navbar"
-import Footer from "@/components/Footer"
 import ClientProvider from "@/components/ClientProvider"
+import Footer from "@/components/Footer"
+import MainNav from "@/components/Navbar"
 
 const font = FontSans({
   subsets: ["latin"],
@@ -28,18 +32,21 @@ export default function RootLayout({
         <head />
         <body
           className={cn(
-            "w-full overflow-x-hidden bg-background font-sans antialiased",
+            "w-full overflow-x-hidden bg-gradient-to-l from-primaryGradientStart to-primaryGradientEnd font-sans antialiased",
             font.className,
-          )}>
+          )}
+        >
           <ThemeProvider
             attribute="class"
             defaultTheme="light"
-            disableTransitionOnChange>
+            disableTransitionOnChange
+          >
             <MainNav />
             <div className=" w-full">{children}</div>
             <Footer />
           </ThemeProvider>
           <Toaster richColors />
+          <Analytics />
         </body>
       </html>
     </ClientProvider>

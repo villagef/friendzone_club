@@ -1,4 +1,3 @@
-import { forwardRef } from "react"
 import Link from "next/link"
 import { subNavbarConfig } from "@/config/subNavbar"
 import { Button } from "../ui/button"
@@ -7,8 +6,8 @@ interface ButtonCreditsProps {
   onClick?: () => void
 }
 
-const ButtonCredits = forwardRef(({ onClick }: ButtonCreditsProps, _ref) => {
-  const { credits } = subNavbarConfig
+export default function ButtonCredits ({ onClick }: ButtonCreditsProps) {
+  const { credits } = subNavbarConfig;
   return (
     <Link href={credits.href} className="w-full" onClick={onClick && onClick}>
       <Button
@@ -22,8 +21,5 @@ const ButtonCredits = forwardRef(({ onClick }: ButtonCreditsProps, _ref) => {
       </Button>
     </Link>
   )
-})
+}
 
-ButtonCredits.displayName = `${subNavbarConfig.credits.name}`
-
-export default ButtonCredits

@@ -35,15 +35,21 @@ model Session {
 }
 
 model User {
-    id            String    @id @default(auto()) @map("_id") @db.ObjectId
-    gender        String?
-    location      String?
-    dob           String?
-    name          String
-    email         String    @unique
-    password      String
-    emailVerified Boolean?
-    image         String?
-    accounts      Account[]
-    sessions      Session[]
+    id                           String    @id @default(auto()) @map("_id") @db.ObjectId
+    gender                       String?
+    location                     String?
+    dob                          String?
+    name                         String
+    email                        String    @unique
+    password                     String
+    passwordResetToken           String?   @default("")
+    passwordResetTokenExpiry     DateTime? @default(now())
+    emailVerified                Boolean?  @default(false)
+    emailVerificationToken       String
+    emailVerificationTokenExpiry DateTime
+    image                        String?   @default("")
+    createdAt                    DateTime  @default(now())
+    updatedAt                    DateTime  @updatedAt
+    accounts                     Account[]
+    sessions                     Session[]
 }
