@@ -1,9 +1,8 @@
 "use client"
 
 import React, { useState } from "react"
-import { FieldErrors, FieldValues, UseFormRegister } from "react-hook-form"
 
-import { SignInSchemaType } from "@/lib/types"
+import { ErrorSchemaType, RegisterSchemaType } from "@/lib/types"
 
 import { Icons } from "../icons"
 import { Button } from "../ui/button"
@@ -11,8 +10,8 @@ import { Input } from "../ui/input"
 import { Label } from "../ui/label"
 
 interface InputPasswordProps {
-  register: UseFormReturn<SignUpSchemaType, unknown, undefined>["register"]
-  errors: FieldErrors<SignInSchemaType>
+  register: RegisterSchemaType
+  errors: ErrorSchemaType
   disabled: boolean
 }
 

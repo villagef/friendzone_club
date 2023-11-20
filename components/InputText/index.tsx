@@ -1,17 +1,16 @@
 import { ReactNode } from "react"
-import { FieldErrors, FieldValues, UseFormReturn } from "react-hook-form"
 
-import { SignupSchemaKeys, SignUpSchemaType } from "@/lib/types"
+import { ErrorSchemaType, RegisterSchemaType } from "@/lib/types"
 
 import AlertInput from "../InputAlert"
 import { Input } from "../ui/input"
 import { Label } from "../ui/label"
 
-export interface InputSelectProps {
-  label: SignupSchemaKeys
+export interface InputTextProps {
+  label: string
   isLoading?: boolean
-  register: UseFormReturn<FieldValues, unknown, undefined>["register"]
-  errors: FieldErrors<SignUpSchemaType>
+  register: RegisterSchemaType
+  errors: ErrorSchemaType
   type?: string
 }
 
@@ -21,7 +20,7 @@ export default function InputText({
   register,
   errors,
   type = "text",
-}: InputSelectProps) {
+}: InputTextProps) {
   const errorMsg = errors[label]?.message as ReactNode
   return (
     <div className="grid gap-1">

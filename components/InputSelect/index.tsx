@@ -1,7 +1,11 @@
 import { ReactNode } from "react"
-import { FieldErrors, UseFormReturn } from "react-hook-form"
 
-import { SignupSchemaKeys, SignUpSchemaType } from "@/lib/types"
+import {
+  ErrorSchemaType,
+  RegisterSchemaType,
+  SetValueSchemaType,
+  SignupSchemaKeys,
+} from "@/lib/types"
 
 import AlertInput from "../InputAlert"
 import { Label } from "../ui/label"
@@ -24,9 +28,9 @@ export interface InputSelectItemsProps {
 export interface InputSelectProps {
   label: SignupSchemaKeys
   isLoading?: boolean
-  register: UseFormReturn<SignUpSchemaType, unknown, undefined>["register"]
-  setValue: UseFormReturn<SignUpSchemaType, unknown, undefined>["setValue"]
-  errors: FieldErrors<SignUpSchemaType>
+  register: RegisterSchemaType
+  setValue: SetValueSchemaType
+  errors: ErrorSchemaType
   items?: InputSelectItemsProps[]
   type?: string
 }

@@ -161,13 +161,6 @@ export default function SignUpPage() {
               register={register}
               errors={errors}
             />
-            {/* <InputText
-              label="password"
-              type="password"
-              isLoading={isSubmitting}
-              register={register}
-              errors={errors}
-            />             */}
             <InputPassword
               register={register}
               errors={errors}

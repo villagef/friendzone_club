@@ -1,8 +1,12 @@
 import React, { ReactNode, useState } from "react"
-import { FieldErrors, UseFormReturn } from "react-hook-form"
 import Datepicker, { DateType } from "react-tailwindcss-datepicker"
 
-import { SignupSchemaKeys, SignUpSchemaType } from "@/lib/types"
+import {
+  ErrorSchemaType,
+  RegisterSchemaType,
+  SetValueSchemaType,
+  SignupSchemaKeys,
+} from "@/lib/types"
 
 import AlertInput from "../InputAlert"
 import { Label } from "../ui/label"
@@ -10,9 +14,9 @@ import { Label } from "../ui/label"
 interface InputCalendarProps {
   label: SignupSchemaKeys
   isLoading?: boolean
-  register: UseFormReturn<SignUpSchemaType, unknown, undefined>["register"]
-  setValue: UseFormReturn<SignUpSchemaType, unknown, undefined>["setValue"]
-  errors: FieldErrors<SignUpSchemaType>
+  register: RegisterSchemaType
+  setValue: SetValueSchemaType
+  errors: ErrorSchemaType
 }
 
 const DatepickerComponent = React.forwardRef<

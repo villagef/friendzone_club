@@ -1,17 +1,15 @@
 "use client"
 
-import React, { useState } from "react"
+import React from "react"
 import Link from "next/link"
 import { useRouter } from "next/navigation"
 import { zodResolver } from "@hookform/resolvers/zod"
 import { signIn, useSession } from "next-auth/react"
-import { FieldValues, useForm } from "react-hook-form"
+import { useForm } from "react-hook-form"
 import { toast } from "sonner"
 
 import { signinSchema, SignInSchemaType } from "@/lib/types"
 import { Button } from "@/components/ui/button"
-import { Input } from "@/components/ui/input"
-import { Label } from "@/components/ui/label"
 import { Icons } from "@/components/icons"
 import InputPassword from "@/components/InputPassword"
 import InputText from "@/components/InputText"
@@ -35,7 +33,7 @@ export default function SignInPage() {
     signIn("google")
   }
 
-  function onSubmit(data: FieldValues) {
+  function onSubmit(data: SignInSchemaType) {
     signIn("credentials", {
       ...data,
       redirect: false,

@@ -1,4 +1,10 @@
-import { z } from "zod"
+import {
+  FieldErrors,
+  FieldValues,
+  SetFieldValue,
+  UseFormRegister,
+} from "react-hook-form"
+import { z, ZodObject, ZodRawShape } from "zod"
 
 //SIGNUP SCHEMA
 export const signupSchema = z.object({
@@ -98,3 +104,11 @@ export type VerificationTokenResetSchemaResetSchemaType = z.infer<
 >
 export type VerificationTokenResetSchemaResetSchemaKeys =
   keyof VerificationTokenResetSchemaResetSchemaType
+
+//FORM INPUTS
+export interface FieldValueProps {
+  [key: string]: string | number | boolean | undefined | null
+}
+export type RegisterSchemaType = UseFormRegister<FieldValueProps>
+export type ErrorSchemaType = FieldErrors
+export type SetValueSchemaType = SetFieldValue<FieldValues>

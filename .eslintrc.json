@@ -17,7 +17,8 @@
     "tailwindcss/no-custom-classname": "off",
     "tailwindcss/classnames-order": "error",
     "react/no-unescaped-entities": "off",
-    "@typescript-eslint/no-unused-vars": "off"
+    "@typescript-eslint/no-unused-vars": "off",
+    "@typescript-eslint/ban-ts-comment": "off"
   },
   "ignorePatterns": ["next.config.js"],
   "settings": {
