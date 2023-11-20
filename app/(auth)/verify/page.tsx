@@ -24,7 +24,7 @@ export default function VerifyAccount() {
 
       const res = await handleTokenFetch(token, "/api/auth/verifyEmail")
 
-      if (res.ok) {
+      if (res.message) {
         setStatus("success")
       } else {
         setStatus("error")
@@ -40,13 +40,13 @@ export default function VerifyAccount() {
     } else {
       handleVerifyEmail(token)
     }
-  }, [])
+  }, [token])
 
   if (status === null) {
     return <Spinner />
   }
 
-  if (status === "success") {
+  if (token && status === "success") {
     toast.success("Account verified successfully", {
       position: "top-right",
     })
