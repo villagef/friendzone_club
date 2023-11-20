@@ -1,5 +1,5 @@
-import SidebarNav from "./SidebarNav"
 import Nav from "./Nav"
+import SidebarNav from "./SidebarNav"
 
 export default function MainNav() {
   return (

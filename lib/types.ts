@@ -4,7 +4,7 @@ import {
   SetFieldValue,
   UseFormRegister,
 } from "react-hook-form"
-import { z, ZodObject, ZodRawShape } from "zod"
+import { z } from "zod"
 
 //SIGNUP SCHEMA
 export const signupSchema = z.object({
