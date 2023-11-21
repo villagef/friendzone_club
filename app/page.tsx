@@ -9,7 +9,7 @@ export default function Home() {
   return (
     <>
       <main className="w-full">
-        <div className="container flex h-auto max-h-[800px] max-w-screen-2xl flex-col items-center justify-center bg-transparent px-6 py-16 sm:p-8 md:py-36 lg:flex-row xl:h-[calc(100vh-70px)]">
+        <div className="container flex h-auto max-h-[800px] max-w-screen-2xl flex-col items-center justify-center bg-transparent px-6 py-16 sm:p-8 md:py-36 lg:flex-row xl:h-[calc(100vh-55px)]">
           <div className="flex h-2/3 w-full flex-col items-center justify-center py-12 text-primary sm:h-full lg:w-[990px]">
             <p className="text-center text-4xl font-bold tracking-tight sm:text-5xl md:text-5xl md:tracking-wide xl:text-6xl">
               {heroSection.title}

@@ -54,14 +54,14 @@ export default function SignInPage() {
 
   if (status === "authenticated") return route.push("/explore")
   return status === "unauthenticated" ? (
-    <div className="mx-auto flex w-full flex-col justify-center space-y-6 sm:w-[350px]">
-      <div className="flex flex-col space-y-2 text-center">
+    <div className="mx-auto flex w-full flex-col justify-center">
+      <div className="mb-4 flex flex-col space-y-2 text-center">
         <h1 className="text-2xl font-semibold tracking-tight">
           Sign in to your account
         </h1>
         <p className="text-sm">Enter your credentails below to sign in</p>
       </div>
-      <div className={"grid gap-6"}>
+      <div className={"grid gap-4"}>
         <form onSubmit={handleSubmit(onSubmit)} noValidate>
           <div className="grid gap-2">
             <InputText
@@ -87,7 +87,7 @@ export default function SignInPage() {
             <Button
               variant={"primary"}
               disabled={!watch().password}
-              className="mt-4"
+              className="my-4"
             >
               {isSubmitting && (
                 <Icons.spinner className="mr-2 h-4 w-4 animate-spin" />

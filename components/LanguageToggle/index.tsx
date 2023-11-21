@@ -1,14 +1,16 @@
 "use client"
 
 import { useState } from "react"
+
 import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu"
-import { Button } from "../ui/button"
+
 import { Icons } from "../icons"
+import { Button } from "../ui/button"
 
 const languages = [
   { label: "English", value: "en" },
@@ -28,15 +30,18 @@ export default function Language() {
           </Button>
         </DropdownMenuTrigger>
         <DropdownMenuContent align="end">
-          {languages.map(language => (
+          {languages.map((language) => (
             <DropdownMenuItem
               key={language.value}
               className={`${
-                value === language.value ? "bg-secondary" : "bg-transparent"
+                value === language.value
+                  ? "bg-accent font-bold"
+                  : "bg-transparent font-normal"
               }`}
               onClick={() => {
                 setValue(language.value)
-              }}>
+              }}
+            >
               {language.label}
             </DropdownMenuItem>
           ))}

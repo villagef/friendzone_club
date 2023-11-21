@@ -111,8 +111,8 @@ export default function SignUpPage() {
 
   if (status === "authenticated") return route.push("/explore")
   return status === "unauthenticated" ? (
-    <div className="mx-auto flex w-full flex-col justify-center space-y-6">
-      <div className="flex flex-col space-y-2 text-center">
+    <div className="mx-auto flex w-full flex-col justify-center">
+      <div className="mb-4 flex flex-col space-y-2 text-center">
         <h1 className="text-2xl font-semibold tracking-tight">
           Create an account
         </h1>
@@ -166,7 +166,7 @@ export default function SignUpPage() {
               errors={errors}
               disabled={isSubmitting}
             />
-            <div className="text-center text-xs">
+            <div className="mt-1 text-center text-xs">
               Are you a member already?
               <Link href="/signin">
                 <span className="mx-2 w-full text-sm font-semibold underline">
@@ -185,7 +185,7 @@ export default function SignUpPage() {
             <Button
               variant={"primary"}
               disabled={!captchaToken || isSubmitting}
-              className="mt-2"
+              className="my-4"
             >
               {isSubmitting && (
                 <Icons.spinner className="mr-2 h-4 w-4 animate-spin" />
@@ -195,7 +195,7 @@ export default function SignUpPage() {
           </div>
         </form>
       </div>
-      <p className="px-8 text-center text-xs text-primary/90">
+      <div className="text-center text-xs text-primary/90">
         By clicking 'Create account' you agree to our{" "}
         <Link
           href="/support"
@@ -211,7 +211,7 @@ export default function SignUpPage() {
           Privacy Policy
         </Link>
         .
-      </p>
+      </div>
     </div>
   ) : (
     <Spinner />
