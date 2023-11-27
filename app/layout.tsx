@@ -7,6 +7,8 @@ import { ThemeProvider } from "@/components/theme-provider"
 
 import "./globals.css"
 
+import { i18n, Locale } from "@/i18n.config"
+
 import { cn } from "@/lib/utils"
 import ClientProvider from "@/components/ClientProvider"
 import Footer from "@/components/Footer"
@@ -21,14 +23,20 @@ export const metadata: Metadata = {
   description: "FriendZone Club cheating app",
 }
 
+export async function generateStaticParams() {
+  return i18n.locales.map((lang) => ({ params: { lang } }))
+}
+
 export default function RootLayout({
   children,
+  params,
 }: {
   children: React.ReactNode
+  params: { lang: Locale }
 }) {
   return (
     <ClientProvider>
-      <html lang="en" suppressHydrationWarning>
+      <html lang={params.lang} suppressHydrationWarning>
         <head />
         <body
           className={cn(

@@ -1,0 +1,279 @@
+{
+  "button": {
+    "signin": "Sign In",
+    "signup": "Sign Up",
+    "signout": "Sign Out",
+    "join": "Join the Club",
+    "cancel": "Cancel",
+    "delete": "Delete",
+    "save": "Save",
+    "edit": "Edit",
+    "add": "Add",
+    "back": "Back",
+    "next": "Next",
+    "submit": "Submit",
+    "close": "Close",
+    "confirm": "Confirm",
+    "yes": "Yes",
+    "no": "No",
+    "mode": "Mode",
+    "lang": "Language"
+  },
+  "auth": {
+    "signin": {
+      "title": "Sign in to your account",
+      "subtitle": "Enter your credentails below.",
+      "email": {
+        "label": "Email",
+        "placeholder": "Enter your email address",
+        "error": {
+          "required": "required",
+          "invalid": "invalid"
+        }
+      },
+      "password": {
+        "label": "Password",
+        "placeholder": "Password (min. 8 characters)",
+        "error": {
+          "required": "required",
+          "minlength": "min. 8 characters"
+        }
+      },
+      "forgot": "Forgot Password?",
+      "create": {
+        "label": "Not a member?",
+        "link": "Create free account"
+      },
+      "separator": "Or continue with",
+      "button": "Sign in"
+    },
+
+    "signup": {
+      "title": "Create your account",
+      "subtitle": "Enter your details below and submit.",
+      "gender": {
+        "label": "Gender",
+        "placeholder": "Select gender",
+        "options": ["Male", "Female", "Transgender", "Non-binary"],
+        "error": {
+          "required": "Gender is required"
+        }
+      },
+      "location": {
+        "label": "Location",
+        "placeholder": "Select location",
+        "options": [
+          "United States",
+          "United Kingdom",
+          "Canada",
+          "Australia",
+          "New Zealand",
+          "Ireland",
+          "South Africa"
+        ],
+        "error": {
+          "required": "required"
+        }
+      },
+      "dob": {
+        "label": "Date of Birth",
+        "placeholder": "Select date of birth",
+        "error": {
+          "required": "required"
+        }
+      },
+      "name": {
+        "label": "Name",
+        "placeholder": "Enter your name",
+        "error": {
+          "required": "required"
+        }
+      },
+      "email": {
+        "label": "Email",
+        "placeholder": "Enter your email address",
+        "error": {
+          "required": "required",
+          "invalid": "invalid",
+          "minlength": "too short",
+          "maxlength": "too long"
+        }
+      },
+      "password": {
+        "label": "Password",
+        "placeholder": "Password (min. 8 characters)",
+        "error": {
+          "required": "required",
+          "minlength": "min. 8 characters",
+          "maxlength": "max. 32 characters",
+          "pattern": "Password must contain at least one uppercase letter, one lowercase letter, one number and one special character"
+        }
+      },
+      "signin": {
+        "label": "Are you a member already?",
+        "link": "Sign in"
+      },
+      "conditions": {
+        "label": "By clicking 'Create account' you agree to our",
+        "separator": " and ",
+        "terms": "Terms&Conditions",
+        "privacy": "Privacy Policy"
+      },
+      "button": "Create account"
+    },
+    "forgot": {
+      "title": "Forgot your password?",
+      "subtitle": "Enter the email address you used when you joined and we’ll send you link to reset your password.",
+      "email": {
+        "label": "Email",
+        "placeholder": "Enter your email address",
+        "error": {
+          "required": "required",
+          "invalid": "invalid"
+        }
+      },
+      "button": "Send request"
+    },
+    "reset": {
+      "title": "Want to setup new password?",
+      "subtitle": "Enter new password and confirm it.",
+      "password": {
+        "label": "New Password",
+        "placeholder": "Password (min. 8 characters)",
+        "error": {
+          "required": "required",
+          "minlength": "min. 8 characters",
+          "maxlength": "max. 32 characters",
+          "pattern": "Password must contain at least one uppercase letter, one lowercase letter, one number and one special character"
+        }
+      },
+      "confirm": {
+        "label": "Confirm Password",
+        "placeholder": "Confirm Password",
+        "error": {
+          "required": "required",
+          "minlength": "min. 8 characters",
+          "match": "passwords do not match"
+        }
+      },
+      "button": "Modify password"
+    },
+    "verify": {
+      "title": "Find verification link in your email",
+      "button": "Check email"
+    },
+    "reverify": {
+      "title": "We can not verify your account",
+      "subtitle": "Enter the email address you used when you joined and we’ll send you link to validate your account.",
+      "email": {
+        "label": "Email",
+        "placeholder": "Enter your email address",
+        "error": {
+          "required": "required",
+          "invalid": "invalid"
+        }
+      },
+      "button": "Verify again"
+    }
+  },
+  "navigation": {
+    "account": "Account",
+    "explore": "Explore",
+    "favourites": "Favourites",
+    "messages": "Messages",
+    "notifications": "Notifications",
+    "credits": "Add Credits",
+    "settings": "Settings",
+    "support": "Help & Support"
+  },
+  "page": {
+    "home": {
+      "hero": {
+        "title": "Unlock Joy in Any Language",
+        "subtitle": "Chat and Fun!",
+        "description": "We've revolutionized dating for your enjoyment and efficiency. Begin your dating journey now for ultimate convenience."
+      },
+      "prolog": {
+        "title": "You're not alone! Millions are seeking a discreet connection, just like you.",
+        "subtitle": "Join the ever-growing FriendZone Club network daily, where countless people just like you find discreet relationships – whether married, attached, or simply curious."
+      },
+      "reviews": {
+        "title": "User's Review",
+        "reviews": [
+          {
+            "name": "Ben Johnson",
+            "status": "Married",
+            "rating": 5,
+            "avatar": "/ben.png",
+            "review": "Since meeting someone on FriendZone Club, and reinvigorating the sexual part of my romantic life, I’m a better husband now than I was."
+          },
+          {
+            "name": "Samantha Smith",
+            "status": "Single",
+            "rating": 5,
+            "avatar": "/emily.png",
+            "review": "I joined the Club and have found the fulfillment I needed. It’s completely removed the anxiety from my life."
+          },
+          {
+            "name": "John Doe",
+            "status": "Married",
+            "rating": 4.9,
+            "avatar": "/roxie.png",
+            "review": "I’ve been married for 10 years, and I’ve been bored for most of them. I’m glad I found FriendZone Club. I’ve met someone who’s made me feel alive again."
+          }
+        ]
+      },
+      "faq": {
+        "title": "FAQ",
+        "questions": [
+          {
+            "question": "What is FriendZone Club?",
+            "answer": "FriendZone Club is a discreet dating site for people who are looking for a casual affair or discreet encounters online. Our members are people just like you, seeking to relive that magical feeling once again."
+          },
+          {
+            "question": "Is FriendZone Club free?",
+            "answer": "FriendZone Club is free to join, and we offer a variety of payment options that make it easy to get started. With a free account, you can create a profile and browse the site at your leisure. You can also upgrade your account to a premium membership, which allows you to send and receive unlimited messages and more."
+          },
+          {
+            "question": "Is FriendZone Club safe?",
+            "answer": "FriendZone Club is a safe and secure site with a dedicated customer service team. We are committed to protecting your personal information and keeping it confidential. We also have a strict privacy policy that ensures your information will never be shared with third parties."
+          },
+          {
+            "question": "How do I get started?",
+            "answer": "To get started, simply create a free account and fill out your profile. You can then browse the site and send messages to other members. If you’re looking for a more discreet experience, you can also upgrade to a premium membership."
+          },
+          {
+            "question": "How do I cancel my membership?",
+            "answer": "You can cancel your membership at any time by logging into your account and clicking on the “Cancel Membership” link. You can also contact our customer service team for assistance."
+          },
+          {
+            "question": "How do I contact customer service?",
+            "answer": "You can contact our customer service team by email, phone, or live chat. We are available 24 hours a day, 7 days a week to answer any questions you may have."
+          },
+          {
+            "question": "How do I delete my account?",
+            "answer": "You can delete your account at any time by logging into your account and clicking on the “Delete Account” link. You can also contact our customer service team for assistance."
+          },
+          {
+            "question": "How do I report a problem?",
+            "answer": "You can report a problem by contacting our customer service team. We are available 24 hours a day, 7 days a week to answer any questions you may have."
+          }
+        ]
+      },
+      "footer": {
+        "copyright": "© 2023 FriendZone Club",
+        "link": {
+          "about": "About",
+          "contact": "Contact",
+          "help": "Help",
+          "cookies": "Cookies",
+          "terms": "Terms & Conditions"
+        }
+      }
+    },
+    "about": {
+      "title": "About",
+      "content": "This is the about page."
+    }
+  }
+}

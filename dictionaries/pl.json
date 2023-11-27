@@ -1,0 +1,278 @@
+{
+  "button": {
+    "signin": "Zaloguj się",
+    "signup": "Zarejestruj się",
+    "signout": "Wyloguj się",
+    "join": "Dołącz do Klubu",
+    "cancel": "Anuluj",
+    "delete": "Usuń",
+    "save": "Zapisz",
+    "edit": "Edytuj",
+    "add": "Dodaj",
+    "back": "Powrót",
+    "next": "Dalej",
+    "submit": "Wyślij",
+    "close": "Zamknij",
+    "confirm": "Potwierdź",
+    "yes": "Tak",
+    "no": "Nie",
+    "mode": "Tryb",
+    "lang": "Język"
+  },
+  "auth": {
+    "signin": {
+      "title": "Zaloguj się do swojego konta",
+      "subtitle": "Wprowadź swoje dane poniżej.",
+      "email": {
+        "label": "E-mail",
+        "placeholder": "Wprowadź swój adres e-mail",
+        "error": {
+          "required": "wymagane",
+          "invalid": "nieprawidłowy"
+        }
+      },
+      "password": {
+        "label": "Hasło",
+        "placeholder": "Hasło (min. 8 znaków)",
+        "error": {
+          "required": "wymagane",
+          "minlength": "min. 8 znaków"
+        }
+      },
+      "forgot": "Zapomniałeś hasła?",
+      "create": {
+        "label": "Nie jesteś jeszcze członkiem?",
+        "link": "Utwórz darmowe konto"
+      },
+      "separator": "Albo kontynuuj za pomocą",
+      "button": "Zaloguj się"
+    },
+    "signup": {
+      "title": "Utwórz swoje konto",
+      "subtitle": "Wprowadź swoje dane poniżej i prześlij.",
+      "gender": {
+        "label": "Płeć",
+        "placeholder": "Wybierz płeć",
+        "options": ["Mężczyzna", "Kobieta", "Transpłciowy", "Niebinarny"],
+        "error": {
+          "required": "Płeć jest wymagana"
+        }
+      },
+      "location": {
+        "label": "Lokalizacja",
+        "placeholder": "Wybierz lokalizację",
+        "options": [
+          "Stany Zjednoczone",
+          "Wielka Brytania",
+          "Kanada",
+          "Australia",
+          "Nowa Zelandia",
+          "Irlandia",
+          "Republika Południowej Afryki"
+        ],
+        "error": {
+          "required": "wymagane"
+        }
+      },
+      "dob": {
+        "label": "Data urodzenia",
+        "placeholder": "Wybierz datę urodzenia",
+        "error": {
+          "required": "wymagane"
+        }
+      },
+      "name": {
+        "label": "Imię",
+        "placeholder": "Wprowadź swoje imię",
+        "error": {
+          "required": "wymagane"
+        }
+      },
+      "email": {
+        "label": "E-mail",
+        "placeholder": "Wprowadź swój adres e-mail",
+        "error": {
+          "required": "wymagane",
+          "invalid": "nieprawidłowy",
+          "minlength": "za krótki",
+          "maxlength": "za długi"
+        }
+      },
+      "password": {
+        "label": "Hasło",
+        "placeholder": "Hasło (min. 8 znaków)",
+        "error": {
+          "required": "wymagane",
+          "minlength": "min. 8 znaków",
+          "maxlength": "maks. 32 znaki",
+          "pattern": "Hasło musi zawierać co najmniej jedną wielką literę, jedną małą literę, jedną cyfrę i jeden znak specjalny"
+        }
+      },
+      "signin": {
+        "label": "Jesteś już członkiem?",
+        "link": "Zaloguj się"
+      },
+      "conditions": {
+        "label": "Klikając przycisk 'Utwórz konto', zgadzasz się na nasze",
+        "separator": " i ",
+        "terms": "Warunki korzystania",
+        "privacy": "Polityka prywatności"
+      },
+      "button": "Utwórz konto"
+    },
+    "forgot": {
+      "title": "Zapomniałeś hasła?",
+      "subtitle": "Wprowadź adres e-mail, który użyłeś podczas rejestracji, a my wyślemy Ci link do zresetowania hasła.",
+      "email": {
+        "label": "E-mail",
+        "placeholder": "Wprowadź swój adres e-mail",
+        "error": {
+          "required": "wymagane",
+          "invalid": "nieprawidłowy"
+        }
+      },
+      "button": "Wyślij prośbę"
+    },
+    "reset": {
+      "title": "Chcesz ustawić nowe hasło?",
+      "subtitle": "Wprowadź nowe hasło i potwierdź je.",
+      "password": {
+        "label": "Nowe hasło",
+        "placeholder": "Hasło (min. 8 znaków)",
+        "error": {
+          "required": "wymagane",
+          "minlength": "min. 8 znaków",
+          "maxlength": "maks. 32 znaki",
+          "pattern": "Hasło musi zawierać co najmniej jedną wielką literę, jedną małą literę, jedną cyfrę i jeden znak specjalny"
+        }
+      },
+      "confirm": {
+        "label": "Potwierdź hasło",
+        "placeholder": "Potwierdź hasło",
+        "error": {
+          "required": "wymagane",
+          "minlength": "min. 8 znaków",
+          "match": "hasła nie pasują do siebie"
+        }
+      },
+      "button": "Zmień hasło"
+    },
+    "verify": {
+      "title": "Sprawdź link weryfikacyjny w swojej poczcie e-mail",
+      "button": "Sprawdź e-mail"
+    },
+    "reverify": {
+      "title": "Nie możemy zweryfikować Twojego konta",
+      "subtitle": "Wprowadź adres e-mail, który użyłeś podczas rejestracji, a my wyślemy Ci link do ponownej weryfikacji konta.",
+      "email": {
+        "label": "E-mail",
+        "placeholder": "Wprowadź swój adres e-mail",
+        "error": {
+          "required": "wymagane",
+          "invalid": "nieprawidłowy"
+        }
+      },
+      "button": "Zweryfikuj ponownie"
+    }
+  },
+  "navigation": {
+    "account": "Konto",
+    "explore": "Przeglądaj",
+    "favourites": "Ulubione",
+    "messages": "Wiadomości",
+    "notifications": "Powiadomienia",
+    "credits": "Dodaj Kredyty",
+    "settings": "Ustawienia",
+    "support": "Pomoc i Obsługa"
+  },
+  "page": {
+    "home": {
+      "hero": {
+        "title": "Rozmowy, które Rozpalają Zmysły",
+        "subtitle": "Czatuj i Baw Się!",
+        "description": "Zrewolucjonizowaliśmy randkowanie dla Twojej przyjemności i wydajności. Rozpocznij teraz swoją podróż randkową dla ostatecznej wygody."
+      },
+      "prolog": {
+        "title": "Nie jesteś sam! Miliony osób poszukuje dyskretnego połączenia, tak samo jak Ty.",
+        "subtitle": "Dołącz do rosnącej codziennie sieci FriendZone Club, gdzie niezliczone osoby takie jak Ty znajdują dyskretne relacje - czy to zamężne, związane czy po prostu ciekawe."
+      },
+      "reviews": {
+        "title": "Recenzje użytkowników",
+        "reviews": [
+          {
+            "name": "Ben Johnson",
+            "status": "Żonaty",
+            "rating": 5,
+            "avatar": "/ben.png",
+            "review": "Odkąd poznałem kogoś w FriendZone Club i ożywiłem życie romantyczne, jestem teraz lepszym mężem niż kiedykolwiek."
+          },
+          {
+            "name": "Samantha Smith",
+            "status": "Singiel",
+            "rating": 5,
+            "avatar": "/emily.png",
+            "review": "Dołączyłem do Klubu i znalazłem satysfakcję, której potrzebowałem. Całkowicie usunął z mojego życia niepokój."
+          },
+          {
+            "name": "John Doe",
+            "status": "Żonaty",
+            "rating": 4.9,
+            "avatar": "/roxie.png",
+            "review": "Jestem żonaty od 10 lat i byłem znudzony przez większość z nich. Cieszę się, że znalazłem FriendZone Club. Poznałem kogoś, kto sprawił"
+          }
+        ]
+      },
+      "faq": {
+        "title": "FAQ",
+        "questions": [
+          {
+            "question": "Czym jest FriendZone Club?",
+            "answer": "FriendZone Club to dyskretny portal randkowy dla osób, które szukają niezobowiązującego romansu lub dyskretnych spotkań online. Nasi członkowie to ludzie tacy jak Ty, pragnący jeszcze raz przeżyć tę magiczną chwilę."
+          },
+          {
+            "question": "Czy FriendZone Club jest darmowy?",
+            "answer": "FriendZone Club jest bezpłatny dołączenia, a oferujemy różne opcje płatności, które ułatwiają rozpoczęcie korzystania z serwisu. Dzięki darmowemu kontu możesz utworzyć profil i przeglądać witrynę w dowolnym tempie. Możesz również uaktualnić swoje konto do konta premium, co umożliwia wysyłanie i odbieranie nieograniczonej liczby wiadomości i wiele więcej."
+          },
+          {
+            "question": "Czy FriendZone Club jest bezpieczny?",
+            "answer": "FriendZone Club to bezpieczny i pewny serwis z dedykowanym zespołem obsługi klienta. Zobowiązujemy się do ochrony Twoich danych osobowych i zachowania ich poufności. Posiadamy także ścisłą politykę prywatności, która zapewnia, że Twoje informacje nigdy nie zostaną udostępnione osobom trzecim."
+          },
+          {
+            "question": "Jak zacząć?",
+            "answer": "Aby rozpocząć, po prostu utwórz darmowe konto i wypełnij swój profil. Następnie możesz przeglądać witrynę i wysyłać wiadomości do innych członków. Jeśli szukasz bardziej dyskretnego doświadczenia, możesz również uaktualnić się do konta premium."
+          },
+          {
+            "question": "Jak anulować moje konto?",
+            "answer": "Możesz anulować swoje konto w dowolnym momencie, logując się na swoje konto i klikając w link „Anuluj konto”. Możesz także skontaktować się z naszym zespołem obsługi klienta w celu uzyskania pomocy."
+          },
+          {
+            "question": "Jak skontaktować się z obsługą klienta?",
+            "answer": "Możesz skontaktować się z naszym zespołem obsługi klienta za pomocą e-maila, telefonu lub czatu na żywo. Jesteśmy dostępni 24 godziny na dobę, 7 dni w tygodniu, aby odpowiedzieć na wszelkie pytania, jakie możesz mieć."
+          },
+          {
+            "question": "Jak usunąć moje konto?",
+            "answer": "Możesz usunąć swoje konto w dowolnym momencie, logując się na swoje konto i klikając w link „Usuń konto”. Możesz także skontaktować się z naszym zespołem obsługi klienta w celu uzyskania pomocy."
+          },
+          {
+            "question": "Jak zgłosić problem?",
+            "answer": "Możesz zgłosić problem, kontaktując się z naszym zespołem obsługi klienta. Jesteśmy dostępni 24 godziny na dobę, 7 dni w tygodniu, aby odpowiedzieć na wszelkie pytania, jakie możesz mieć."
+          }
+        ]
+      },
+      "footer": {
+        "copyright": "© 2023 FriendZone Club",
+        "link": {
+          "about": "O nas",
+          "contact": "Kontakt",
+          "help": "Pomoc",
+          "cookies": "Pliki cookie",
+          "terms": "Regulamin"
+        }
+      },
+      "about": {
+        "title": "O nas",
+        "content": "To jest strona informacyjna."
+      }
+    }
+  }
+}

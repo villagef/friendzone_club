@@ -16,7 +16,7 @@ export const signupSchema = z.object({
   email: z
     .string()
     .email({ message: "invalid email" })
-    .min(1, { message: "required" })
+    .min(8, { message: "required" })
     .max(64, { message: "too long email" })
     .default(""),
   password: z
@@ -134,3 +134,6 @@ export interface FieldValueProps {
 export type RegisterSchemaType = UseFormRegister<FieldValueProps>
 export type ErrorSchemaType = FieldErrors
 export type SetValueSchemaType = SetFieldValue<FieldValues>
+
+//DICTIONARY
+export type DictionaryType = typeof import("@/dictionaries/en.json")

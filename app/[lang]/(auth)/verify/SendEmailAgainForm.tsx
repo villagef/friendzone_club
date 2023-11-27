@@ -16,7 +16,9 @@ export default function SendEmailAgainForm() {
 
   return (
     <div className="flex flex-col items-center justify-center gap-y-4 rounded-lg p-10 text-center text-xl shadow-md dark:bg-transparent/80 sm:shadow-none sm:dark:bg-transparent">
-      <h1>Find verification link in your email</h1>
+      <h1 className="text-xl font-semibold tracking-tight">
+        Find verification link in your email
+      </h1>
       <a href={emailProvider} target="_blank">
         <Button variant="primary" onClick={handleCheckEmailClick}>
           Check email
