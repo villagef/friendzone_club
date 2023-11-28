@@ -2,7 +2,6 @@
 
 import Link from "next/link"
 import { usePathname } from "next/navigation"
-import useStore, { initI18nStore } from "@/store"
 
 import { LANGUAGES } from "@/lib/consts"
 import {
@@ -17,7 +16,7 @@ import { Button } from "../ui/button"
 
 export default function Language() {
   const pathName = usePathname()
-  const { locale, setLocale } = useStore()
+  const locale = pathName.split("/")[1]
 
   const redirectedPathName = (locale: string) => {
     if (!pathName) return "/"
@@ -45,10 +44,6 @@ export default function Language() {
                     ? "bg-accent font-bold"
                     : "bg-transparent font-normal"
                 }`}
-                onClick={() => {
-                  setLocale(value)
-                  initI18nStore(value)
-                }}
               >
                 {label}
               </DropdownMenuItem>

@@ -3,7 +3,8 @@ import { Inter as FontSans } from "next/font/google"
 
 import "../globals.css"
 
-import { i18n, Locale } from "@/i18n.config"
+import { notFound } from "next/navigation"
+import { Locale, locales } from "@/i18n"
 
 import { cn } from "@/lib/utils"
 import Footer from "@/components/Footer"
@@ -20,19 +21,21 @@ export const metadata: Metadata = {
   description: "FriendZone Club cheating app",
 }
 
-export async function generateStaticParams() {
-  return i18n.locales.map((lang) => ({ params: { lang } }))
-}
+// export async function generateStaticParams() {
+//   return locales.map((locale) => ({ params: { locale } }))
+// }
 
 export default function RootLayout({
   children,
-  params,
+  params: { locale },
 }: {
   children: React.ReactNode
-  params: { lang: Locale }
+  params: { locale: Locale }
 }) {
+  if (!locales.includes(locale as string)) notFound()
+
   return (
-    <html lang={params.lang} suppressHydrationWarning>
+    <html lang={locale} suppressHydrationWarning>
       <head />
       <body
         className={cn(
@@ -40,8 +43,8 @@ export default function RootLayout({
           font.className,
         )}
       >
-        <Provider lang={params.lang}>
-          <MainNav lang={params.lang} />
+        <Provider locale={locale}>
+          <MainNav />
           <div className=" w-full">{children}</div>
           <Footer />
         </Provider>

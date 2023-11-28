@@ -198,66 +198,46 @@
       },
       "reviews": {
         "title": "Recenzje użytkowników",
-        "reviews": [
-          {
-            "name": "Ben Johnson",
-            "status": "Żonaty",
-            "rating": 5,
-            "avatar": "/ben.png",
-            "review": "Odkąd poznałem kogoś w FriendZone Club i ożywiłem życie romantyczne, jestem teraz lepszym mężem niż kiedykolwiek."
-          },
-          {
-            "name": "Samantha Smith",
-            "status": "Singiel",
-            "rating": 5,
-            "avatar": "/emily.png",
-            "review": "Dołączyłem do Klubu i znalazłem satysfakcję, której potrzebowałem. Całkowicie usunął z mojego życia niepokój."
-          },
-          {
-            "name": "John Doe",
-            "status": "Żonaty",
-            "rating": 4.9,
-            "avatar": "/roxie.png",
-            "review": "Jestem żonaty od 10 lat i byłem znudzony przez większość z nich. Cieszę się, że znalazłem FriendZone Club. Poznałem kogoś, kto sprawił"
-          }
-        ]
+        "review1": {
+          "name": "Ben Johnson",
+          "status": "Żonaty",
+          "rating": "5",
+          "avatar": "/ben.png",
+          "review": "Odkąd poznałem kogoś w FriendZone Club i ożywiłem życie romantyczne, jestem teraz lepszym mężem niż kiedykolwiek."
+        },
+        "review2": {
+          "name": "Samantha Smith",
+          "status": "Singiel",
+          "rating": "5",
+          "avatar": "/emily.png",
+          "review": "Dołączyłem do Klubu i znalazłem satysfakcję, której potrzebowałem. Całkowicie usunął z mojego życia niepokój."
+        },
+        "review3": {
+          "name": "John Doe",
+          "status": "Żonaty",
+          "rating": "4.9",
+          "avatar": "/roxie.png",
+          "review": "Jestem żonaty od 10 lat i byłem znudzony przez większość z nich. Cieszę się, że znalazłem FriendZone Club. Poznałem kogoś, kto sprawił"
+        }
       },
       "faq": {
         "title": "FAQ",
-        "questions": [
-          {
-            "question": "Czym jest FriendZone Club?",
-            "answer": "FriendZone Club to dyskretny portal randkowy dla osób, które szukają niezobowiązującego romansu lub dyskretnych spotkań online. Nasi członkowie to ludzie tacy jak Ty, pragnący jeszcze raz przeżyć tę magiczną chwilę."
-          },
-          {
-            "question": "Czy FriendZone Club jest darmowy?",
-            "answer": "FriendZone Club jest bezpłatny dołączenia, a oferujemy różne opcje płatności, które ułatwiają rozpoczęcie korzystania z serwisu. Dzięki darmowemu kontu możesz utworzyć profil i przeglądać witrynę w dowolnym tempie. Możesz również uaktualnić swoje konto do konta premium, co umożliwia wysyłanie i odbieranie nieograniczonej liczby wiadomości i wiele więcej."
-          },
-          {
-            "question": "Czy FriendZone Club jest bezpieczny?",
-            "answer": "FriendZone Club to bezpieczny i pewny serwis z dedykowanym zespołem obsługi klienta. Zobowiązujemy się do ochrony Twoich danych osobowych i zachowania ich poufności. Posiadamy także ścisłą politykę prywatności, która zapewnia, że Twoje informacje nigdy nie zostaną udostępnione osobom trzecim."
-          },
-          {
-            "question": "Jak zacząć?",
-            "answer": "Aby rozpocząć, po prostu utwórz darmowe konto i wypełnij swój profil. Następnie możesz przeglądać witrynę i wysyłać wiadomości do innych członków. Jeśli szukasz bardziej dyskretnego doświadczenia, możesz również uaktualnić się do konta premium."
-          },
-          {
-            "question": "Jak anulować moje konto?",
-            "answer": "Możesz anulować swoje konto w dowolnym momencie, logując się na swoje konto i klikając w link „Anuluj konto”. Możesz także skontaktować się z naszym zespołem obsługi klienta w celu uzyskania pomocy."
-          },
-          {
-            "question": "Jak skontaktować się z obsługą klienta?",
-            "answer": "Możesz skontaktować się z naszym zespołem obsługi klienta za pomocą e-maila, telefonu lub czatu na żywo. Jesteśmy dostępni 24 godziny na dobę, 7 dni w tygodniu, aby odpowiedzieć na wszelkie pytania, jakie możesz mieć."
-          },
-          {
-            "question": "Jak usunąć moje konto?",
-            "answer": "Możesz usunąć swoje konto w dowolnym momencie, logując się na swoje konto i klikając w link „Usuń konto”. Możesz także skontaktować się z naszym zespołem obsługi klienta w celu uzyskania pomocy."
-          },
-          {
-            "question": "Jak zgłosić problem?",
-            "answer": "Możesz zgłosić problem, kontaktując się z naszym zespołem obsługi klienta. Jesteśmy dostępni 24 godziny na dobę, 7 dni w tygodniu, aby odpowiedzieć na wszelkie pytania, jakie możesz mieć."
-          }
-        ]
+        "question1": {
+          "question": "Czym jest FriendZone Club?",
+          "answer": "FriendZone Club to dyskretny portal randkowy dla osób, które szukają niezobowiązującego romansu lub dyskretnych spotkań online. Nasi członkowie to ludzie tacy jak Ty, pragnący jeszcze raz przeżyć tę magiczną chwilę."
+        },
+        "question2": {
+          "question": "Czy FriendZone Club jest darmowy?",
+          "answer": "FriendZone Club jest bezpłatny dołączenia, a oferujemy różne opcje płatności, które ułatwiają rozpoczęcie korzystania z serwisu. Dzięki darmowemu kontu możesz utworzyć profil i przeglądać witrynę w dowolnym tempie. Możesz również uaktualnić swoje konto do konta premium, co umożliwia wysyłanie i odbieranie nieograniczonej liczby wiadomości i wiele więcej."
+        },
+        "question3": {
+          "question": "Czy FriendZone Club jest bezpieczny?",
+          "answer": "FriendZone Club to bezpieczny i pewny serwis z dedykowanym zespołem obsługi klienta. Zobowiązujemy się do ochrony Twoich danych osobowych i zachowania ich poufności. Posiadamy także ścisłą politykę prywatności, która zapewnia, że Twoje informacje nigdy nie zostaną udostępnione osobom trzecim."
+        },
+        "question4": {
+          "question": "Jak zacząć?",
+          "answer": "Aby rozpocząć, po prostu utwórz darmowe konto i wypełnij swój profil. Następnie możesz przeglądać witrynę i wysyłać wiadomości do innych członków. Jeśli szukasz bardziej dyskretnego doświadczenia, możesz również uaktualnić się do konta premium."
+        }
       },
       "footer": {
         "copyright": "© 2023 FriendZone Club",

@@ -199,66 +199,46 @@
       },
       "reviews": {
         "title": "User's Review",
-        "reviews": [
-          {
-            "name": "Ben Johnson",
-            "status": "Married",
-            "rating": 5,
-            "avatar": "/ben.png",
-            "review": "Since meeting someone on FriendZone Club, and reinvigorating the sexual part of my romantic life, I’m a better husband now than I was."
-          },
-          {
-            "name": "Samantha Smith",
-            "status": "Single",
-            "rating": 5,
-            "avatar": "/emily.png",
-            "review": "I joined the Club and have found the fulfillment I needed. It’s completely removed the anxiety from my life."
-          },
-          {
-            "name": "John Doe",
-            "status": "Married",
-            "rating": 4.9,
-            "avatar": "/roxie.png",
-            "review": "I’ve been married for 10 years, and I’ve been bored for most of them. I’m glad I found FriendZone Club. I’ve met someone who’s made me feel alive again."
-          }
-        ]
+        "review1": {
+          "name": "Ben Johnson",
+          "status": "Married",
+          "rating": "5",
+          "avatar": "/ben.png",
+          "review": "Since meeting someone on FriendZone Club, and reinvigorating the sexual part of my romantic life, I’m a better husband now than I was."
+        },
+        "review2": {
+          "name": "Samantha Smith",
+          "status": "Single",
+          "rating": "5",
+          "avatar": "/emily.png",
+          "review": "I joined the Club and have found the fulfillment I needed. It’s completely removed the anxiety from my life."
+        },
+        "review3": {
+          "name": "John Doe",
+          "status": "Married",
+          "rating": "4.9",
+          "avatar": "/roxie.png",
+          "review": "I’ve been married for 10 years, and I’ve been bored for most of them. I’m glad I found FriendZone Club. I’ve met someone who’s made me feel alive again."
+        }
       },
       "faq": {
         "title": "FAQ",
-        "questions": [
-          {
-            "question": "What is FriendZone Club?",
-            "answer": "FriendZone Club is a discreet dating site for people who are looking for a casual affair or discreet encounters online. Our members are people just like you, seeking to relive that magical feeling once again."
-          },
-          {
-            "question": "Is FriendZone Club free?",
-            "answer": "FriendZone Club is free to join, and we offer a variety of payment options that make it easy to get started. With a free account, you can create a profile and browse the site at your leisure. You can also upgrade your account to a premium membership, which allows you to send and receive unlimited messages and more."
-          },
-          {
-            "question": "Is FriendZone Club safe?",
-            "answer": "FriendZone Club is a safe and secure site with a dedicated customer service team. We are committed to protecting your personal information and keeping it confidential. We also have a strict privacy policy that ensures your information will never be shared with third parties."
-          },
-          {
-            "question": "How do I get started?",
-            "answer": "To get started, simply create a free account and fill out your profile. You can then browse the site and send messages to other members. If you’re looking for a more discreet experience, you can also upgrade to a premium membership."
-          },
-          {
-            "question": "How do I cancel my membership?",
-            "answer": "You can cancel your membership at any time by logging into your account and clicking on the “Cancel Membership” link. You can also contact our customer service team for assistance."
-          },
-          {
-            "question": "How do I contact customer service?",
-            "answer": "You can contact our customer service team by email, phone, or live chat. We are available 24 hours a day, 7 days a week to answer any questions you may have."
-          },
-          {
-            "question": "How do I delete my account?",
-            "answer": "You can delete your account at any time by logging into your account and clicking on the “Delete Account” link. You can also contact our customer service team for assistance."
-          },
-          {
-            "question": "How do I report a problem?",
-            "answer": "You can report a problem by contacting our customer service team. We are available 24 hours a day, 7 days a week to answer any questions you may have."
-          }
-        ]
+        "question1": {
+          "question": "What is FriendZone Club?",
+          "answer": "FriendZone Club is a discreet dating site for people who are looking for a casual affair or discreet encounters online. Our members are people just like you, seeking to relive that magical feeling once again."
+        },
+        "question2": {
+          "question": "Is FriendZone Club free?",
+          "answer": "FriendZone Club is free to join, and we offer a variety of payment options that make it easy to get started. With a free account, you can create a profile and browse the site at your leisure. You can also upgrade your account to a premium membership, which allows you to send and receive unlimited messages and more."
+        },
+        "question3": {
+          "question": "Is FriendZone Club safe?",
+          "answer": "FriendZone Club is a safe and secure site with a dedicated customer service team. We are committed to protecting your personal information and keeping it confidential. We also have a strict privacy policy that ensures your information will never be shared with third parties."
+        },
+        "question4": {
+          "question": "How do I get started?",
+          "answer": "To get started, simply create a free account and fill out your profile. You can then browse the site and send messages to other members. If you’re looking for a more discreet experience, you can also upgrade to a premium membership."
+        }
       },
       "footer": {
         "copyright": "© 2023 FriendZone Club",

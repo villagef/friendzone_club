@@ -3,7 +3,6 @@
 import { useSession } from "next-auth/react"
 
 import { navbarConfig } from "@/config/navbar"
-import { DictionaryType } from "@/lib/types"
 
 import ButtonSignIn from "../ButtonSignIn"
 import Language from "../LanguageToggle"
@@ -12,14 +11,7 @@ import ModeToggle from "../ModeToggle"
 import NavLink from "./NavLink"
 import Profile from "./Profile"
 
-interface NavProps {
-  dictionary: {
-    button: DictionaryType["button"]
-    navigation: DictionaryType["navigation"]
-  }
-}
-
-export default function Nav({ dictionary }: NavProps) {
+export default function Nav() {
   const { data: session } = useSession()
   return (
     <div className="hidden h-[55px] w-full max-w-screen-2xl flex-col items-center justify-between sm:flex sm:flex-row">
@@ -38,7 +30,7 @@ export default function Nav({ dictionary }: NavProps) {
           <>
             <ModeToggle />
             <Language />
-            <ButtonSignIn label={dictionary.button.signin} />
+            <ButtonSignIn />
           </>
         )}
       </ul>
