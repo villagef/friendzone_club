@@ -11,7 +11,7 @@ export default async function Home({
 }: {
   params: { lang: Locale }
 }) {
-  const { page } = await getDictionary(lang)
+  const { page, button } = await getDictionary(lang)
   return (
     <>
       <main className="w-full">
@@ -26,7 +26,7 @@ export default async function Home({
             <p className="md:px-42 lg:px-46 text-md mt-2 p-0 py-6 text-center leading-8 tracking-wider sm:mt-6 sm:px-24 md:text-xl">
               {page.home.hero.description}
             </p>
-            <ButtonSignUp />
+            <ButtonSignUp label={button.join} />
           </div>
         </div>
       </main>

@@ -169,21 +169,7 @@ export const COUNTRIES = [
   },
 ]
 
-export const GENDERS = [
-  {
-    label: "Male",
-    value: "male",
-  },
-  {
-    label: "Female",
-    value: "female",
-  },
-  {
-    label: "Transgender",
-    value: "transgender",
-  },
-  {
-    label: "Non-binary",
-    value: "non-binary",
-  },
-]
+export const LANGUAGES = [
+  { label: "English", value: "en" },
+  { label: "Polski", value: "pl" },
+] as const

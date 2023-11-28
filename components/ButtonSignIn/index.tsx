@@ -1,14 +1,16 @@
 "use client"
 
 import { signIn } from "next-auth/react"
-import { Button } from "../ui/button"
+
 import { Icons } from "../icons"
+import { Button } from "../ui/button"
 
 interface ButtonSignInProps {
+  label: string
   icon?: boolean
 }
 
-export default function ButtonSignIn({ icon }: ButtonSignInProps) {
+export default function ButtonSignIn({ label, icon }: ButtonSignInProps) {
   const handleClick = () => {
     signIn()
   }
@@ -17,8 +19,8 @@ export default function ButtonSignIn({ icon }: ButtonSignInProps) {
       {icon && (
         <Icons.login className={"stroke-secondary dark:stroke-primary"} />
       )}
-      <span className="mx-2">Sign in</span>
-      <span className="sr-only">Sign in</span>
+      <span className="mx-2">{label}</span>
+      <span className="sr-only">{label}</span>
     </Button>
   )
 }

@@ -1,21 +1,22 @@
 import Link from "next/link"
-import { heroSection } from "@/config/home"
-import { Button } from "../ui/button"
+
 import { Icons } from "../icons"
+import { Button } from "../ui/button"
 
 interface ButtonSignUpProps {
+  label: string
   icon?: boolean
 }
 
-export default function ButtonSignUp({ icon }: ButtonSignUpProps) {
+export default function ButtonSignUp({ label, icon }: ButtonSignUpProps) {
   return (
     <Link href="/signup">
       <Button variant="primary" size={"lg"}>
         {icon && (
           <Icons.login className={"stroke-secondary dark:stroke-primary"} />
         )}
-        <span className="mx-2">{heroSection.actionButton}</span>
-        <span className="sr-only">{heroSection.actionButton}</span>
+        <span className="mx-2">{label}</span>
+        <span className="sr-only">{label}</span>
       </Button>
     </Link>
   )

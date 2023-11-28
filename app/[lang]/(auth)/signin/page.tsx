@@ -57,7 +57,7 @@ export default function SignInPage() {
     <div className="mx-auto flex w-full flex-col justify-center">
       <div className="mb-4 flex flex-col space-y-2 text-center">
         <h1 className="text-2xl font-semibold tracking-tight">
-          Sign in to your account
+          {/* {auth.signin.title} */}
         </h1>
         <p className="text-sm">Enter your credentails below to sign in</p>
       </div>

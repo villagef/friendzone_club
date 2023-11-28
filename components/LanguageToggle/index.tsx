@@ -1,7 +1,10 @@
 "use client"
 
-import { useState } from "react"
+import Link from "next/link"
+import { usePathname } from "next/navigation"
+import useStore, { initI18nStore } from "@/store"
 
+import { LANGUAGES } from "@/lib/consts"
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -12,13 +15,16 @@ import {
 import { Icons } from "../icons"
 import { Button } from "../ui/button"
 
-const languages = [
-  { label: "English", value: "en" },
-  { label: "Polish", value: "pl" },
-] as const
-
 export default function Language() {
-  const [value, setValue] = useState<string>()
+  const pathName = usePathname()
+  const { locale, setLocale } = useStore()
+
+  const redirectedPathName = (locale: string) => {
+    if (!pathName) return "/"
+    const segments = pathName.split("/")
+    segments[1] = locale
+    return segments.join("/")
+  }
 
   return (
     <li className="list-none">
@@ -30,20 +36,23 @@ export default function Language() {
           </Button>
         </DropdownMenuTrigger>
         <DropdownMenuContent align="end">
-          {languages.map((language) => (
-            <DropdownMenuItem
-              key={language.value}
-              className={`${
-                value === language.value
-                  ? "bg-accent font-bold"
-                  : "bg-transparent font-normal"
-              }`}
-              onClick={() => {
-                setValue(language.value)
-              }}
-            >
-              {language.label}
-            </DropdownMenuItem>
+          {LANGUAGES.map(({ value, label }) => (
+            <Link href={redirectedPathName(value)} key={value}>
+              <DropdownMenuItem
+                key={value}
+                className={`${
+                  locale === value
+                    ? "bg-accent font-bold"
+                    : "bg-transparent font-normal"
+                }`}
+                onClick={() => {
+                  setLocale(value)
+                  initI18nStore(value)
+                }}
+              >
+                {label}
+              </DropdownMenuItem>
+            </Link>
           ))}
         </DropdownMenuContent>
       </DropdownMenu>
