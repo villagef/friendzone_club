@@ -3,6 +3,9 @@
 import { useState } from "react"
 import Link from "next/link"
 import { useSession } from "next-auth/react"
+
+import { subNavbarConfig } from "@/config/subNavbar"
+import { DictionaryType } from "@/lib/types"
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -10,19 +13,24 @@ import {
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu"
-import { subNavbarConfig } from "@/config/subNavbar"
-import ProfileLink from "./ProfileLink"
-import UserAvatar from "./UserAvatar"
-import { Button } from "../ui/button"
-import ButtonSignOut from "../ButtonSignOut"
-import ButtonCredits from "../ButtonCredits"
 
-export default function Profile() {
+import ButtonCredits from "../ButtonCredits"
+import ButtonSignOut from "../ButtonSignOut"
+import { Button } from "../ui/button"
+import SidebarNavLink from "./SidebarNavLink"
+import UserAvatar from "./UserAvatar"
+
+interface ProfileProps {
+  dictionary: DictionaryType["navigation"]
+}
+
+export default function Profile({ dictionary }: ProfileProps) {
   const [open, setOpen] = useState(false)
   const { data: session } = useSession()
   const userName = session?.user?.name
   const userAvatar = session?.user?.image
   const { profile, settings, support } = subNavbarConfig
+  const subLinks = [settings, support]
 
   return (
     <li>
@@ -35,7 +43,7 @@ export default function Profile() {
         </DropdownMenuTrigger>
         <DropdownMenuContent align="end" className="hidden w-[280px] sm:block">
           <Link href={profile.href}>
-            <DropdownMenuItem className="flex">
+            <DropdownMenuItem className="flex bg-primary/10">
               <UserAvatar src={userAvatar} />
               <div className="px-2">
                 <span className="my-0 py-0 pl-2 text-lg font-medium">
@@ -48,10 +56,18 @@ export default function Profile() {
             </DropdownMenuItem>
           </Link>
           <DropdownMenuGroup>
-            <ProfileLink {...settings} />
-            <ProfileLink {...support} />
-            <ButtonCredits />
-            <ButtonSignOut />
+            {subLinks.map((props) => (
+              <SidebarNavLink
+                key={props.key}
+                href={props.href}
+                label={
+                  dictionary.links[props.key as keyof typeof dictionary.links]
+                }
+                onClick={() => setOpen(false)}
+              />
+            ))}
+            <ButtonCredits label={dictionary.credits} />
+            <ButtonSignOut label={dictionary.signout} />
           </DropdownMenuGroup>
         </DropdownMenuContent>
       </DropdownMenu>

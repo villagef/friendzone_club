@@ -1,30 +1,30 @@
-import { Icons } from "@/components/icons";
+import { Icons } from "@/components/icons"
 
 export interface NavLinkProps {
-  href: string;
-  name: string;
-  icon: keyof typeof Icons;
+  href: string
+  key: string
+  icon: keyof typeof Icons
 }
 
 export const navbarConfig: { [key: string]: NavLinkProps } = {
   explore: {
     href: "/explore",
-    name: "Explore",
+    key: "explore",
     icon: "explore",
   },
   favourite: {
     href: "/favourite",
-    name: "Favourite",
+    key: "favourite",
     icon: "favourite",
   },
   message: {
     href: "/messages",
-    name: "Messages",
+    key: "messages",
     icon: "message",
   },
   notification: {
     href: "/account/notifications",
-    name: "Notifications",
+    key: "notifications",
     icon: "notification",
   },
-};
+}

@@ -2,9 +2,10 @@
 
 import { useState } from "react"
 import Link from "next/link"
+import { Locale } from "@/i18n"
 import { useSession } from "next-auth/react"
 
-import { navbarConfig, NavLinkProps } from "@/config/navbar"
+import { navbarConfig } from "@/config/navbar"
 import { subNavbarConfig } from "@/config/subNavbar"
 import { DictionaryType } from "@/lib/types"
 import { Separator } from "@/components/ui/separator"
@@ -30,10 +31,7 @@ import SidebarNavLink from "./SidebarNavLink"
 import UserAvatar from "./UserAvatar"
 
 interface SidebarNavProps {
-  dictionary: {
-    button: DictionaryType["button"]
-    navigation: DictionaryType["navigation"]
-  }
+  dictionary: DictionaryType["navigation"]
 }
 
 export default function SidebarNav({ dictionary }: SidebarNavProps) {
@@ -41,7 +39,7 @@ export default function SidebarNav({ dictionary }: SidebarNavProps) {
   const { profile, settings, support } = subNavbarConfig
   const [open, setOpen] = useState(false)
   const links = Object.values(navbarConfig)
-  const subLinks = [settings, support] as NavLinkProps[]
+  const subLinks = [settings, support]
   const userName = session?.user?.name
   const userAvatar = session?.user?.image
 
@@ -108,23 +106,36 @@ export default function SidebarNav({ dictionary }: SidebarNavProps) {
         </Link>
         <div className="flex flex-col items-center justify-center py-3">
           {links.map((props) => (
-            <SheetTrigger key={props.name} asChild>
-              <SidebarNavLink {...props} onClick={handleNavClose} />
+            <SheetTrigger key={props.key} asChild>
+              <SidebarNavLink
+                href={props.href}
+                label={
+                  dictionary.links[props.key as keyof typeof dictionary.links]
+                }
+                icon={props.icon}
+                onClick={handleNavClose}
+              />
             </SheetTrigger>
           ))}
         </div>
         <SheetTrigger asChild>
-          <ButtonCredits onClick={handleNavClose} />
+          <ButtonCredits label={dictionary.credits} onClick={handleNavClose} />
         </SheetTrigger>
         <div className="flex flex-col items-center justify-center py-4 ">
           {subLinks.map((props) => (
             <SheetTrigger key={props.name} asChild>
-              <SidebarNavLink {...props} onClick={handleNavClose} />
+              <SidebarNavLink
+                href={props.href}
+                label={
+                  dictionary.links[props.key as keyof typeof dictionary.links]
+                }
+                onClick={handleNavClose}
+              />
             </SheetTrigger>
           ))}
         </div>
         <SheetFooter>
-          <ButtonSignOut />
+          <ButtonSignOut label={dictionary.signout} />
         </SheetFooter>
         <SheetFooter className="flex flex-row items-center justify-center gap-8 pt-6">
           <ModeToggle />
@@ -140,7 +151,7 @@ export default function SidebarNav({ dictionary }: SidebarNavProps) {
       <div className="flex gap-x-2">
         <ModeToggle />
         <Language />
-        <ButtonSignIn label={dictionary.button.signin} />
+        <ButtonSignIn label={dictionary.signin} />
       </div>
     </div>
   )

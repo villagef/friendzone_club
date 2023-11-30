@@ -1,10 +1,10 @@
 import type { Metadata } from "next"
 import { Inter as FontSans } from "next/font/google"
 
-import "../globals.css"
+import "./globals.css"
 
 import { notFound } from "next/navigation"
-import { Locale, locales } from "@/i18n"
+import { i18n, Locale } from "@/i18n"
 
 import { cn } from "@/lib/utils"
 import Footer from "@/components/Footer"
@@ -21,21 +21,19 @@ export const metadata: Metadata = {
   description: "FriendZone Club cheating app",
 }
 
-// export async function generateStaticParams() {
-//   return locales.map((locale) => ({ params: { locale } }))
-// }
+export async function generateStaticParams() {
+  return i18n.locales.map((locale) => ({ params: { locale } }))
+}
 
 export default function RootLayout({
   children,
-  params: { locale },
+  params: { lang },
 }: {
   children: React.ReactNode
-  params: { locale: Locale }
+  params: { lang: Locale }
 }) {
-  if (!locales.includes(locale as string)) notFound()
-
   return (
-    <html lang={locale} suppressHydrationWarning>
+    <html lang={lang} suppressHydrationWarning>
       <head />
       <body
         className={cn(
@@ -43,10 +41,10 @@ export default function RootLayout({
           font.className,
         )}
       >
-        <Provider locale={locale}>
-          <MainNav />
+        <Provider locale={lang}>
+          <MainNav lang={lang} />
           <div className=" w-full">{children}</div>
-          <Footer />
+          <Footer lang={lang} />
         </Provider>
       </body>
     </html>

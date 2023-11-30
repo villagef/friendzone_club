@@ -1,5 +1,4 @@
-import { useTranslations } from "next-intl"
-
+import { DictionaryType } from "@/lib/types"
 import {
   Accordion,
   AccordionContent,
@@ -7,24 +6,25 @@ import {
   AccordionTrigger,
 } from "@/components/ui/accordion"
 
-export default function FAQSection() {
-  const questionKeys = ["question1", "question2", "question3", "question4"]
-  const t = useTranslations("page.home.faq")
+interface FAQSectionProps {
+  dictionary: DictionaryType["page"]["home"]["faq"]
+}
 
+export default function FAQSection({ dictionary }: FAQSectionProps) {
   return (
     <div className="container flex max-w-screen-2xl flex-col items-center justify-center px-6">
       <h1 className="mb-6 text-4xl font-bold text-primary lg:text-5xl">
-        {t("title")}
+        {dictionary.title}
       </h1>
       <Accordion
         type="single"
         collapsible
         className="w-full text-primary sm:px-4 md:px-24"
       >
-        {questionKeys.map((question) => (
-          <AccordionItem key={question} value={question}>
-            <AccordionTrigger>{t(`${question}.question`)}</AccordionTrigger>
-            <AccordionContent>{t(`${question}.answer`)}</AccordionContent>
+        {dictionary.list.map((item) => (
+          <AccordionItem key={item.question} value={item.question}>
+            <AccordionTrigger>{item.question}</AccordionTrigger>
+            <AccordionContent>{item.answer}</AccordionContent>
           </AccordionItem>
         ))}
       </Accordion>

@@ -176,14 +176,20 @@
     }
   },
   "navigation": {
-    "account": "Konto",
-    "explore": "Przeglądaj",
-    "favourites": "Ulubione",
-    "messages": "Wiadomości",
-    "notifications": "Powiadomienia",
+    "signin": "Zaloguj się",
+    "signout": "Wyloguj się",
     "credits": "Dodaj Kredyty",
-    "settings": "Ustawienia",
-    "support": "Pomoc i Obsługa"
+    "links": {
+      "account": "Konto",
+      "explore": "Przeglądaj",
+      "favourite": "Ulubione",
+      "messages": "Wiadomości",
+      "notifications": "Powiadomienia",
+      "credits": "Dodaj Kredyty",
+      "settings": "Ustawienia",
+      "support": "Pomoc i Obsługa",
+      "signin": "Zaloguj się"
+    }
   },
   "page": {
     "home": {
@@ -198,57 +204,61 @@
       },
       "reviews": {
         "title": "Recenzje użytkowników",
-        "review1": {
-          "name": "Ben Johnson",
-          "status": "Żonaty",
-          "rating": "5",
-          "avatar": "/ben.png",
-          "review": "Odkąd poznałem kogoś w FriendZone Club i ożywiłem życie romantyczne, jestem teraz lepszym mężem niż kiedykolwiek."
-        },
-        "review2": {
-          "name": "Samantha Smith",
-          "status": "Singiel",
-          "rating": "5",
-          "avatar": "/emily.png",
-          "review": "Dołączyłem do Klubu i znalazłem satysfakcję, której potrzebowałem. Całkowicie usunął z mojego życia niepokój."
-        },
-        "review3": {
-          "name": "John Doe",
-          "status": "Żonaty",
-          "rating": "4.9",
-          "avatar": "/roxie.png",
-          "review": "Jestem żonaty od 10 lat i byłem znudzony przez większość z nich. Cieszę się, że znalazłem FriendZone Club. Poznałem kogoś, kto sprawił"
-        }
+        "list": [
+          {
+            "name": "Ben Johnson",
+            "status": "Żonaty",
+            "rating": "5",
+            "avatar": "/ben.png",
+            "review": "Odkąd poznałem kogoś w FriendZone Club i ożywiłem życie romantyczne, jestem teraz lepszym mężem niż kiedykolwiek."
+          },
+          {
+            "name": "Samantha Smith",
+            "status": "Singiel",
+            "rating": "5",
+            "avatar": "/emily.png",
+            "review": "Dołączyłem do Klubu i znalazłem satysfakcję, której potrzebowałem. Całkowicie usunął z mojego życia niepokój."
+          },
+          {
+            "name": "John Doe",
+            "status": "Żonaty",
+            "rating": "4.9",
+            "avatar": "/roxie.png",
+            "review": "Jestem żonaty od 10 lat i byłem znudzony przez większość z nich. Cieszę się, że znalazłem FriendZone Club. Poznałem kogoś, kto sprawił"
+          }
+        ]
       },
       "faq": {
         "title": "FAQ",
-        "question1": {
-          "question": "Czym jest FriendZone Club?",
-          "answer": "FriendZone Club to dyskretny portal randkowy dla osób, które szukają niezobowiązującego romansu lub dyskretnych spotkań online. Nasi członkowie to ludzie tacy jak Ty, pragnący jeszcze raz przeżyć tę magiczną chwilę."
-        },
-        "question2": {
-          "question": "Czy FriendZone Club jest darmowy?",
-          "answer": "FriendZone Club jest bezpłatny dołączenia, a oferujemy różne opcje płatności, które ułatwiają rozpoczęcie korzystania z serwisu. Dzięki darmowemu kontu możesz utworzyć profil i przeglądać witrynę w dowolnym tempie. Możesz również uaktualnić swoje konto do konta premium, co umożliwia wysyłanie i odbieranie nieograniczonej liczby wiadomości i wiele więcej."
-        },
-        "question3": {
-          "question": "Czy FriendZone Club jest bezpieczny?",
-          "answer": "FriendZone Club to bezpieczny i pewny serwis z dedykowanym zespołem obsługi klienta. Zobowiązujemy się do ochrony Twoich danych osobowych i zachowania ich poufności. Posiadamy także ścisłą politykę prywatności, która zapewnia, że Twoje informacje nigdy nie zostaną udostępnione osobom trzecim."
-        },
-        "question4": {
-          "question": "Jak zacząć?",
-          "answer": "Aby rozpocząć, po prostu utwórz darmowe konto i wypełnij swój profil. Następnie możesz przeglądać witrynę i wysyłać wiadomości do innych członków. Jeśli szukasz bardziej dyskretnego doświadczenia, możesz również uaktualnić się do konta premium."
-        }
-      },
-      "footer": {
-        "copyright": "© 2023 FriendZone Club",
-        "link": {
-          "about": "O nas",
-          "contact": "Kontakt",
-          "help": "Pomoc",
-          "cookies": "Pliki cookie",
-          "terms": "Regulamin"
-        }
+        "list": [
+          {
+            "question": "Czym jest FriendZone Club?",
+            "answer": "FriendZone Club to dyskretny portal randkowy dla osób, które szukają niezobowiązującego romansu lub dyskretnych spotkań online. Nasi członkowie to ludzie tacy jak Ty, pragnący jeszcze raz przeżyć tę magiczną chwilę."
+          },
+          {
+            "question": "Czy FriendZone Club jest darmowy?",
+            "answer": "FriendZone Club jest bezpłatny dołączenia, a oferujemy różne opcje płatności, które ułatwiają rozpoczęcie korzystania z serwisu. Dzięki darmowemu kontu możesz utworzyć profil i przeglądać witrynę w dowolnym tempie. Możesz również uaktualnić swoje konto do konta premium, co umożliwia wysyłanie i odbieranie nieograniczonej liczby wiadomości i wiele więcej."
+          },
+          {
+            "question": "Czy FriendZone Club jest bezpieczny?",
+            "answer": "FriendZone Club to bezpieczny i pewny serwis z dedykowanym zespołem obsługi klienta. Zobowiązujemy się do ochrony Twoich danych osobowych i zachowania ich poufności. Posiadamy także ścisłą politykę prywatności, która zapewnia, że Twoje informacje nigdy nie zostaną udostępnione osobom trzecim."
+          },
+          {
+            "question": "Jak zacząć?",
+            "answer": "Aby rozpocząć, po prostu utwórz darmowe konto i wypełnij swój profil. Następnie możesz przeglądać witrynę i wysyłać wiadomości do innych członków. Jeśli szukasz bardziej dyskretnego doświadczenia, możesz również uaktualnić się do konta premium."
+          }
+        ]
       }
+    }
+  },
+  "footer": {
+    "copyright": "2023 © FriendZone Club",
+    "links": {
+      "about": "O nas",
+      "contact": "Kontakt",
+      "help": "Pomoc",
+      "cookies": "Pliki cookie",
+      "terms": "Regulamin"
     }
   }
 }
