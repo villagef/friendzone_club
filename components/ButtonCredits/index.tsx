@@ -1,3 +1,4 @@
+import React from "react"
 import Link from "next/link"
 
 import { subNavbarConfig } from "@/config/subNavbar"
@@ -9,19 +10,30 @@ interface ButtonCreditsProps {
   onClick?: () => void
 }
 
-export default function ButtonCredits({ label, onClick }: ButtonCreditsProps) {
-  const { credits } = subNavbarConfig
-  return (
-    <Link href={credits.href} className="w-full" onClick={onClick && onClick}>
-      <Button
-        variant="primary"
-        size={"xl"}
-        className="my-1 w-full"
+const ButtonCredits = React.forwardRef<HTMLAnchorElement, ButtonCreditsProps>(
+  ({ label, onClick }, ref) => {
+    const { credits } = subNavbarConfig
+    return (
+      <Link
+        href={credits.href}
+        className="w-full"
         onClick={onClick && onClick}
+        ref={ref}
       >
-        {label}
-        <span className="sr-only">{label}</span>
-      </Button>
-    </Link>
-  )
-}
+        <Button
+          variant="primary"
+          size={"xl"}
+          className="my-1 w-full"
+          onClick={onClick && onClick}
+        >
+          {label}
+          <span className="sr-only">{label}</span>
+        </Button>
+      </Link>
+    )
+  },
+)
+
+ButtonCredits.displayName = "ButtonCredits"
+
+export default ButtonCredits
