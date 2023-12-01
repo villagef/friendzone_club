@@ -1,6 +1,6 @@
 import { DictionaryType } from "@/lib/types"
 
-import { Avatar, AvatarImage } from "../ui/avatar"
+import { Avatar, AvatarImage } from "../../../../components/ui/avatar"
 
 interface ReviewsSectionProps {
   dictionary: DictionaryType["page"]["home"]["reviews"]
