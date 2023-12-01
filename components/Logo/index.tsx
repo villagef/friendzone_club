@@ -11,7 +11,7 @@ export default function Logo({ width = 220, height = 24, styling }: LogoProps) {
   return (
     <Link href={"/"}>
       <Image
-        src="/logo.svg"
+        src="/images/logo.svg"
         alt="Logo"
         width={width}
         height={height}

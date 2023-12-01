@@ -5,5 +5,5 @@ import { localeMiddleware } from "@/middlewares/localeMiddleware"
 export default chain([localeMiddleware, authMiddleware])
 
 export const config = {
-  matcher: ["/((?!api|_next/static|favicon.ico).*)"],
+  matcher: ["/((?!api|_next/static|images|favicon.ico).*)"],
 }

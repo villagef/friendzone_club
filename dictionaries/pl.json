@@ -209,21 +209,21 @@
             "name": "Ben Johnson",
             "status": "Żonaty",
             "rating": "5",
-            "avatar": "/ben.png",
+            "avatar": "/images//ben.png",
             "review": "Odkąd poznałem kogoś w FriendZone Club i ożywiłem życie romantyczne, jestem teraz lepszym mężem niż kiedykolwiek."
           },
           {
             "name": "Samantha Smith",
             "status": "Singiel",
             "rating": "5",
-            "avatar": "/emily.png",
+            "avatar": "/images//emily.png",
             "review": "Dołączyłem do Klubu i znalazłem satysfakcję, której potrzebowałem. Całkowicie usunął z mojego życia niepokój."
           },
           {
             "name": "John Doe",
             "status": "Żonaty",
             "rating": "4.9",
-            "avatar": "/roxie.png",
+            "avatar": "/images//roxie.png",
             "review": "Jestem żonaty od 10 lat i byłem znudzony przez większość z nich. Cieszę się, że znalazłem FriendZone Club. Poznałem kogoś, kto sprawił"
           }
         ]

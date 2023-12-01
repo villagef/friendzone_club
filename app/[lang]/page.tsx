@@ -42,7 +42,7 @@ export default async function Home({
           </div>
           <div className="md:h-50 order-1 flex w-full flex-col items-center justify-center px-6 lg:order-2 lg:mt-0 lg:w-1/2">
             <Image
-              src={"/phone.avif"}
+              src={"/images/phone.avif"}
               width={500}
               height={400}
               alt="Phone with user profiles"

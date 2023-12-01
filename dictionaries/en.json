@@ -210,21 +210,21 @@
             "name": "Ben Johnson",
             "status": "Married",
             "rating": "5",
-            "avatar": "/ben.png",
+            "avatar": "/images/ben.png",
             "review": "Since meeting someone on FriendZone Club, and reinvigorating the sexual part of my romantic life, I’m a better husband now than I was."
           },
           {
             "name": "Samantha Smith",
             "status": "Single",
             "rating": "5",
-            "avatar": "/emily.png",
+            "avatar": "/images//emily.png",
             "review": "I joined the Club and have found the fulfillment I needed. It’s completely removed the anxiety from my life."
           },
           {
             "name": "John Doe",
             "status": "Married",
             "rating": "4.9",
-            "avatar": "/roxie.png",
+            "avatar": "/images//roxie.png",
             "review": "I’ve been married for 10 years, and I’ve been bored for most of them. I’m glad I found FriendZone Club. I’ve met someone who’s made me feel alive again."
           }
         ]
