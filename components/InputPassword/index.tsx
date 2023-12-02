@@ -2,7 +2,11 @@
 
 import React, { useState } from "react"
 
-import { ErrorSchemaType, RegisterSchemaType } from "@/lib/types"
+import {
+  ErrorSchemaType,
+  RegisterSchemaType,
+  SignupSchemaKeys,
+} from "@/lib/types"
 
 import { Icons } from "../icons"
 import InputLabel from "../InputLabel"
@@ -11,12 +15,14 @@ import { Input } from "../ui/input"
 import { Label } from "../ui/label"
 
 interface InputPasswordProps {
+  label: SignupSchemaKeys
   register: RegisterSchemaType
   errors: ErrorSchemaType
   disabled: boolean
 }
 
 export default function InputPassword({
+  label,
   register,
   errors,
   disabled,
@@ -28,14 +34,14 @@ export default function InputPassword({
   const errorMsg = errors["password"]?.message
   return (
     <div className="grid gap-1">
-      <Label htmlFor="password" className="text-[10px] font-semibold">
-        PASSWORD {errorMsg && <InputLabel message={errorMsg} />}
+      <Label htmlFor="password" className="text-[10px] font-semibold uppercase">
+        {label} {errorMsg && <InputLabel message={errorMsg} />}
       </Label>
       <div className="relative">
         <Input
           id="password"
           {...register("password")}
-          placeholder="password (min 8 characters)"
+          placeholder="Password (min 8 characters)"
           type={showPassword ? "text" : "password"}
           autoCapitalize="none"
           autoComplete="new-password"

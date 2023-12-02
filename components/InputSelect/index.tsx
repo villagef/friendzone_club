@@ -59,7 +59,7 @@ export default function InputSelect({
         {...register(label)}
       >
         <SelectTrigger>
-          <SelectValue placeholder={`Select ${label}`} />
+          <SelectValue placeholder={label} />
         </SelectTrigger>
         <SelectContent>
           <SelectGroup>

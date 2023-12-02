@@ -7,7 +7,12 @@ import { signIn } from "next-auth/react"
 import { useForm } from "react-hook-form"
 import { toast } from "sonner"
 
-import { DictionaryType, signinSchema, SignInSchemaType } from "@/lib/types"
+import {
+  DictionaryType,
+  signinSchema,
+  SignInSchemaKeys,
+  SignInSchemaType,
+} from "@/lib/types"
 import { Button } from "@/components/ui/button"
 import ButtonSignInGoogle from "@/components/ButtonSignInGoogle"
 import { Icons } from "@/components/icons"
@@ -46,6 +51,11 @@ export default function SignIn({ dictionary }: SignInProps) {
       })
   }
 
+  const labels = {
+    email: dictionary.email.label as SignInSchemaKeys,
+    password: dictionary.password.label as SignInSchemaKeys,
+  }
+
   return (
     <div className="mx-auto flex w-full  flex-col justify-center">
       <div className="mb-4 flex flex-col space-y-2 text-center">
@@ -58,13 +68,14 @@ export default function SignIn({ dictionary }: SignInProps) {
         <form onSubmit={handleSubmit(onSubmit)} noValidate>
           <div className="grid gap-2">
             <InputText
-              label="email"
+              label={labels.email}
               type="email"
               isLoading={isSubmitting}
               register={register}
               errors={errors}
             />
             <InputPassword
+              label={labels.password}
               register={register}
               errors={errors}
               disabled={isSubmitting}
