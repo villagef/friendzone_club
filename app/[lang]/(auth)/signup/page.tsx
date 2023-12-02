@@ -11,7 +11,7 @@ import ReCAPTCHA from "react-google-recaptcha"
 import { useForm } from "react-hook-form"
 import { toast } from "sonner"
 
-import { COUNTRIES, GENDERS } from "@/lib/consts"
+import { COUNTRIES } from "@/lib/consts"
 import { signupSchema, SignUpSchemaType } from "@/lib/types"
 import { handleTokenFetch, isOver18 } from "@/lib/utils"
 import { Button } from "@/components/ui/button"
@@ -130,7 +130,7 @@ export default function SignUpPage() {
                 register={register}
                 setValue={setValue}
                 errors={errors}
-                items={GENDERS}
+                items={[]}
               />
               <InputSelect
                 label="location"

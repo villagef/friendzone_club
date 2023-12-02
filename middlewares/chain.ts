@@ -1,6 +1,6 @@
 import { NextMiddlewareResult } from "next/dist/server/web/types"
 import { NextResponse } from "next/server"
-import type { NextFetchEvent, NextRequest } from "next/server"
+import type { NextFetchEvent } from "next/server"
 import { NextRequestWithAuth } from "next-auth/middleware"
 
 export type CustomMiddleware = (
@@ -23,8 +23,8 @@ export function chain(
   }
 
   return (
-    request: NextRequestWithAuth,
-    event: NextFetchEvent,
+    _request: NextRequestWithAuth,
+    _event: NextFetchEvent,
     response: NextResponse,
   ) => {
     return response

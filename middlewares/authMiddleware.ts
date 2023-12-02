@@ -13,6 +13,8 @@ const protectedPaths = [
   "/profile",
 ]
 
+const protectedPathsForAuthenticatedUser = ["/signin", "/signup"]
+
 function getProtectedRoutes(protectedPaths: string[], locales: Locale[]) {
   let protectedPathsWithLocale = [...protectedPaths]
 
@@ -31,7 +33,6 @@ function getProtectedRoutes(protectedPaths: string[], locales: Locale[]) {
 
 export function authMiddleware(middleware: CustomMiddleware) {
   return async (request: NextRequestWithAuth, event: NextFetchEvent) => {
-    // Create a response object to pass down the chain
     const response = NextResponse.next()
 
     const token = await getToken({ req: request })
@@ -44,10 +45,20 @@ export function authMiddleware(middleware: CustomMiddleware) {
       ...i18n.locales,
     ])
 
+    const protectedPathsWithLocaleForAuthenticated = getProtectedRoutes(
+      protectedPathsForAuthenticatedUser,
+      [...i18n.locales],
+    )
+
     if (!token && protectedPathsWithLocale.includes(pathname)) {
       const signInUrl = new URL("/api/auth/signin", request.url)
       signInUrl.searchParams.set("callbackUrl", pathname)
       return NextResponse.redirect(signInUrl)
+    } else if (
+      token &&
+      protectedPathsWithLocaleForAuthenticated.includes(pathname)
+    ) {
+      return NextResponse.redirect(new URL("/explore", request.url))
     }
 
     return middleware(request, event, response)

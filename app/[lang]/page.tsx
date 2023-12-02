@@ -1,17 +1,11 @@
-import { Locale } from "@/i18n"
-
 import { getDictionary } from "@/lib/dictionary"
-import FAQSection from "@/app/[lang]/_home/FAQSection"
-import ReviewsSection from "@/app/[lang]/_home/ReviewsSection"
+import { GlobalParamsType } from "@/lib/types"
+import FAQSection from "@/app/components/home/FAQSection"
+import HeroSection from "@/app/components/home/HeroSection"
+import PrologSection from "@/app/components/home/PrologSection"
+import ReviewsSection from "@/app/components/home/ReviewsSection"
 
-import HeroSection from "./_home/HeroSection"
-import PrologSection from "./_home/PrologSection"
-
-export default async function Home({
-  params: { lang },
-}: {
-  params: { lang: Locale }
-}) {
+export default async function Home({ params: { lang } }: GlobalParamsType) {
   const { page } = await getDictionary(lang)
   return (
     <>

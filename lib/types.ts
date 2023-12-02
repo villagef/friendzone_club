@@ -1,3 +1,4 @@
+import { Locale } from "@/i18n"
 import {
   FieldErrors,
   FieldValues,
@@ -5,6 +6,13 @@ import {
   UseFormRegister,
 } from "react-hook-form"
 import { z } from "zod"
+
+//GLOBAL PARAMS
+export interface GlobalParamsType {
+  params: {
+    lang: Locale
+  }
+}
 
 //SIGNUP SCHEMA
 export const signupSchema = z.object({

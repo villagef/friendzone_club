@@ -36,7 +36,7 @@ export default function Authentication({ children }: AuthenticationProps) {
             <Language />
           </div>
         </div>
-        <div className="h-full w-full overflow-y-visible rounded-none bg-foreground p-4 pb-12 pt-24 shadow-lg dark:bg-black/80 sm:mb-8 sm:mt-16 sm:h-auto sm:w-auto sm:min-w-[350px] sm:max-w-[450px] sm:rounded-lg sm:p-6 lg:dark:bg-transparent/20">
+        <div className="h-full w-full min-w-[320px] overflow-y-visible rounded-none bg-foreground p-4 pb-12 pt-24 shadow-lg dark:bg-black/80 sm:mb-8 sm:mt-16 sm:h-auto sm:w-auto sm:min-w-[390px] sm:max-w-[450px] sm:rounded-lg sm:p-6 lg:dark:bg-transparent/20">
           {children}
         </div>
       </div>

@@ -3,14 +3,18 @@ import { Inter as FontSans } from "next/font/google"
 
 import "./globals.css"
 
-import { notFound } from "next/navigation"
-import { i18n, Locale } from "@/i18n"
+import { i18n } from "@/i18n"
 
+import { GlobalParamsType } from "@/lib/types"
 import { cn } from "@/lib/utils"
 import Footer from "@/components/Footer"
 import MainNav from "@/components/Navbar"
 
 import Provider from "./provider"
+
+interface RootLayoutProps extends GlobalParamsType {
+  children: React.ReactNode
+}
 
 const font = FontSans({
   subsets: ["latin"],
@@ -28,10 +32,7 @@ export async function generateStaticParams() {
 export default function RootLayout({
   children,
   params: { lang },
-}: {
-  children: React.ReactNode
-  params: { lang: Locale }
-}) {
+}: RootLayoutProps) {
   return (
     <html lang={lang} suppressHydrationWarning>
       <head />
